@@ -15,7 +15,7 @@ function Login() {
     <Box
       sx={{
         minHeight: "100vh",
-        width: "100%",
+        width: "100vw",
         backgroundImage: `url(${Background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -32,7 +32,7 @@ function Login() {
         sx={{
           padding: 3,
           width: "100%",
-          maxWidth: 400,
+          maxWidth: 700,
           backgroundColor: "rgba(255, 255, 255, 0.2)",
           backdropFilter: "blur(6px)",
           borderRadius: 3,
@@ -70,7 +70,7 @@ function Login() {
             opacity: 0.9,
           }}
         >
-          Please Login To Continue !
+          Please Sign In To Continue !
         </Typography>
 
         {/* Input Email */}
@@ -82,7 +82,7 @@ function Login() {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <Email color="action" />
+                <Email color="action" sx={{ mx: 1 }}/>
               </InputAdornment>
             ),
             sx: {
@@ -105,7 +105,7 @@ function Login() {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <Lock color="action" />
+                <Lock color="action" sx={{ mx: 1 }}/>
               </InputAdornment>
             ),
             sx: {
@@ -125,7 +125,7 @@ function Login() {
             sx={{
               py: 1,
               px: 6,
-              backgroundColor: "#43a047",
+              backgroundColor: "#00673B",
               transition: "all 0.2s ease",
               "&:hover": {
                 backgroundColor: "#388e3c",
@@ -134,23 +134,11 @@ function Login() {
             }}
             
           >
-            Login
+            Sign In
           </Button>
         </Box>
 
-        {/* Link tambahan */}
-        <Typography
-          variant="body2"
-          sx={{
-            textAlign: "center",
-            mt: 1,
-            color: "white",
-            cursor: "pointer",
-            "&:hover": { textDecoration: "underline" },
-          }}
-        >
-          Forgot Password?
-        </Typography>
+        
         <Typography
           variant="body2"
           sx={{
@@ -160,7 +148,7 @@ function Login() {
           }}
         >
           Don't have account?{" "}
-          <span style={{ color: "#43a047", cursor: "pointer" }}>Register</span>
+          <span style={{ color: "#43a047", cursor: "pointer" }}>Sign Up</span>
         </Typography>
       </Paper>
     </Box>
