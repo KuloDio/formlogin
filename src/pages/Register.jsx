@@ -1,6 +1,6 @@
 import React from 'react'
 import bgregister from '../assets/bgregister.jpeg'
-import { Typography, Container, Box, Grid, Button } from '@mui/material'
+import { Typography,  Box, Grid, Button } from '@mui/material'
 import FormRegister from '../components/formregister'
 
 const Register = () => {
@@ -62,7 +62,7 @@ const Register = () => {
                             justifyContent: "space-between",
                         }}>
                             <Typography>Have a account?</Typography>
-                            <Button href='/signin' sx={{
+                            <Button href='/login' sx={{
                                 textTransform: "none",
                                 color: "#00673B",
                                 fontWeight: 600,
