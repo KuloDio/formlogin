@@ -1,5 +1,19 @@
+ reval
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* hilangkan scroll */
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
 html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
 }
+ main
