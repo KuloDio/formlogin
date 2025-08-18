@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { Email, Lock } from "@mui/icons-material";
 import Background from "../assets/image/background.jpeg";
+import { Link } from "react-router-dom";
+
 
 function Login() {
   return (
@@ -148,7 +150,12 @@ function Login() {
           }}
         >
           Don't have account?{" "}
-          <span style={{ color: "#43a047", cursor: "pointer" }}>Sign Up</span>
+          <Link
+    to="/register"
+    style={{ color: "#43a047", cursor: "pointer", textDecoration: "none" }}
+  >
+    Sign Up
+  </Link>
         </Typography>
       </Paper>
     </Box>
