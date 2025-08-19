@@ -4,6 +4,7 @@ import { Typography,  Box, Grid, Button } from '@mui/material'
 import FormRegister from '../components/formregister'
 
 const Register = () => {
+
     return (
         <>
             <Box sx={{
