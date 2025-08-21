@@ -30,7 +30,8 @@ const Home = () => {
             fontWeight: 900,
           }}>Indonesian traditional recipes</Typography>
           <Typography sx={{
-            paddingRight: { md: "40%" },
+            marginTop: "2%",
+            paddingRight: { md: "20%" },
           }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae nam aut itaque, labore explicabo obcaecati modi repudiandae ratione. Odio, molestias!</Typography>
           <Box sx={{
             marginTop: "5%",
