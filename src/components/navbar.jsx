@@ -17,18 +17,6 @@ export const Navbar = () => {
                     fontWeight: "900",
                     color: "white",
                 }}>Logo</Typography>
-                {/* <Box sx={{
-                    display: {xs: "none", sm: "none", md: "flex"},
-                    flexDirection: "row",
-                    gap: "16px",
-                }}>
-                    <Link underline='none' href="/" sx={{
-                        color: "#ADBC9F",
-                    }}>Home</Link>
-                    <Link underline='none' href="/resep" sx={{
-                        color: "#ADBC9F",
-                    }}>Explore Recipe</Link>
-                </Box> */}
                 <Box sx={{
                     display: "flex",
                     alignItems: "center",
