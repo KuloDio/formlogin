@@ -15,5 +15,12 @@ html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #191A19;
+}
+
+html[data-toolpad-color-scheme="light"] {
+  background-color: #ffffff; /* putih saat light mode */
+}
+
+html[data-toolpad-color-scheme="dark"] {
+  background-color: #191A19; /* hitam saat dark mode */
 }

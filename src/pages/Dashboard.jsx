@@ -31,7 +31,11 @@ const demoTheme = createTheme({
   cssVariables: {
     colorSchemeSelector: "data-toolpad-color-scheme",
   },
-  colorSchemes: { light: true, dark: true },
+  colorSchemes: {
+    light: true,
+    dark: true,
+  },
+  defaultColorScheme: "dark", // 👈 default jadi dark mode
   breakpoints: {
     values: {
       xs: 0,
@@ -42,6 +46,8 @@ const demoTheme = createTheme({
     },
   },
 });
+
+
 
 // ✅ Konten berdasarkan route
 function DemoPageContent({ pathname }) {
