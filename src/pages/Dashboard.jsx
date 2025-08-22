@@ -25,6 +25,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AppProvider } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { DemoProvider, useDemoRouter } from "@toolpad/core/internal";
+import MyResep from "./myresep";
+import Favorite from "./favorite";
+import DaftarResep from "./ResepPublic";
+import ResepUser from "./ResepUser";
 
 // 🎨 Custom Theme
 const demoTheme = createTheme({
@@ -77,75 +81,21 @@ function DemoPageContent({ pathname }) {
       {/* All Recipes */}
       {pathname === "/all-recipes" && (
         <>
-          <Typography variant="h3" sx={{ fontWeight: "bold", mb: 3 }}>
-            All Recipes
-          </Typography>
-          <TextField
-      placeholder="Search Recipe..."
-      variant="outlined"
-      theme={demoTheme}
-      sx={{
-        my: 3,
-        width: '90%',
-        "& .MuiOutlinedInput-root": {
-          borderRadius: "50px", // bikin rounded
-        },
-      }}
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton>
-              <SearchIcon />
-            </IconButton>
-          </InputAdornment>
-        ),
-      }}
-    />
-
-          <Grid container spacing={2}>
-            {[1, 2, 3, 4].map((id) => (
-              <Grid item xs={12} sm={6} md={3} key={id}>
-                <Card>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={`https://source.unsplash.com/400x300/?food,recipe,${id}`}
-                    alt={`Recipe ${id}`}
-                  />
-                  <CardContent>
-                    <Typography variant="h6">Recipe {id}</Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Deskripsi singkat resep {id}.
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
+          <ResepUser/>
         </>
       )}
 
       {/* Favorites */}
       {pathname === "/favorites" && (
         <>
-          <Typography variant="h3" sx={{ fontWeight: "bold" }}>
-            Favorites
-          </Typography>
-          <Typography variant="body1" sx={{ py: 5, px: 8 }}>
-            Resep favoritmu akan muncul di sini.
-          </Typography>
+          <Favorite/>
         </>
       )}
 
       {/* My Recipes */}
       {pathname === "/my-recipes" && (
         <>
-          <Typography variant="h3" sx={{ fontWeight: "bold" }}>
-            My Recipes
-          </Typography>
-          <Typography variant="body1" sx={{ py: 5, px: 8 }}>
-            Tambahkan resep buatanmu sendiri dan bagikan dengan pengguna lain.
-          </Typography>
+          <MyResep/>
         </>
       )}
     </Box>
