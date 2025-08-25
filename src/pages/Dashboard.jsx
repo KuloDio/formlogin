@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/navbar";
+import MyResep from "./myresep";
+import ResepUser from "./ResepUser";
+import Favorite from "./favorite";
+import Home from "./Home";
+
 import {
   Drawer,
   Toolbar,
@@ -20,9 +25,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonIcon from "@mui/icons-material/Person";
+
 import ResepUser from "./ResepUser";
 import { useNavigate } from "react-router-dom";
-import Favorite from "./favorite";
 
 
 const drawerWidth = 240;
@@ -40,7 +45,7 @@ const menuItems = [
 
 const Dashboard = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activePage, setActivePage] = useState("Home"); // halaman aktif
+  const [activePage, setActivePage] = useState("Home");
   const isMobile = useMediaQuery("(max-width:600px)");
   const navigate = useNavigate();
 
@@ -53,19 +58,19 @@ const Dashboard = () => {
   const renderContent = () => {
     switch (activePage) {
       case "Home":
-        return <Typography variant="h4">Ini Halaman Home</Typography>;
+        return <Home/>;
       case "All Recipes":
         return(
           <ResepUser />
         );
       case "Favorites":
-        return(
-          <Favorite />
-        );
+        return <Favorite/>;
       case "My Recipes":
-        return <Typography variant="h4">Resep Buatan Saya</Typography>;
+        return <MyResep/>;
       default:
-        return <Typography variant="h4">Halaman Home</Typography>;
+
+        return <Typography variant="h4">DASHBOARD</Typography>;
+
     }
   };
 
@@ -77,7 +82,7 @@ const Dashboard = () => {
           <ListItem key={item.text} disablePadding>
             <ListItemButton
               onClick={() => setActivePage(item.text)}
-              selected={activePage === item.text} // highlight aktif
+              selected={activePage === item.text}
               sx={{
                 "&.Mui-selected": {
                   backgroundColor: "#2e2e2e",
@@ -129,7 +134,7 @@ const Dashboard = () => {
         <IconButton
           color="inherit"
           onClick={handleDrawerToggle}
-          sx={{ position: "fixed", top: 10, left: 10, zIndex: 2000 }}
+          sx={{ position: "fixed", top: 10, left: 10, zIndex: 2000, color: "white" }}
         >
           <MenuIcon />
         </IconButton>
@@ -146,7 +151,7 @@ const Dashboard = () => {
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
             boxSizing: "border-box",
-            marginTop: isMobile ? 0 : "64px", // supaya tidak nutup AppBar
+            marginTop: isMobile ? 0 : "64px",
             backgroundColor: "#191A19",
             color: "#D8E9A8",
           },
@@ -155,17 +160,15 @@ const Dashboard = () => {
         {drawerContent}
       </Drawer>
 
-      {/* Konten utama */}
+      {/* KONTEN */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
-          display: "flex",
-          justifyContent: "center",
           alignItems: "center",
-          minHeight: "calc(100vh - 64px)",
+          marginTop: {xs: "10%",md: "5%"},
           backgroundColor: "#1a1a1a",
           color: "white",
         }}
