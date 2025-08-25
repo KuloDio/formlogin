@@ -62,7 +62,7 @@ const HomeDashboard = () => {
     fontWeight: 900,
     fontSize: { xs: "1.8rem", sm: "2.5rem", md: "3rem" },
     marginBottom: "2%",
-    color: theme.palette.text.secondary,   // 🔥 ini kuncinya
+    color: '#4caf50',   // 🔥 ini kuncinya
   }}
 >
   Indonesian Traditional Recipes
@@ -73,7 +73,8 @@ const HomeDashboard = () => {
     paddingX: { xs: "5%", md: 0 },
     marginBottom: "5%",
     fontSize: { xs: "0.9rem", sm: "1rem" },
-    color: theme.palette.text.secondary, // 🔥 ini juga
+    color: '#757575', // 🔥 ini juga
+    WebkitTextStroke: "0.3px black",
   }}
 >
   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae nam aut

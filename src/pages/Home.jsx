@@ -47,10 +47,12 @@ const Home = () => {
           <Typography variant='h3' sx={{
             marginTop: "15%",
             fontWeight: 900,
+            color: '#4caf50',
           }}>Indonesian traditional recipes</Typography>
           <Typography sx={{
             marginTop: "2%",
             paddingRight: { md: "20%" },
+            color: '#757575',
           }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae nam aut itaque...</Typography>
           <Box sx={{
             marginTop: "5%",

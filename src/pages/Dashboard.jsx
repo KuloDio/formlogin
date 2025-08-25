@@ -94,28 +94,6 @@ function DemoPageContent({ pathname }) {
       {pathname === "/all-recipes" && (
         <>
           <ResepUser />
-
-          <TextField
-            placeholder="Search Recipe..."
-            variant="outlined"
-            theme={demoTheme}
-            sx={{
-              my: 3,
-              width: "90%",
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "50px", // bikin rounded
-              },
-            }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
         </>
       )}
 
