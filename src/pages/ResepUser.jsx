@@ -1,10 +1,20 @@
-import { Typography } from '@mui/material'
-import React from 'react'
+import React from 'react';
+import {
+  Box,
+  TextField,
+  InputAdornment,
+  IconButton,
+  Button,
+  Typography, Grid,
+} from "@mui/material";
+
+import SearchIcon from "@mui/icons-material/Search"; // ✅ tambahkan ini
+import RecipeReviewCard from '../components/RecipeCard';
 
 const ResepUser = () => {
   return (
     <>
-        <Typography>RESEP USER</Typography>
+        <RecipeReviewCard />
     </>
   )
 }

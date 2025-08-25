@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Navbar } from "../components/navbar";
 import {
   Drawer,
@@ -20,40 +19,72 @@ import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonIcon from "@mui/icons-material/Person";
+import ResepUser from "./ResepUser";
 
 const drawerWidth = 240;
 
-const icons = [
-  <HomeIcon sx={{ color: "#D8E9A8" }} />,
-  <BookIcon sx={{ color: "#D8E9A8" }} />,
-  <FavoriteIcon sx={{ color: "#D8E9A8" }} />,
-  <PersonIcon sx={{ color: "#D8E9A8" }} />,
+const menuItems = [
+  { text: "Home", icon: <HomeIcon /> },
+  { text: "All Recipes", icon: <BookIcon /> },
+  { text: "Favorites", icon: <FavoriteIcon /> },
+  { text: "My Recipes", icon: <PersonIcon /> },
 ];
 
 const Dashboard = () => {
-  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activePage, setActivePage] = useState("Home"); // halaman aktif
   const isMobile = useMediaQuery("(max-width:600px)");
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const menuItems = [
-    { text: "Home", path: "/" },
-    { text: "All Recipes", path: "/resep" },
-    { text: "Favorites", path: "/favorite" },
-    { text: "My Recipes", path: "/MyResep" },
-  ];
+  // Konten berdasarkan menu aktif
+  const renderContent = () => {
+    switch (activePage) {
+      case "Home":
+        return <Typography variant="h4">Ini Halaman Home</Typography>;
+      case "All Recipes":
+        return(
+          <ResepUser />
+        );
+      case "Favorites":
+        return <Typography variant="h4">Resep Favorit Kamu</Typography>;
+      case "My Recipes":
+        return <Typography variant="h4">Resep Buatan Saya</Typography>;
+      default:
+        return <Typography variant="h4"> Halaman Home</Typography>;
+    }
+  };
 
   const drawerContent = (
     <Box sx={{ overflow: "auto" }}>
       <Toolbar />
       <List>
-        {menuItems.map((item, index) => (
+        {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
-            <ListItemButton onClick={() => navigate(item.path)}>
-              <ListItemIcon>{icons[index % icons.length]}</ListItemIcon>
+            <ListItemButton
+              onClick={() => setActivePage(item.text)}
+              selected={activePage === item.text} // highlight aktif
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#2e2e2e",
+                  color: "#fff",
+                  "& .MuiSvgIcon-root": {
+                    color: "#fff",
+                  },
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#3a3a3a",
+                },
+                "&:hover": {
+                  backgroundColor: "#252525",
+                },
+              }}
+            >
+              <ListItemIcon sx={{ minWidth: 40, color: "#D8E9A8" }}>
+                {item.icon}
+              </ListItemIcon>
               {!isMobile && <ListItemText primary={item.text} />}
             </ListItemButton>
           </ListItem>
@@ -86,7 +117,7 @@ const Dashboard = () => {
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
             boxSizing: "border-box",
-            marginTop: isMobile ? 0 : "64px", // biar tidak menutupi AppBar
+            marginTop: isMobile ? 0 : "64px", // supaya tidak nutup AppBar
             backgroundColor: "#191A19",
             color: "#D8E9A8",
           },
@@ -95,16 +126,22 @@ const Dashboard = () => {
         {drawerContent}
       </Drawer>
 
+      {/* Konten utama */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "calc(100vh - 64px)",
+          backgroundColor: "#1a1a1a",
+          color: "white",
         }}
       >
-        <Toolbar />
-        <Typography sx={{ color: "red" }}>TES</Typography>
+        {renderContent()}
       </Box>
     </>
   );
