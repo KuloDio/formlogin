@@ -8,7 +8,7 @@ export const Navbar = () => {
 
     return (
         <AppBar sx={{
-            backgroundColor: "transparent",
+            backgroundColor: "#191A19",
         }}>
             <Toolbar sx={{
                 justifyContent: "space-between"
