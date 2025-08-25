@@ -4,7 +4,7 @@ import React from 'react'
 const ResepUser = () => {
   return (
     <>
-        <Typography></Typography>
+        <Typography>RESEP USER</Typography>
     </>
   )
 }
