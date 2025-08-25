@@ -1,177 +1,150 @@
-// src/pages/DashboardLayoutNavigationLinks.jsx
-import * as React from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { Navbar } from "../components/navbar";
 import {
+  Drawer,
+  Toolbar,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Box,
-  TextField,
-  InputAdornment,
+  useMediaQuery,
   IconButton,
-  Button,
+  Typography,
 } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
 
-// Icons
+import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonIcon from "@mui/icons-material/Person";
-import SearchIcon from "@mui/icons-material/Search";
-
-// Toolpad
-import { AppProvider } from "@toolpad/core/AppProvider";
-import { DashboardLayout } from "@toolpad/core/DashboardLayout";
-import { DemoProvider, useDemoRouter } from "@toolpad/core/internal";
-
-// Pages
-import MyResep from "./myresep";
-import Favorite from "./favorite";
 import ResepUser from "./ResepUser";
-import HomeDashboard from "../components/HomeDashboard";
 
-// 🎨 Custom Theme
-// 🎨 Custom Theme
-const demoTheme = createTheme({
-  cssVariables: {
-    colorSchemeSelector: "data-toolpad-color-scheme",
-  },
-  colorSchemes: {
-    light: {
-      palette: {
-        mode: "light",
-        background: {
-          default: "#ffffff", // putih
-          paper: "#f9f9f9",
-        },
-        text: {
-          primary: "#000000", // teks hitam
-          secondary: "#333333",
-        },
-      },
-    },
-    dark: {
-      palette: {
-        mode: "dark",
-        background: {
-          default: "#191A19", // hitam
-          paper: "#1e1e1e",
-        },
-        text: {
-          primary: "#ffffff", // teks putih
-          secondary: "#bbbbbb",
-        },
-      },
-    },
-  },
-  defaultColorScheme: "dark", // 👈 default tetap dark
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 600,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-});
+const drawerWidth = 240;
 
+const menuItems = [
+  { text: "Home", icon: <HomeIcon /> },
+  { text: "All Recipes", icon: <BookIcon /> },
+  { text: "Favorites", icon: <FavoriteIcon /> },
+  { text: "My Recipes", icon: <PersonIcon /> },
+];
 
-// ✅ Konten berdasarkan route
-function DemoPageContent({ pathname }) {
-  return (
-    <Box
-      sx={{
-        py: 4,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
-      {/* Home */}
-      {pathname === "/home" && <HomeDashboard />}
+const Dashboard = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activePage, setActivePage] = useState("Home"); // halaman aktif
+  const isMobile = useMediaQuery("(max-width:600px)");
 
-      {/* All Recipes */}
-      {pathname === "/all-recipes" && (
-        <>
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  // Konten berdasarkan menu aktif
+  const renderContent = () => {
+    switch (activePage) {
+      case "Home":
+        return <Typography variant="h4">Ini Halaman Home</Typography>;
+      case "All Recipes":
+        return(
           <ResepUser />
-        </>
-      )}
+        );
+      case "Favorites":
+        return <Typography variant="h4">Resep Favorit Kamu</Typography>;
+      case "My Recipes":
+        return <Typography variant="h4">Resep Buatan Saya</Typography>;
+      default:
+        return <Typography variant="h4">Ini Halaman Home</Typography>;
+    }
+  };
 
-      {/* Favorites */}
-      {pathname === "/favorites" && <Favorite />}
-
-      {/* My Recipes */}
-      {pathname === "/my-recipes" && <MyResep />}
+  const drawerContent = (
+    <Box sx={{ overflow: "auto" }}>
+      <Toolbar />
+      <List>
+        {menuItems.map((item) => (
+          <ListItem key={item.text} disablePadding>
+            <ListItemButton
+              onClick={() => setActivePage(item.text)}
+              selected={activePage === item.text} // highlight aktif
+              sx={{
+                "&.Mui-selected": {
+                  backgroundColor: "#2e2e2e",
+                  color: "#fff",
+                  "& .MuiSvgIcon-root": {
+                    color: "#fff",
+                  },
+                },
+                "&.Mui-selected:hover": {
+                  backgroundColor: "#3a3a3a",
+                },
+                "&:hover": {
+                  backgroundColor: "#252525",
+                },
+              }}
+            >
+              <ListItemIcon sx={{ minWidth: 40, color: "#D8E9A8" }}>
+                {item.icon}
+              </ListItemIcon>
+              {!isMobile && <ListItemText primary={item.text} />}
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
     </Box>
   );
-}
-
-DemoPageContent.propTypes = {
-  pathname: PropTypes.string.isRequired,
-};
-
-// ✅ Layout Dashboard
-function DashboardLayoutNavigationLinks(props) {
-  const { window } = props;
-  const router = useDemoRouter("/home");
-
-  const demoWindow = window !== undefined ? window() : undefined;
-
-  // 🔹 Fungsi logout sederhana
-const handleLogout = () => {
-  const confirmLogout = globalThis.confirm("Yakin ingin logout?");
-  if (confirmLogout) {
-    localStorage.removeItem("token");
-    window.location.href = "/";
-  } else {
-    console.log("Logout dibatalkan");
-  }
-};
-
-
 
   return (
-    <DemoProvider window={demoWindow}>
-      <AppProvider
-        navigation={[
-          { segment: "home", title: "Home", icon: <HomeIcon /> },
-          { segment: "all-recipes", title: "All Recipes", icon: <BookIcon /> },
-          { segment: "favorites", title: "Favorites", icon: <FavoriteIcon /> },
-          { segment: "my-recipes", title: "My Recipes", icon: <PersonIcon /> },
-        ]}
-        router={router}
-        theme={demoTheme}
-        window={demoWindow}
-        branding={{
-          logo: <></>, // 👉 kosongkan logo
-          title: "", // 👉 kosongkan tulisan Toolpad
+    <>
+      <Navbar />
+      {isMobile && (
+        <IconButton
+          color="inherit"
+          onClick={handleDrawerToggle}
+          sx={{ position: "fixed", top: 10, left: 10, zIndex: 2000 }}
+        >
+          <MenuIcon />
+        </IconButton>
+      )}
+
+      <Drawer
+        variant={isMobile ? "temporary" : "permanent"}
+        open={isMobile ? mobileOpen : true}
+        onClose={handleDrawerToggle}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
+            width: drawerWidth,
+            boxSizing: "border-box",
+            marginTop: isMobile ? 0 : "64px", // supaya tidak nutup AppBar
+            backgroundColor: "#191A19",
+            color: "#D8E9A8",
+          },
         }}
       >
-        <DashboardLayout
-          slots={{
-            sidebarFooter: () => (
-              <Box sx={{ p: 2 }}>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  fullWidth
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Button>
-              </Box>
-            ),
-          }}
-        >
-          <DemoPageContent pathname={router.pathname} />
-        </DashboardLayout>
-      </AppProvider>
-    </DemoProvider>
-  );
-}
+        {drawerContent}
+      </Drawer>
 
-DashboardLayoutNavigationLinks.propTypes = {
-  window: PropTypes.func,
+      {/* Konten utama */}
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          marginLeft: isMobile ? 0 : `${drawerWidth}px`,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "calc(100vh - 64px)",
+          backgroundColor: "#1a1a1a",
+          color: "white",
+        }}
+      >
+        {renderContent()}
+      </Box>
+    </>
+  );
 };
 
-export default DashboardLayoutNavigationLinks;
+export default Dashboard;

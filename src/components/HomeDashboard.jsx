@@ -1,15 +1,6 @@
 import React from 'react'
-import { Box, Typography, Grid, Button } from '@mui/material'
-import { Navbar } from '../components/navbar'
-import { useNavigate } from 'react-router-dom'
-import bghome from '../assets/image/imghome.png'
-import { useTheme } from "@mui/material/styles";
-
 
 const HomeDashboard = () => {
-  const navigate = useNavigate();
-  const theme = useTheme();
-
   return (
     <>
       <Grid
@@ -62,7 +53,7 @@ const HomeDashboard = () => {
     fontWeight: 900,
     fontSize: { xs: "1.8rem", sm: "2.5rem", md: "3rem" },
     marginBottom: "2%",
-    color: '#4caf50',   // 🔥 ini kuncinya
+    color: theme.palette.text.secondary,   // 🔥 ini kuncinya
   }}
 >
   Indonesian Traditional Recipes
@@ -73,8 +64,7 @@ const HomeDashboard = () => {
     paddingX: { xs: "5%", md: 0 },
     marginBottom: "5%",
     fontSize: { xs: "0.9rem", sm: "1rem" },
-    color: '#757575', // 🔥 ini juga
-    WebkitTextStroke: "0.3px black",
+    color: theme.palette.text.secondary, // 🔥 ini juga
   }}
 >
   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae nam aut
