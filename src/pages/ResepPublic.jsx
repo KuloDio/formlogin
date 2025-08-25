@@ -6,7 +6,7 @@ const ResepPublic = () => {
   return (
     <>
         <Navbar/>
-        <Typography>Resep Public</Typography>
+        <Typography></Typography>
     </>
   )
 }

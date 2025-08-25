@@ -33,9 +33,9 @@ const Home = () => {
           display: "flex",
           paddingX: "8%",
           gap: "2%",
-          backgroundColor: "#191A19",   // 🔹 tambahkan ini
-        minHeight: "100vh",           // 🔹 pastikan full layar
-        color: "white",               // 🔹 teks default putih
+          backgroundColor: "#191A19",
+          minHeight: "100vh",
+          color: "white",
         }}
       >
         <Box sx={{
@@ -51,7 +51,7 @@ const Home = () => {
           <Typography sx={{
             marginTop: "2%",
             paddingRight: { md: "20%" },
-          }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae nam aut itaque...</Typography>
+          }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores expedita officia sequi. Id asperiores earum facere vitae, tenetur laudantium.</Typography>
           <Box sx={{
             marginTop: "5%",
             display: "flex",
@@ -60,7 +60,9 @@ const Home = () => {
             <Button variant='contained'
               onClick={() => navigate("/resep")}
               sx={{
-                backgroundColor: "#1E5128"
+                backgroundColor: "#1E5128",
+                color: "white",
+                fontWeight: "700",
               }}>Get Started</Button>
             <Button variant='outlined'
               onClick={() => navigate("/login")}
@@ -69,7 +71,8 @@ const Home = () => {
                 display: { md: "none" },
                 border: "3px solid",
                 borderColor: "#1E5128",
-                color: "#D8E9A8"
+                color: "#D8E9A8",
+                fontWeight: "600",
               }}
             >Login</Button>
           </Box>

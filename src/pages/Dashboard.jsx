@@ -1,199 +1,100 @@
-// src/pages/DashboardLayoutNavigationLinks.jsx
-import * as React from "react";
-import PropTypes from "prop-types";
+import React, { useState } from 'react'
+import { Navbar } from '../components/navbar'
 import {
-  Box,
-  TextField,
-  InputAdornment,
-  IconButton,
-  Button,
-} from "@mui/material";
-import { createTheme } from "@mui/material/styles";
-
-// Icons
+  Drawer, Toolbar, List, ListItem, ListItemButton,
+  ListItemIcon, ListItemText, Box, useMediaQuery, IconButton,
+  Typography
+} from '@mui/material'
 import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonIcon from "@mui/icons-material/Person";
-import SearchIcon from "@mui/icons-material/Search";
 
-// Toolpad
-import { AppProvider } from "@toolpad/core/AppProvider";
-import { DashboardLayout } from "@toolpad/core/DashboardLayout";
-import { DemoProvider, useDemoRouter } from "@toolpad/core/internal";
+const drawerWidth = 240
+const icons = [<HomeIcon sx={{color: "#D8E9A8"}}/>, <BookIcon  sx={{color: "#D8E9A8"}}/>, <FavoriteIcon sx={{color: "#D8E9A8"}}/>, <PersonIcon sx={{color: "#D8E9A8"}}/>];
 
-// Pages
-import MyResep from "./myresep";
-import Favorite from "./favorite";
-import ResepUser from "./ResepUser";
-import HomeDashboard from "../components/HomeDashboard";
+const Dashboard = () => {
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const isMobile = useMediaQuery('(max-width:600px)')
 
-// 🎨 Custom Theme
-// 🎨 Custom Theme
-const demoTheme = createTheme({
-  cssVariables: {
-    colorSchemeSelector: "data-toolpad-color-scheme",
-  },
-  colorSchemes: {
-    light: {
-      palette: {
-        mode: "light",
-        background: {
-          default: "#ffffff", // putih
-          paper: "#f9f9f9",
-        },
-        text: {
-          primary: "#000000", // teks hitam
-          secondary: "#333333",
-        },
-      },
-    },
-    dark: {
-      palette: {
-        mode: "dark",
-        background: {
-          default: "#191A19", // hitam
-          paper: "#1e1e1e",
-        },
-        text: {
-          primary: "#ffffff", // teks putih
-          secondary: "#bbbbbb",
-        },
-      },
-    },
-  },
-  defaultColorScheme: "dark", // 👈 default tetap dark
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 600,
-      lg: 1200,
-      xl: 1536,
-    },
-  },
-});
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
 
+  const drawerContent = (
+    <Box sx={{ overflow: 'auto' }}>
+      <Toolbar />
+      <List>
+        {['Home', 'All Recipes', 'Favorites', 'My Recipes'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {icons[index % icons.length]}
+              </ListItemIcon>
+              {!isMobile && <ListItemText primary={text} />}
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  )
 
-// ✅ Konten berdasarkan route
-function DemoPageContent({ pathname }) {
   return (
-    <Box
-      sx={{
-        py: 4,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
-      {/* Home */}
-      {pathname === "/home" && <HomeDashboard />}
+    <>
+      <Navbar />
+      {/* DEKSTOP */}
+      {!isMobile && (
+        <Drawer
+          variant="permanent"
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: {
+              width: drawerWidth,
+              boxSizing: 'border-box',
+              marginTop: '64px',
+              backgroundColor: "#191A19",
+              color: "#D8E9A8",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+      )}
 
-      {/* All Recipes */}
-      {pathname === "/all-recipes" && (
+      {/* HP */}
+      {isMobile && (
         <>
-          <ResepUser />
+          <IconButton
+            color="inherit"
+            onClick={handleDrawerToggle}
+            sx={{ position: 'fixed', top: 10, left: 10, zIndex: 2000 }}
+          >
+            <MenuIcon />
+          </IconButton>
 
-          <TextField
-            placeholder="Search Recipe..."
-            variant="outlined"
-            theme={demoTheme}
+          <Drawer
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{ keepMounted: true }}
             sx={{
-              my: 3,
-              width: "90%",
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "50px", // bikin rounded
-              },
+              [`& .MuiDrawer-paper`]: { width: drawerWidth },
             }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
+          >
+            {drawerContent}
+          </Drawer>
         </>
       )}
 
-      {/* Favorites */}
-      {pathname === "/favorites" && <Favorite />}
-
-      {/* My Recipes */}
-      {pathname === "/my-recipes" && <MyResep />}
-    </Box>
-  );
+      <Box component="main" sx={{ flexGrow: 1, p: 3, marginLeft: drawerWidth }}>
+        <Toolbar />
+        <Typography sx={{
+          color: "red",
+        }}>TES</Typography>
+      </Box>
+    </>
+  )
 }
 
-DemoPageContent.propTypes = {
-  pathname: PropTypes.string.isRequired,
-};
-
-// ✅ Layout Dashboard
-function DashboardLayoutNavigationLinks(props) {
-  const { window } = props;
-  const router = useDemoRouter("/home");
-
-  const demoWindow = window !== undefined ? window() : undefined;
-
-  // 🔹 Fungsi logout sederhana
-const handleLogout = () => {
-  const confirmLogout = globalThis.confirm("Yakin ingin logout?");
-  if (confirmLogout) {
-    localStorage.removeItem("token");
-    window.location.href = "/";
-  } else {
-    console.log("Logout dibatalkan");
-  }
-};
-
-
-
-  return (
-    <DemoProvider window={demoWindow}>
-      <AppProvider
-        navigation={[
-          { segment: "home", title: "Home", icon: <HomeIcon /> },
-          { segment: "all-recipes", title: "All Recipes", icon: <BookIcon /> },
-          { segment: "favorites", title: "Favorites", icon: <FavoriteIcon /> },
-          { segment: "my-recipes", title: "My Recipes", icon: <PersonIcon /> },
-        ]}
-        router={router}
-        theme={demoTheme}
-        window={demoWindow}
-        branding={{
-          logo: <></>, // 👉 kosongkan logo
-          title: "", // 👉 kosongkan tulisan Toolpad
-        }}
-      >
-        <DashboardLayout
-          slots={{
-            sidebarFooter: () => (
-              <Box sx={{ p: 2 }}>
-                <Button
-                  variant="outlined"
-                  color="error"
-                  fullWidth
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Button>
-              </Box>
-            ),
-          }}
-        >
-          <DemoPageContent pathname={router.pathname} />
-        </DashboardLayout>
-      </AppProvider>
-    </DemoProvider>
-  );
-}
-
-DashboardLayoutNavigationLinks.propTypes = {
-  window: PropTypes.func,
-};
-
-export default DashboardLayoutNavigationLinks;
+export default Dashboard
