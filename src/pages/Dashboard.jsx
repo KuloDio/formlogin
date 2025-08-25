@@ -53,7 +53,7 @@ const Dashboard = () => {
       case "My Recipes":
         return <Typography variant="h4">Resep Buatan Saya</Typography>;
       default:
-        return <Typography variant="h4">Ini Halaman Home</Typography>;
+        return <Typography variant="h4"> Halaman Home</Typography>;
     }
   };
 
