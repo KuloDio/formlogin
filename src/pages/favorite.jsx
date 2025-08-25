@@ -1,14 +1,14 @@
 import React from 'react'
-import { Typography } from '@mui/material'
+import { Typography, CardMedia } from '@mui/material'
 
 const Favorite = () => {
   return (
     <>
-        <Typography
-            sx={{
-                color: "white",
-            }}
-        >Favorite RESEP</Typography>
+        <Typography variant="h3" color="initial" sx={{ 
+          color: 'white',
+          fontWeight: 'bold',
+          
+         }}>Favorite Recipes</Typography>
     </>
   )
 }
