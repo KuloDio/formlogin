@@ -12,6 +12,7 @@ import {
   useMediaQuery,
   IconButton,
   Typography,
+  Button,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -20,20 +21,29 @@ import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonIcon from "@mui/icons-material/Person";
 import ResepUser from "./ResepUser";
+import { useNavigate } from "react-router-dom";
+import Favorite from "./favorite";
+
 
 const drawerWidth = 240;
+
 
 const menuItems = [
   { text: "Home", icon: <HomeIcon /> },
   { text: "All Recipes", icon: <BookIcon /> },
   { text: "Favorites", icon: <FavoriteIcon /> },
   { text: "My Recipes", icon: <PersonIcon /> },
+  <Button variant="outlined" color="error">
+        Error
+      </Button>
 ];
 
 const Dashboard = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activePage, setActivePage] = useState("Home"); // halaman aktif
   const isMobile = useMediaQuery("(max-width:600px)");
+  const navigate = useNavigate();
+
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -49,11 +59,13 @@ const Dashboard = () => {
           <ResepUser />
         );
       case "Favorites":
-        return <Typography variant="h4">Resep Favorit Kamu</Typography>;
+        return(
+          <Favorite />
+        );
       case "My Recipes":
         return <Typography variant="h4">Resep Buatan Saya</Typography>;
       default:
-        return <Typography variant="h4"> Halaman Home</Typography>;
+        return <Typography variant="h4">Halaman Home</Typography>;
     }
   };
 
@@ -89,6 +101,23 @@ const Dashboard = () => {
             </ListItemButton>
           </ListItem>
         ))}
+                <Box sx={{ p: 2 }}>
+          <Button
+            variant="outlined"
+            color="error"
+            fullWidth
+            onClick={() => {
+              const confirmLogout = window.confirm('Yakin ingin log out?');
+              if (confirmLogout) {
+                alert('Berhasil Log out')
+                navigate('/')
+              }
+            }}
+            sx={{ mt: 25 }}
+          >
+          Log Out
+          </Button>
+        </Box>
       </List>
     </Box>
   );
