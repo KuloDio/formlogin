@@ -1,35 +1,21 @@
 import React from 'react'
 import { Box, Typography, Grid, Button } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { Navbar } from '../components/navbar'
 import { useNavigate } from 'react-router-dom'
 import bghome from '../assets/image/imghome.png'
 
-// 🔹 Buat tema dark khusus Home
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    background: {
-      default: '#191A19',
-      paper: '#191A19',
-    },
-    text: {
-      primary: '#ffffff',
-    },
-  },
-});
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <>
       <Navbar />
       <Grid
         container
         direction={{ xs: "column", sm: "row" }}
         sx={{
-          marginTop: { xs: "15%", sm: "15%", md: "8%" },
+          marginTop: { xs: "15%", sm: "15%", md: "4%" },
           display: "flex",
           paddingX: "8%",
           gap: "2%",
@@ -93,7 +79,7 @@ const Home = () => {
           />
         </Box>
       </Grid>
-    </ThemeProvider>
+    </>
   )
 }
 
