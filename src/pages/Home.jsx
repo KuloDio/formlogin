@@ -29,7 +29,7 @@ const Home = () => {
         container
         direction={{ xs: "column", sm: "row" }}
         sx={{
-          marginTop: { xs: "15%", sm: "15%", md: "8%" },
+          marginTop: { xs: "15%", sm: "15%", md: "4%" },
           display: "flex",
           paddingX: "8%",
           gap: "2%",

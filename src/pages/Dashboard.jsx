@@ -37,9 +37,6 @@ const menuItems = [
   { text: "All Recipes", icon: <BookIcon /> },
   { text: "Favorites", icon: <FavoriteIcon /> },
   { text: "My Recipes", icon: <PersonIcon /> },
-  <Button variant="outlined" color="error">
-        Error
-      </Button>
 ];
 
 const Dashboard = () => {
@@ -166,8 +163,9 @@ const Dashboard = () => {
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
-          alignItems: "center",
-          marginTop: {xs: "10%",md: "5%"},
+          marginTop: isMobile ? "56px" : "64px", // tinggi Navbar
+          height: `calc(100vh - ${isMobile ? "56px" : "64px"})`, // sisakan area navbar
+          overflowY: "auto", // biar dashboard bisa scroll
           backgroundColor: "#1a1a1a",
           color: "white",
         }}
