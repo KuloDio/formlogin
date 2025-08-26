@@ -25,10 +25,17 @@ import PersonIcon from "@mui/icons-material/Person";
 const drawerWidth = 240;
 
 const menuItems = [
+<<<<<<< HEAD
+  { text: "Home", icon: <HomeIcon /> },
+  { text: "All Recipes", icon: <BookIcon /> },
+  { text: "Favorites", icon: <FavoriteIcon /> },
+  { text: "My Recipes", icon: <PersonIcon /> },
+=======
   { text: "Home", icon: <HomeIcon />, path: "home" },
   { text: "All Recipes", icon: <BookIcon />, path: "resepuser" },
   { text: "Favorites", icon: <FavoriteIcon />, path: "favorite" },
   { text: "My Recipes", icon: <PersonIcon />, path: "myresep" },
+>>>>>>> 09cfd65bc580f3b9ffb3a4441c7b00b176c8b5c1
 ];
 
 const Dashboard = () => {
@@ -135,7 +142,13 @@ const Dashboard = () => {
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
+<<<<<<< HEAD
+          marginTop: isMobile ? "56px" : "64px", // tinggi Navbar
+          height: `calc(100vh - ${isMobile ? "56px" : "64px"})`, // sisakan area navbar
+          overflowY: "auto", // biar dashboard bisa scroll
+=======
           marginTop: { xs: "10%", md: "5%" },
+>>>>>>> 09cfd65bc580f3b9ffb3a4441c7b00b176c8b5c1
           backgroundColor: "#1a1a1a",
           color: "white",
           minHeight: "100vh",

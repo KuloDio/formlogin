@@ -50,7 +50,7 @@ export default function RecipeReviewCard() {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, backgroundColor: '#212121', color: '#bdbdbd' }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -58,12 +58,13 @@ export default function RecipeReviewCard() {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label="settings" sx={{ color: "#bdbdbd" }}>
             <MoreVertIcon />
           </IconButton>
         }
         title="Nasi Uduk"
         subheader="September 14, 2016"
+        subheaderTypographyProps={{ sx: { color: "#bdbdbd" } }}
       />
       <CardMedia
         component="img"
@@ -75,17 +76,15 @@ export default function RecipeReviewCard() {
          }}
       />
       <CardContent>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+        <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde officia iusto facere! Aperiam alias, sit animi quidem sunt, totam dolor praesentium incidunt dolores dolore aut!
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites"  sx={{ color: "#bdbdbd" }}>
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton aria-label="share"  sx={{ color: "#bdbdbd" }}>
           <ShareIcon />
         </IconButton>
         <ExpandMore
@@ -93,6 +92,7 @@ export default function RecipeReviewCard() {
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
+           sx={{ color: "#bdbdbd" }}
         >
           <ExpandMoreIcon />
         </ExpandMore>
@@ -101,17 +101,10 @@ export default function RecipeReviewCard() {
         <CardContent>
           <Typography sx={{ marginBottom: 2 }}>Method:</Typography>
           <Typography sx={{ marginBottom: 2 }}>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati.
           </Typography>
           <Typography sx={{ marginBottom: 2 }}>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-            large plate and set aside, leaving chicken and chorizo in the pan. Add
-            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-            stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?
           </Typography>
           <Typography sx={{ marginBottom: 2 }}>
             Add rice and stir very gently to distribute. Top with artichokes and
