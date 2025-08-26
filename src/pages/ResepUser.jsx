@@ -14,7 +14,14 @@ import RecipeReviewCard from '../components/RecipeCard';
 const ResepUser = () => {
   return (
     <>
-    <Grid container spacing={1} sx={{ justifyContent: 'space-evenly' }}>
+
+    <Typography variant="h3" color="initial" sx={{ 
+      color: 'white',
+      fontWeight: 'bold',
+      pb: 5
+     }}>All Recipes</Typography>
+
+    <Grid container spacing={1} sx={{ justifyContent: 'space-evenly', mb: 8 }}>
       <Box>
         <RecipeReviewCard />
       </Box>
