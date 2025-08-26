@@ -4,6 +4,10 @@ import Register from './pages/Register.jsx';
 import Home from './pages/Home.jsx'
 import { Routes, Route, Navigate } from "react-router-dom";
 import ResepPublic from './pages/ResepPublic.jsx';
+import ResepUser from './pages/ResepUser.jsx';
+import TambahResep from './pages/TambahResep.jsx';
+import MyResep from './pages/myresep.jsx';
+import Favorite from './pages/favorite.jsx';
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -17,6 +21,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reseppublic" element={<ResepPublic />} />
+
       <Route
         path="/dashboard"
         element={
@@ -24,7 +29,13 @@ function App() {
             <Dashboard />
           /* </PrivateRoute> */
         }
-      />
+      >
+        <Route path="home" element={<Home />} />
+        <Route path="resepuser" element={<ResepUser />} />
+        <Route path="favorite" element={<Favorite />} />
+        <Route path="myresep" element={<MyResep />} />
+        <Route path="tambahresep" element={<TambahResep />} />
+      </Route>
     </Routes>
   );
 }

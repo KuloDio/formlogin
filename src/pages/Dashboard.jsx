@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/navbar";
-import MyResep from "./myresep";
-import ResepUser from "./ResepUser";
-import Favorite from "./favorite";
-import Home from "./Home";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 import {
   Drawer,
@@ -16,7 +13,6 @@ import {
   Box,
   useMediaQuery,
   IconButton,
-  Typography,
   Button,
 } from "@mui/material";
 
@@ -26,48 +22,30 @@ import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonIcon from "@mui/icons-material/Person";
 
-import { useNavigate } from "react-router-dom";
-
-
 const drawerWidth = 240;
 
-
 const menuItems = [
+<<<<<<< HEAD
   { text: "Home", icon: <HomeIcon /> },
   { text: "All Recipes", icon: <BookIcon /> },
   { text: "Favorites", icon: <FavoriteIcon /> },
   { text: "My Recipes", icon: <PersonIcon /> },
+=======
+  { text: "Home", icon: <HomeIcon />, path: "home" },
+  { text: "All Recipes", icon: <BookIcon />, path: "resepuser" },
+  { text: "Favorites", icon: <FavoriteIcon />, path: "favorite" },
+  { text: "My Recipes", icon: <PersonIcon />, path: "myresep" },
+>>>>>>> 09cfd65bc580f3b9ffb3a4441c7b00b176c8b5c1
 ];
 
 const Dashboard = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activePage, setActivePage] = useState("Home");
   const isMobile = useMediaQuery("(max-width:600px)");
   const navigate = useNavigate();
-
+  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  };
-
-  // Konten berdasarkan menu aktif
-  const renderContent = () => {
-    switch (activePage) {
-      case "Home":
-        return <Home/>;
-      case "All Recipes":
-        return(
-          <ResepUser />
-        );
-      case "Favorites":
-        return <Favorite/>;
-      case "My Recipes":
-        return <MyResep/>;
-      default:
-
-        return <Typography variant="h4">DASHBOARD</Typography>;
-
-    }
   };
 
   const drawerContent = (
@@ -77,22 +55,19 @@ const Dashboard = () => {
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton
-              onClick={() => setActivePage(item.text)}
-              selected={activePage === item.text}
+              onClick={() => {
+                navigate(item.path);
+                if (isMobile) setMobileOpen(false);
+              }}
+              selected={location.pathname.includes(item.path)}
               sx={{
                 "&.Mui-selected": {
-                  backgroundColor: "#2e2e2e",
+                  backgroundColor: "#12372A",
                   color: "#fff",
-                  "& .MuiSvgIcon-root": {
-                    color: "#fff",
-                  },
+                  "& .MuiSvgIcon-root": { color: "#fff" },
                 },
-                "&.Mui-selected:hover": {
-                  backgroundColor: "#3a3a3a",
-                },
-                "&:hover": {
-                  backgroundColor: "#252525",
-                },
+                "&.Mui-selected:hover": { backgroundColor: "#436850" },
+                "&:hover": { backgroundColor: "#252525" },
               }}
             >
               <ListItemIcon sx={{ minWidth: 40, color: "#D8E9A8" }}>
@@ -102,21 +77,23 @@ const Dashboard = () => {
             </ListItemButton>
           </ListItem>
         ))}
-                <Box sx={{ p: 2 }}>
+
+        
+        <Box sx={{ p: 2 }}>
           <Button
             variant="outlined"
             color="error"
             fullWidth
             onClick={() => {
-              const confirmLogout = window.confirm('Yakin ingin log out?');
+              const confirmLogout = window.confirm("Yakin ingin log out?");
               if (confirmLogout) {
-                alert('Berhasil Log out')
-                navigate('/')
+                alert("Berhasil Log out");
+                navigate("/");
               }
             }}
             sx={{ mt: 25 }}
           >
-          Log Out
+            Log Out
           </Button>
         </Box>
       </List>
@@ -126,6 +103,8 @@ const Dashboard = () => {
   return (
     <>
       <Navbar />
+
+      {/* Tombol menu versi mobile */}
       {isMobile && (
         <IconButton
           color="inherit"
@@ -156,21 +135,26 @@ const Dashboard = () => {
         {drawerContent}
       </Drawer>
 
-      {/* KONTEN */}
+      {/* Konten */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
+<<<<<<< HEAD
           marginTop: isMobile ? "56px" : "64px", // tinggi Navbar
           height: `calc(100vh - ${isMobile ? "56px" : "64px"})`, // sisakan area navbar
           overflowY: "auto", // biar dashboard bisa scroll
+=======
+          marginTop: { xs: "10%", md: "5%" },
+>>>>>>> 09cfd65bc580f3b9ffb3a4441c7b00b176c8b5c1
           backgroundColor: "#1a1a1a",
           color: "white",
+          minHeight: "100vh",
         }}
       >
-        {renderContent()}
+        <Outlet />
       </Box>
     </>
   );
