@@ -84,7 +84,7 @@ export default function FavoriteCard() {
       <CardActions disableSpacing>
         <IconButton aria-label="share"  sx={{ color: "#bdbdbd", alignItems: 'center' }}>
           <AccessTimeIcon/>
-          <Typography variant="body2" color="#bdbdbd" sx={{ pl: 1, alignItems: 'center' }}>30 Menit</Typography>
+          <Typography variant="body2" color="#bdbdbd" sx={{ pl: 0.5, alignItems: 'center' }}>30 Menit</Typography>
         </IconButton>
         <Typography variant="h5" color="#bdbdbd">|</Typography>
         <IconButton aria-label="share"  sx={{ color: "#bdbdbd", alignItems: 'center' }}>

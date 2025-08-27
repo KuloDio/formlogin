@@ -14,6 +14,8 @@ import {
   useMediaQuery,
   IconButton,
   Button,
+  Alert,
+  Stack,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -33,12 +35,24 @@ const menuItems = [
 
 const Dashboard = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showAlert, setShowAlert] = useState(false); // state untuk alert
   const isMobile = useMediaQuery("(max-width:600px)");
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Yakin ingin log out?");
+    if (confirmLogout) {
+      setShowAlert(true); // munculkan alert
+      setTimeout(() => {
+        setShowAlert(false); // sembunyikan alert setelah 2 detik
+        navigate("/"); // redirect ke home
+      }, 1000);
+    }
   };
 
   const drawerContent = (
@@ -76,13 +90,7 @@ const Dashboard = () => {
             variant="outlined"
             color="error"
             fullWidth
-            onClick={() => {
-              const confirmLogout = window.confirm("Yakin ingin log out?");
-              if (confirmLogout) {
-                alert("Berhasil Log out");
-                navigate("/");
-              }
-            }}
+            onClick={handleLogout}
             sx={{ mt: 25 }}
           >
             Log Out
@@ -148,6 +156,13 @@ const Dashboard = () => {
           minHeight: "100vh",
         }}
       >
+        {/* Alert muncul di atas konten */}
+        {showAlert && (
+          <Stack sx={{ width: "100%", mb: 2 }} spacing={2}>
+            <Alert severity="success">Berhasil log out!</Alert>
+          </Stack>
+        )}
+
         <Outlet />
       </Box>
     </>
