@@ -70,7 +70,6 @@ const Dashboard = () => {
             </ListItemButton>
           </ListItem>
         ))}
-
         <Box sx={{ p: 2 }}>
           <Button
             variant="outlined"
@@ -145,7 +144,6 @@ const Dashboard = () => {
           overflowY: "auto", // biar dashboard bisa scroll
           backgroundColor: "#1a1a1a",
           color: "white",
-          minHeight: "100vh",
         }}
       >
         <Outlet />
