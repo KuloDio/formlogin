@@ -26,7 +26,7 @@ const MyResep = () => {
             backgroundColor: "#1E5128",
             fontWeight: "800",
             borderRadius: "15px",
-            border: "2px solid",
+            border: "3px solid",
             borderColor: "#D8E9A8",
             width: { xs: "40%", sm: "30%", md: "15%" },
             marginY: 2,
@@ -35,7 +35,7 @@ const MyResep = () => {
       </Box>
       <Typography sx={{
         textAlign: "center",
-        border: "3px solid",
+        border: "4px solid",
         borderRadius: "25px",
         borderColor: "#D8E9A8",
         fontWeight: "800",
