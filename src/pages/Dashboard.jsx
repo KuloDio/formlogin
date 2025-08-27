@@ -70,8 +70,6 @@ const Dashboard = () => {
             </ListItemButton>
           </ListItem>
         ))}
-
-
         <Box sx={{ p: 2 }}>
           <Button
             variant="outlined"
@@ -102,7 +100,13 @@ const Dashboard = () => {
         <IconButton
           color="inherit"
           onClick={handleDrawerToggle}
-          sx={{ position: "fixed", top: 10, left: 10, zIndex: 2000, color: "white" }}
+          sx={{
+            position: "fixed",
+            top: 10,
+            left: 10,
+            zIndex: 2000,
+            color: "white",
+          }}
         >
           <MenuIcon />
         </IconButton>
@@ -128,16 +132,16 @@ const Dashboard = () => {
         {drawerContent}
       </Drawer>
 
-      {/* Konten */}
+      {/* Konten utama */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
-          marginTop: isMobile ? "56px" : "64px",
-          height: `calc(100vh - ${isMobile ? "56px" : "64px"})`,
-          overflowY: "auto",
+          marginTop: isMobile ? "56px" : "64px", // tinggi Navbar
+          height: `calc(100vh - ${isMobile ? "56px" : "64px"})`, // sisakan area navbar
+          overflowY: "auto", // biar dashboard bisa scroll
           backgroundColor: "#1a1a1a",
           color: "white",
         }}

@@ -14,8 +14,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import PersonIcon from '@mui/icons-material/Person';
 
 import imghome from "../assets/image/imghome.png";
+
+
 
 
 const ExpandMore = styled((props) => {
@@ -58,12 +62,12 @@ export default function RecipeReviewCard() {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings" sx={{ color: "#bdbdbd" }}>
-            <MoreVertIcon />
-          </IconButton>
+          <IconButton aria-label="add to favorites"  sx={{ color: "#bdbdbd" }}>
+          <FavoriteIcon />
+        </IconButton>
         }
         title="Nasi Uduk"
-        subheader="September 14, 2016"
+        subheader="Sarapan"
         subheaderTypographyProps={{ sx: { color: "#bdbdbd" } }}
       />
       <CardMedia
@@ -81,11 +85,14 @@ export default function RecipeReviewCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites"  sx={{ color: "#bdbdbd" }}>
-          <FavoriteIcon />
+        <IconButton aria-label="share"  sx={{ color: "#bdbdbd", alignItems: 'center' }}>
+          <AccessTimeIcon/>
+          <Typography variant="body2" color="#bdbdbd" sx={{ pl: 1, alignItems: 'center' }}>30 Menit</Typography>
         </IconButton>
-        <IconButton aria-label="share"  sx={{ color: "#bdbdbd" }}>
-          <ShareIcon />
+        <Typography variant="h5" color="#bdbdbd">|</Typography>
+        <IconButton aria-label="share"  sx={{ color: "#bdbdbd", alignItems: 'center' }}>
+          <PersonIcon/>
+          <Typography variant="body2" color="#bdbdbd" sx={{ alignItems: 'center' }} >1 porsi</Typography>
         </IconButton>
         <ExpandMore
           expand={expanded}

@@ -30,6 +30,7 @@ function App() {
           /* </PrivateRoute> */
         }
       >
+        <Route index element={<Navigate to="home" replace />} />
         <Route path="home" element={<Home />} />
         <Route path="resepuser" element={<ResepUser />} />
         <Route path="favorite" element={<Favorite />} />
