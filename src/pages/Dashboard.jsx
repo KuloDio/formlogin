@@ -14,6 +14,8 @@ import {
   useMediaQuery,
   IconButton,
   Button,
+  Alert,
+  Stack,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -33,12 +35,24 @@ const menuItems = [
 
 const Dashboard = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showAlert, setShowAlert] = useState(false); // state untuk alert
   const isMobile = useMediaQuery("(max-width:600px)");
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Yakin ingin log out?");
+    if (confirmLogout) {
+      setShowAlert(true); // munculkan alert
+      setTimeout(() => {
+        setShowAlert(false); // sembunyikan alert setelah 2 detik
+        navigate("/"); // redirect ke home
+      }, 1000);
+    }
   };
 
   const drawerContent = (
@@ -70,20 +84,12 @@ const Dashboard = () => {
             </ListItemButton>
           </ListItem>
         ))}
-
-
         <Box sx={{ p: 2 }}>
           <Button
             variant="outlined"
             color="error"
             fullWidth
-            onClick={() => {
-              const confirmLogout = window.confirm("Yakin ingin log out?");
-              if (confirmLogout) {
-                alert("Berhasil Log out");
-                navigate("/");
-              }
-            }}
+            onClick={handleLogout}
             sx={{ mt: 25 }}
           >
             Log Out
@@ -102,7 +108,13 @@ const Dashboard = () => {
         <IconButton
           color="inherit"
           onClick={handleDrawerToggle}
-          sx={{ position: "fixed", top: 10, left: 10, zIndex: 2000, color: "white" }}
+          sx={{
+            position: "fixed",
+            top: 10,
+            left: 10,
+            zIndex: 2000,
+            color: "white",
+          }}
         >
           <MenuIcon />
         </IconButton>
@@ -128,20 +140,27 @@ const Dashboard = () => {
         {drawerContent}
       </Drawer>
 
-      {/* Konten */}
+      {/* Konten utama */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
-          marginTop: isMobile ? "56px" : "64px",
-          height: `calc(100vh - ${isMobile ? "56px" : "64px"})`,
-          overflowY: "auto",
+          marginTop: isMobile ? "56px" : "64px", // tinggi Navbar
+          height: `calc(100vh - ${isMobile ? "56px" : "64px"})`, // sisakan area navbar
+          overflowY: "auto", // biar dashboard bisa scroll
           backgroundColor: "#1a1a1a",
           color: "white",
         }}
       >
+        {/* Alert muncul di atas konten */}
+        {showAlert && (
+          <Stack sx={{ width: "100%", mb: 2 }} spacing={2}>
+            <Alert severity="success">Berhasil log out!</Alert>
+          </Stack>
+        )}
+
         <Outlet />
       </Box>
     </>
