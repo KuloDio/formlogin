@@ -88,7 +88,7 @@ const Dashboard = () => {
           display: "flex", 
           justifyContent: "flex-end", 
           gap: 1,
-          marginX: "2%", }}>
+          marginX: "10%", }}>
           <Button
             variant="outlined"
             color="error"
