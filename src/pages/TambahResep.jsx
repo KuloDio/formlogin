@@ -37,14 +37,15 @@ const TambahResep = () => {
                 <Box sx={{
                     display: "flex",
                     justifyContent: "flex-end",
+                    marginTop: "2%",
                 }}>
                     <Button variant='contained' sx={{
                         backgroundColor: "#D8E9A8",
                         color: "#1E5128",
-                        fontWeight: "800",
+                        fontWeight: "900",
                         borderRadius: "15px",
-                        width: { xs: "40%", sm: "30%", md: "15%" },
-                    }}>SIMPAN RESEP</Button>
+                        paddingX: "2%",
+                    }}>TAMBAH RESEP</Button>
                 </Box>
             </Box>
         </>
