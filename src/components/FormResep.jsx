@@ -63,7 +63,7 @@ const FormResep = () => {
                         fontWeight: "800",
                         paddingY: "2%",
                         color: "#1E5128",
-                        marginTop: { xs: "5%", md: "12%" },
+                        marginTop: { xs: "5%", md: "5%" },
                         boxShadow: "0 4px 2px #00000035",
                     }}>DESKRIPSI RESEP
                     </Typography>
@@ -95,11 +95,52 @@ const FormResep = () => {
                                 },
                             },
                         }} />
+                    <Typography sx={{
+                        textAlign: "center",
+                        backgroundColor: "#D8E9A8",
+                        alignItems: "center",
+                        borderRadius: "25px",
+                        fontWeight: "800",
+                        paddingY: "2%",
+                        color: "#1E5128",
+                        marginTop: { xs: "5%", md: "5%" },
+                        boxShadow: "0 4px 2px #00000035",
+                    }}>FOTO MAKANAN
+                    </Typography>
+                    <TextField
+                        id='image'
+                        placeholder='Masukkan Foto Makanan'
+                        type='url'
+                        sx={{
+                            width: "100%",
+                            marginTop: "5%",
+                            textAlign: "center",
+                            "& .MuiOutlinedInput-root": {
+                                border: "4px solid",
+                                borderColor: "#D8E9A8",
+                                borderRadius: "20px",
+                                "& fieldset": {
+                                    borderColor: "transparent",
+                                },
+                                "&:hover fieldset": {
+                                    borderColor: "transparent",
+                                },
+                                "&.Mui-focused fieldset": {
+                                    borderColor: "transparent",
+                                },
+                                "& .MuiInputLabel-root": {
+                                    color: "white",
+                                },
+                                "& .MuiInputBase-input": {
+                                    color: "white",
+                                },
+                            },
+                        }} />
                 </Box>
                 <Box xs={12} md={4} sx={{
                     width: { xs: "100%", md: "32%" },
                     height: "40vh",
-                    marginTop: { xs: "2%", md: "2" },
+                    marginTop: { xs: "37%", md: "2%" },
                     padding: "1%",
                 }}>
                     <Typography sx={{
@@ -150,7 +191,7 @@ const FormResep = () => {
                         fontWeight: "800",
                         paddingY: "2%",
                         color: "#1E5128",
-                        marginTop: { xs: "5%", md: "12%" },
+                        marginTop: { xs: "5%", md: "5%" },
                         boxShadow: "0 4px 2px #00000035",
                     }}>JUMLAH PORSI
                     </Typography>
