@@ -8,6 +8,7 @@ import ResepUser from './pages/ResepUser.jsx';
 import TambahResep from './pages/TambahResep.jsx';
 import MyResep from './pages/myresep.jsx';
 import Favorite from './pages/favorite.jsx';
+import Profile from './pages/Profile.jsx';
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -21,6 +22,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reseppublic" element={<ResepPublic />} />
+      
 
       <Route
         path="/dashboard"
@@ -36,6 +38,7 @@ function App() {
         <Route path="favorite" element={<Favorite />} />
         <Route path="myresep" element={<MyResep />} />
         <Route path="tambahresep" element={<TambahResep />} />
+        <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
   );

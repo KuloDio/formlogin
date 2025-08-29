@@ -23,6 +23,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PersonIcon from "@mui/icons-material/Person";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const drawerWidth = 240;
 
@@ -31,6 +32,7 @@ const menuItems = [
   { text: "All Recipes", icon: <BookIcon />, path: "resepuser" },
   { text: "Favorites", icon: <FavoriteIcon />, path: "favorite" },
   { text: "My Recipes", icon: <PersonIcon />, path: "myresep" },
+  { text: "My Profile", icon: <AccountCircleIcon />, path: "profile" },
 ];
 
 const Dashboard = () => {

@@ -11,46 +11,33 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PersonIcon from '@mui/icons-material/Person';
 
 import imghome from "../assets/image/imghome.png";
 
-
-
-
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
-})(({ theme }) => ({
+})(({ theme, expand }) => ({
   marginLeft: 'auto',
   transition: theme.transitions.create('transform', {
     duration: theme.transitions.duration.shortest,
   }),
-  variants: [
-    {
-      props: ({ expand }) => !expand,
-      style: {
-        transform: 'rotate(0deg)',
-      },
-    },
-    {
-      props: ({ expand }) => !!expand,
-      style: {
-        transform: 'rotate(180deg)',
-      },
-    },
-  ],
+  transform: expand ? 'rotate(180deg)' : 'rotate(0deg)',
 }));
 
 export default function RecipeReviewCard() {
   const [expanded, setExpanded] = React.useState(false);
+  const [favorited, setFavorited] = React.useState(false); // 🔴 state untuk favorite
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const handleFavoriteClick = () => {
+    setFavorited(!favorited); // toggle true/false
   };
 
   return (
@@ -62,9 +49,13 @@ export default function RecipeReviewCard() {
           </Avatar>
         }
         action={
-          <IconButton aria-label="add to favorites"  sx={{ color: "#bdbdbd" }}>
-          <FavoriteIcon />
-        </IconButton>
+          <IconButton 
+            aria-label="add to favorites"  
+            sx={{ color: favorited ? "#ff0000ff" : "#bdbdbd" }} // 🔴 ganti warna sesuai state
+            onClick={handleFavoriteClick}
+          >
+            <FavoriteIcon />
+          </IconButton>
         }
         title="Nasi Uduk"
         subheader="Sarapan"
@@ -75,9 +66,7 @@ export default function RecipeReviewCard() {
         height="194"
         image={imghome}
         alt="Nasi Uduk"
-        sx={{ 
-            objectFit: "contain",
-         }}
+        sx={{ objectFit: "contain" }}
       />
       <CardContent>
         <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
@@ -85,21 +74,21 @@ export default function RecipeReviewCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="share"  sx={{ color: "#bdbdbd", alignItems: 'center' }}>
+        <IconButton aria-label="time" sx={{ color: "#bdbdbd", alignItems: 'center' }}>
           <AccessTimeIcon/>
-          <Typography variant="body2" color="#bdbdbd" sx={{ pl: 0.5, alignItems: 'center' }}>30 Menit</Typography>
+          <Typography variant="body2" color="#bdbdbd" sx={{ pl: 0.5 }}>30 Menit</Typography>
         </IconButton>
-        <Typography variant="h5" color="#bdbdbd">|</Typography>
-        <IconButton aria-label="share"  sx={{ color: "#bdbdbd", alignItems: 'center' }}>
+        <Typography variant="h5" color="#bdbdbd" sx={{ justifyContent: 'center' }}>|</Typography>
+        <IconButton aria-label="person" sx={{ color: "#bdbdbd", alignItems: 'center' }}>
           <PersonIcon/>
-          <Typography variant="body2" color="#bdbdbd" sx={{ alignItems: 'center' }} >1 porsi</Typography>
+          <Typography variant="body2" color="#bdbdbd">1 porsi</Typography>
         </IconButton>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
-           sx={{ color: "#bdbdbd" }}
+          sx={{ color: "#bdbdbd" }}
         >
           <ExpandMoreIcon />
         </ExpandMore>
@@ -114,15 +103,10 @@ export default function RecipeReviewCard() {
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?
           </Typography>
           <Typography sx={{ marginBottom: 2 }}>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is absorbed,
-            15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without
-            stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don&apos;t open.)
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?
           </Typography>
           <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!
           </Typography>
         </CardContent>
       </Collapse>
