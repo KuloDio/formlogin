@@ -78,7 +78,7 @@ function Profile() {
 
       {/* Stats */}
       <Box border="2px solid #fff" sx={{ my: 3, mx: 5, borderRadius: 2 }}>
-        <Typography variant="body1" color="#fff" sx={{ py: 1, borderBottom: '2px solid #fff' }}>STATS</Typography>
+        <Typography variant="body1" color="#fff" sx={{ py: 1, borderBottom: '2px solid #fff' }}>Stats</Typography>
         <Grid container spacing={4} sx={{ justifyContent: 'space-between', py: 3, px: 12 }}>
           <Grid item>
             <PersonIcon />
