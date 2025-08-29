@@ -23,6 +23,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const drawerWidth = 240;
 
@@ -31,6 +32,7 @@ const menuItems = [
   { text: "All Recipes", icon: <BookIcon />, path: "resepuser" },
   { text: "Favorites", icon: <FavoriteIcon />, path: "favorite" },
   { text: "My Recipes", icon: <RestaurantIcon />, path: "myresep" },
+  { text: "Profile", icon: <AccountCircleIcon />, path: "profile" },
 ];
 
 const Dashboard = () => {
@@ -47,6 +49,7 @@ const Dashboard = () => {
   const handleLogout = () => {
     const confirmLogout = window.confirm("Yakin ingin log out?");
     if (confirmLogout) {
+      localStorage.removeItem("token");
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
