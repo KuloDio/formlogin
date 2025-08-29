@@ -47,10 +47,10 @@ const Dashboard = () => {
   const handleLogout = () => {
     const confirmLogout = window.confirm("Yakin ingin log out?");
     if (confirmLogout) {
-      setShowAlert(true); // munculkan alert
+      setShowAlert(true);
       setTimeout(() => {
-        setShowAlert(false); // sembunyikan alert setelah 2 detik
-        navigate("/"); // redirect ke home
+        setShowAlert(false);
+        navigate("/");
       }, 1000);
     }
   };
@@ -84,13 +84,21 @@ const Dashboard = () => {
             </ListItemButton>
           </ListItem>
         ))}
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ 
+          display: "flex", 
+          justifyContent: "flex-end", 
+          gap: 1,
+          marginX: "10%", }}>
           <Button
             variant="outlined"
             color="error"
             fullWidth
             onClick={handleLogout}
-            sx={{ mt: 25 }}
+            sx={{
+              marginTop: "100%",
+              border: "3px solid",
+              fontWeight: "800"
+            }}
           >
             Log Out
           </Button>
