@@ -44,7 +44,7 @@ const Home = () => {
             gap: "2%",
           }}>
             <Button variant='contained'
-              onClick={() => navigate("/reseppublic")}
+              onClick={() => navigate("/dashboard/resepuser")}
               sx={{
                 backgroundColor: "#1E5128",
                 color: "white",
