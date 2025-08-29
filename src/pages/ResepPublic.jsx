@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar } from '../components/navbar'
-import { Box, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 
 const ResepPublic = () => {
   return (
