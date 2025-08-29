@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AppBar, Box, Typography, Button, Toolbar, Link, Input, } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom'
+import logocook from '../assets/image/logocook.png'
 
 export const Navbar = () => {
     const navigate = useNavigate();
@@ -13,10 +14,13 @@ export const Navbar = () => {
             <Toolbar sx={{
                 justifyContent: "space-between"
             }}>
-                <Typography variant='h5' sx={{
-                    fontWeight: "900",
-                    color: "white",
-                }}>Logo</Typography>
+                <img
+                    src={logocook}
+                    alt="logo"
+                    style={{
+                        width: "9%",
+                    }}
+                />
                 <Box sx={{
                     display: "flex",
                     alignItems: "center",
@@ -38,7 +42,7 @@ export const Navbar = () => {
                     }}>
                         <SearchIcon sx={{
                             color: "#ADBC9F"
-                        }}/>
+                        }} />
                         <Input placeholder='Search' sx={{
                             "& .MuiInput-input::placeholder": {
                                 color: "#D8E9A8",
@@ -48,7 +52,7 @@ export const Navbar = () => {
                         }} ></Input >
                     </Box>
                     <Button onClick={() => navigate("/login")} sx={{
-                        display: {xs: "none", sm: "none", md: "flex"},
+                        display: { xs: "none", sm: "none", md: "flex" },
                         color: "white",
                         backgroundColor: "#1E5128",
                         paddingX: 3,

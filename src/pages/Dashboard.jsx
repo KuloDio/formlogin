@@ -22,7 +22,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import PersonIcon from "@mui/icons-material/Person";
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 const drawerWidth = 240;
 
@@ -30,7 +30,7 @@ const menuItems = [
   { text: "Home", icon: <HomeIcon />, path: "home" },
   { text: "All Recipes", icon: <BookIcon />, path: "resepuser" },
   { text: "Favorites", icon: <FavoriteIcon />, path: "favorite" },
-  { text: "My Recipes", icon: <PersonIcon />, path: "myresep" },
+  { text: "My Recipes", icon: <RestaurantIcon />, path: "myresep" },
 ];
 
 const Dashboard = () => {
