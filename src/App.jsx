@@ -27,9 +27,9 @@ function App() {
       <Route
         path="/dashboard"
         element={
-          // <PrivateRoute>
+          <PrivateRoute>
             <Dashboard />
-          /* </PrivateRoute> */
+          </PrivateRoute>
         }
       >
         <Route index element={<Navigate to="home" replace />} />

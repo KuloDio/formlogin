@@ -44,16 +44,35 @@ function Profile() {
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
+        PaperProps={{
+    sx: {
+      borderRadius: "16px", // atur sudut membulat
+      overflow: "hidden",   // biar header/footer ikut rounded
+      border: '3px solid #D8E9A8'
+    },
+  }}
+
       >
-        <DialogTitle>Edit Profile</DialogTitle>
-        <DialogContent>
+        <DialogTitle sx={{ 
+          backgroundColor: '#12372A',
+          color: '#fff',
+          textAlign: 'center',
+          justifyContent: 'center',
+          fontWeight: 'bold',
+          fontSize: 25,
+         }}>Edit Profile</DialogTitle>
+        <DialogContent sx={{ 
+          backgroundColor: '#12372A',
+         }}>
           <DialogContentText id="alert-dialog-slide-description">
-            Fitur edit profile bisa ditaruh di sini (misalnya form untuk ubah username, bio, foto, dll).
+            
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Save</Button>
+        <DialogActions sx={{ 
+          backgroundColor: '#12372A',
+         }}>
+          <Button onClick={handleClose} sx={{ backgroundColor: '#D8E9A8', color: '#fff' }}>Cancel</Button>
+          <Button onClick={handleClose} sx={{ backgroundColor: '#D8E9A8', color: '#fff' }}>Save</Button>
         </DialogActions>
       </Dialog>
 
