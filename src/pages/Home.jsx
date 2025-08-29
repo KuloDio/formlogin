@@ -20,7 +20,7 @@ const Home = () => {
           paddingX: "8%",
           gap: "2%",
           backgroundColor: "#191A19",
-          minHeight: "100vh",
+          maxHeight: "100vh",
           color: "white",
         }}
       >
@@ -67,7 +67,8 @@ const Home = () => {
           color: "white",
           height: "100vh",
           width: "40%",
-          py: 6
+          py: 6,
+          display: { xs: "none", sm: "none", md: "block" },
         }}>
           <img
             src={bghome}
