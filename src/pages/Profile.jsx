@@ -11,33 +11,40 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function Profile() {
   const [open, setOpen] = useState(false);
+
+  // state utama (ditampilkan di profile)
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
-
-  // state untuk foto
   const [photoPreview, setPhotoPreview] = useState(null);
-  const [photoFile, setPhotoFile] = useState(null);
+
+  // state sementara untuk dialog
+  const [tempName, setTempName] = useState("");
+  const [tempBio, setTempBio] = useState("");
+  const [tempPhoto, setTempPhoto] = useState(null);
 
   // buka dialog
-  const handleClickOpen = () => setOpen(true);
+  const handleClickOpen = () => {
+    setTempName(name);
+    setTempBio(bio);
+    setTempPhoto(photoPreview);
+    setOpen(true);
+  };
+
   const handleClose = () => setOpen(false);
 
-  // ganti foto profile
+  // ganti foto profile (di dialog)
   const handlePhotoChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    setPhotoFile(file);
-
-    // convert file ke base64 biar bisa disimpan di localStorage
     const reader = new FileReader();
     reader.onloadend = () => {
-      setPhotoPreview(reader.result); // hasil base64
+      setTempPhoto(reader.result); // simpan di temp, bukan di utama
     };
     reader.readAsDataURL(file);
   };
 
-  // ====== LOAD DATA DARI LOCALSTORAGE (saat pertama buka halaman) ======
+  // LOAD DATA DARI LOCALSTORAGE
   useEffect(() => {
     const savedProfile = localStorage.getItem("profileData");
     if (savedProfile) {
@@ -48,15 +55,20 @@ function Profile() {
     }
   }, []);
 
-  // ====== SAVE DATA KE LOCALSTORAGE ======
+  // SAVE DATA KE LOCALSTORAGE
   const handleSave = () => {
+    setName(tempName);
+    setBio(tempBio);
+    setPhotoPreview(tempPhoto);
+
     const profileData = {
-      name,
-      bio,
-      photo: photoPreview,
+      name: tempName,
+      bio: tempBio,
+      photo: tempPhoto,
     };
     localStorage.setItem("profileData", JSON.stringify(profileData));
-    handleClose();
+
+    setOpen(false);
   };
 
   return (
@@ -92,7 +104,6 @@ function Profile() {
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
         PaperProps={{
           sx: {
             borderRadius: "16px",
@@ -105,7 +116,6 @@ function Profile() {
           backgroundColor: '#12372A',
           color: '#fff',
           textAlign: 'center',
-          justifyContent: 'center',
           fontWeight: 'bold',
           fontSize: 25,
         }}>
@@ -114,17 +124,16 @@ function Profile() {
 
         <DialogContent sx={{ backgroundColor: '#12372A' }}>
 
-          {/* ====== Edit Foto Profile ====== */}
+          {/* Edit Foto Profile */}
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
             <Box sx={{ position: 'relative' }}>
               <Avatar
-                src={photoPreview || undefined}
+                src={tempPhoto || undefined}
                 sx={{ width: 96, height: 96, bgcolor: red[500], fontSize: 32 }}
               >
-                {!photoPreview && "R"}
+                {!tempPhoto && "R"}
               </Avatar>
 
-              {/* input file tersembunyi */}
               <input
                 id="profile-photo-input"
                 type="file"
@@ -150,12 +159,12 @@ function Profile() {
             </Box>
           </Box>
 
-          {/* ====== Form Nama & Bio ====== */}
+          {/* Form Nama & Bio */}
           <Box>
             <TextField
-              value={name}
+              value={tempName}
               placeholder='Nama'
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setTempName(e.target.value)}
               fullWidth
               sx={{
                 mb: 2,
@@ -173,9 +182,9 @@ function Profile() {
             />
 
             <TextField
-              value={bio}
+              value={tempBio}
               placeholder='Bio'
-              onChange={(e) => setBio(e.target.value)}
+              onChange={(e) => setTempBio(e.target.value)}
               fullWidth
               multiline
               minRows={3}
