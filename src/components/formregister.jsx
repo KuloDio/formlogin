@@ -4,6 +4,8 @@ import { Box, TextField, Button } from "@mui/material";
 
 
 const FormRegister = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -45,7 +47,7 @@ const FormRegister = () => {
     }
 
     try {
-      const res = await axios.post("http://192.168.100.247:8080/auth/register", {
+      const res = await axios.post(`${API_URL}/auth/register`, {
         name: form.name,
         email: form.email,
         password: form.password,
