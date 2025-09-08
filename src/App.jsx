@@ -29,7 +29,7 @@ function App() {
         element={
           // <PrivateRoute>
             <Dashboard />
-          /* </PrivateRoute> */
+          // </PrivateRoute>
         }
       >
         <Route index element={<Navigate to="home" replace />} />
@@ -37,7 +37,6 @@ function App() {
         <Route path="resepuser" element={<ResepUser />} />
         <Route path="favorite" element={<Favorite />} />
         <Route path="myresep" element={<MyResep />} />
-        {/* >>> HANYA route ini yang dibungkus provider <<< */}
         <Route
           path="tambahresep"
           element={
