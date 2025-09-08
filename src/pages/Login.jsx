@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
 
@@ -17,7 +18,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://192.168.100.247:8080/auth/login", {
+      const res = await axios.post(`${API_URL}/auth/login`, {
         email: form.email,
         password: form.password,
       });

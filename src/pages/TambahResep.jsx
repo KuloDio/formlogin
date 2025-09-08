@@ -5,12 +5,14 @@ import FormResep from '../components/FormResep'
 import { FormContext } from '../context/FormContext'
 
 const TambahResep = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const { formResep, steps, bahanList } = useContext(FormContext);
 
   const handleSubmit = async () => {
     const payload = { ...formResep, steps, bahanList };
     try {
-      const res = await fetch('http://192.168.100.247:8080/auth/resep', {
+      const res = await fetch(`${API_URL}/api/recipes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
