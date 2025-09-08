@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Typography, Box, Grid, Avatar, Stack, Button, Dialog, DialogTitle, DialogContent, DialogActions, Slide, TextField, IconButton } from '@mui/material'
+import {
+  Typography, Box, Grid, Avatar, Stack, Button, Dialog, DialogTitle,
+  DialogContent, DialogActions, Slide, TextField, IconButton, useMediaQuery
+} from '@mui/material'
+import { useTheme } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
@@ -12,39 +16,40 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function Profile() {
   const [open, setOpen] = useState(false);
 
-  // state utama (ditampilkan di profile)
+  // state utama
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [photoPreview, setPhotoPreview] = useState(null);
 
-  // state sementara untuk dialog
+  // state sementara (supaya cancel tidak ubah data utama)
   const [tempName, setTempName] = useState("");
   const [tempBio, setTempBio] = useState("");
   const [tempPhoto, setTempPhoto] = useState(null);
 
-  // buka dialog
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  // buka dialog → isi state sementara
   const handleClickOpen = () => {
     setTempName(name);
     setTempBio(bio);
     setTempPhoto(photoPreview);
     setOpen(true);
   };
-
   const handleClose = () => setOpen(false);
 
-  // ganti foto profile (di dialog)
+  // ganti foto profile (di state sementara)
   const handlePhotoChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     const reader = new FileReader();
     reader.onloadend = () => {
-      setTempPhoto(reader.result); // simpan di temp, bukan di utama
+      setTempPhoto(reader.result);
     };
     reader.readAsDataURL(file);
   };
 
-  // LOAD DATA DARI LOCALSTORAGE
+  // load data dari localStorage
   useEffect(() => {
     const savedProfile = localStorage.getItem("profileData");
     if (savedProfile) {
@@ -55,7 +60,7 @@ function Profile() {
     }
   }, []);
 
-  // SAVE DATA KE LOCALSTORAGE
+  // save ke localStorage
   const handleSave = () => {
     setName(tempName);
     setBio(tempBio);
@@ -67,21 +72,35 @@ function Profile() {
       photo: tempPhoto,
     };
     localStorage.setItem("profileData", JSON.stringify(profileData));
-
-    setOpen(false);
+    handleClose();
   };
 
   return (
-    <Box sx={{ backgroundColor: '#12372A', mx: 30, height: '99%', textAlign: 'center', border: '3px solid #D8E9A8', borderRadius: 5, boxShadow: 3 }}>
-      
+    <Box
+      sx={{
+        backgroundColor: '#12372A',
+        mx: { xs: 2, sm: 5, md: 10, lg: 30 }, // responsive margin
+        my: 3,
+        p: { xs: 2, sm: 3 },
+        minHeight: "90vh",
+        textAlign: 'center',
+        border: '3px solid #D8E9A8',
+        borderRadius: 5,
+        boxShadow: 3
+      }}
+    >
+
       {/* Avatar & Nama */}
       <Grid container spacing={0} sx={{ py: 3, justifyContent: 'center', alignItems: 'center' }}>
         <Grid item>
           <Stack spacing={1} alignItems="center">
-            <Avatar src={photoPreview || undefined} sx={{ bgcolor: red[500], width: 90, height: 90, fontSize: 30 }}>
+            <Avatar
+              src={photoPreview || undefined}
+              sx={{ bgcolor: red[500], width: isMobile ? 70 : 90, height: isMobile ? 70 : 90, fontSize: 30 }}
+            >
               {!photoPreview && "R"}
             </Avatar>
-            <Typography variant="h6" color="#fff" sx={{ fontWeight: 'bold' }}>
+            <Typography variant={isMobile ? "body1" : "h6"} color="#fff" sx={{ fontWeight: 'bold' }}>
               {name || "Nama Kamu"}
             </Typography>
           </Stack>
@@ -89,33 +108,40 @@ function Profile() {
       </Grid>
 
       {/* Bio */}
-      <Typography variant="body1" color="#fff" sx={{ textAlign: 'center', px: 10 }}>
+      <Typography variant="body2" color="#fff" sx={{ textAlign: 'center', px: { xs: 2, sm: 5, md: 10 } }}>
         {bio || "Tambahkan bio kamu disini..."}
       </Typography>
 
       {/* Edit Profile Button */}
-      <Button variant="outlined" sx={{ fontWeight: 'bold', my: 2, color: '#fff', borderColor: '#fff' }} onClick={handleClickOpen}>
+      <Button
+        variant="outlined"
+        sx={{ fontWeight: 'bold', my: 2, color: '#fff', borderColor: '#fff' }}
+        onClick={handleClickOpen}
+      >
         Edit Profile
       </Button>
 
       {/* Dialog */}
       <Dialog
+        fullScreen={isMobile} // kalau mobile → fullscreen
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
         PaperProps={{
           sx: {
-            borderRadius: "16px",
+            borderRadius: isMobile ? 0 : "16px",
             overflow: "hidden",
             border: '3px solid #D8E9A8'
           },
         }}
       >
-        <DialogTitle sx={{ 
+        <DialogTitle sx={{
           backgroundColor: '#12372A',
           color: '#fff',
           textAlign: 'center',
+          justifyContent: 'center',
           fontWeight: 'bold',
           fontSize: 25,
         }}>
@@ -124,7 +150,7 @@ function Profile() {
 
         <DialogContent sx={{ backgroundColor: '#12372A' }}>
 
-          {/* Edit Foto Profile */}
+          {/* ====== Edit Foto Profile ====== */}
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
             <Box sx={{ position: 'relative' }}>
               <Avatar
@@ -134,6 +160,7 @@ function Profile() {
                 {!tempPhoto && "R"}
               </Avatar>
 
+              {/* input file tersembunyi */}
               <input
                 id="profile-photo-input"
                 type="file"
@@ -159,7 +186,7 @@ function Profile() {
             </Box>
           </Box>
 
-          {/* Form Nama & Bio */}
+          {/* ====== Form Nama & Bio ====== */}
           <Box>
             <TextField
               value={tempName}
@@ -168,7 +195,6 @@ function Profile() {
               fullWidth
               sx={{
                 mb: 2,
-                px: 5,
                 input: { color: "white" },
                 "& .MuiOutlinedInput-root": {
                   border: "3px solid",
@@ -190,7 +216,6 @@ function Profile() {
               minRows={3}
               sx={{
                 mb: 2,
-                px: 5,
                 input: { color: "white" },
                 "& .MuiOutlinedInput-root": {
                   border: "3px solid",
@@ -218,18 +243,18 @@ function Profile() {
       </Dialog>
 
       {/* Stats */}
-      <Box border="2px solid #fff" sx={{ my: 3, mx: 5, borderRadius: 2 }}>
+      <Box border="2px solid #fff" sx={{ my: 3, mx: { xs: 1, sm: 3, md: 5 }, borderRadius: 2 }}>
         <Typography variant="body1" color="#fff" sx={{ py: 1, borderBottom: '2px solid #fff', fontWeight: 'bold' }}>STATS</Typography>
-        <Grid container spacing={4} sx={{ justifyContent: 'space-between', py: 3, px: 12 }}>
-          <Grid item>
+        <Grid container spacing={2} sx={{ justifyContent: 'space-around', py: 3 }}>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
             <RestaurantIcon />
-            <Typography variant="body1" color="#fff">My Recipes</Typography>
-            <Typography variant="body1" color="#fff">0</Typography>
+            <Typography variant="body2" color="#fff">My Recipes</Typography>
+            <Typography variant="body2" color="#fff">0</Typography>
           </Grid>
-          <Grid item>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
             <FavoriteIcon />
-            <Typography variant="body1" color="#fff">Favorites</Typography>
-            <Typography variant="body1" color="#fff">0</Typography>
+            <Typography variant="body2" color="#fff">Favorites</Typography>
+            <Typography variant="body2" color="#fff">0</Typography>
           </Grid>
         </Grid>
       </Box>
