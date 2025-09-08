@@ -10,7 +10,7 @@ const TambahResep = () => {
   const handleSubmit = async () => {
     const payload = { ...formResep, steps, bahanList };
     try {
-      const res = await fetch('http://localhost:5000/api/resep', {
+      const res = await fetch('http://192.168.100.247:8080/auth/resep', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
