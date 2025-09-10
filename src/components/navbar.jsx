@@ -19,6 +19,7 @@ export const Navbar = () => {
                     alt="logo"
                     style={{
                         width: "9%",
+                        display: { xs: "none", sm: "none", md: "flex" },
                     }}
                 />
                 <Box sx={{
