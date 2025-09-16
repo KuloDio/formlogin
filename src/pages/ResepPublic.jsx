@@ -15,8 +15,20 @@ const ResepPublic = () => {
         <Typography variant="h4" align="center"
           sx={{
             fontWeight: 'bold',
+            color: "white",
           }}>
           Temukan Resep Pilihan Anda
+        </Typography>
+        <Typography variant="" align="center"
+          sx={{
+            fontWeight: 'light',
+            color: "white",
+            mb: 3,
+            mx: "8%",
+            textAlign: "center",
+
+          }}>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod, voluptate a perspiciatis, excepturi error repudiandae fuga tempore porro similique fugiat.
         </Typography>
         <Grid container spacing={1}
           sx={{
