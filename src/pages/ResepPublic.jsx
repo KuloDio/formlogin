@@ -12,12 +12,13 @@ const ResepPublic = () => {
       <Box sx={{
         height: '100vh',
         overflow: 'auto',
-        marginTop: '9%',
+        paddingTop: '9%',
       }}>
         <Typography variant="h4" align="center"
           sx={{
             fontWeight: 'bold',
             color: "white",
+            py: 3
           }}>
           Temukan Resep Pilihan Anda
         </Typography>

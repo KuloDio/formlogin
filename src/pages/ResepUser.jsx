@@ -10,10 +10,12 @@ import {
 } from "@mui/material";
 
 import RecipeReviewCard from '../components/RecipeCard';
+import { Navbar } from '../components/navbar';
 
 const ResepUser = () => {
   return (
     <>
+    <Navbar />
       <Box
         sx={{
           marginTop: 4,
@@ -26,7 +28,7 @@ const ResepUser = () => {
           textAlign: 'center',
 
         }}>ALL RECIPES</Typography>
-        <Typography>
+        <Typography sx={{ textAlign: 'center', py: 3 }}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum ea ipsum culpa, officia placeat
         </Typography>
       </Box>
