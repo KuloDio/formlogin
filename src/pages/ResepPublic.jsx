@@ -6,7 +6,9 @@ import RecipeReviewCard from '../components/RecipeCard'
 const ResepPublic = () => {
   return (
     <>
-      <Navbar />
+      <Navbar sx={{
+        mb: "8%",
+      }}/>
       <Box sx={{
         height: '100vh',
         overflow: 'auto',
@@ -19,14 +21,12 @@ const ResepPublic = () => {
           }}>
           Temukan Resep Pilihan Anda
         </Typography>
-        <Typography variant="" align="center"
+        <Typography variant="inherit"
           sx={{
             fontWeight: 'light',
             color: "white",
             mb: 3,
-            mx: "8%",
             textAlign: "center",
-
           }}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod, voluptate a perspiciatis, excepturi error repudiandae fuga tempore porro similique fugiat.
         </Typography>
