@@ -5,63 +5,73 @@ import {
   InputAdornment,
   IconButton,
   Button,
-  Typography, Grid,
+  Typography,
+  Grid,
 } from "@mui/material";
 
-import SearchIcon from "@mui/icons-material/Search"; // ✅ tambahkan ini
 import RecipeReviewCard from '../components/RecipeCard';
 
 const ResepUser = () => {
   return (
     <>
+      <Box
+        sx={{
+          marginTop: 4,
+          marginX: { md: '15%' },
+        }}
+      >
+        <Typography variant="h3" color="initial" sx={{
+          color: 'white',
+          fontWeight: 'bold',
+          textAlign: 'center',
 
-    <Typography variant="h3" color="initial" sx={{ 
-      color: 'white',
-      fontWeight: 'bold',
-      pb: 5
-     }}>All Recipes</Typography>
+        }}>ALL RECIPES</Typography>
+        <Typography>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum ea ipsum culpa, officia placeat
+        </Typography>
+      </Box>
 
-    <Grid container spacing={1} sx={{ justifyContent: 'space-evenly', mb: 8 }}>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-      <Box>
-        <RecipeReviewCard />
-      </Box>
-    </Grid>
+      <Grid container spacing={1} sx={{ justifyContent: 'space-evenly', mb: 8 }}>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+        <Box>
+          <RecipeReviewCard />
+        </Box>
+      </Grid>
 
 
-        {/* <Grid container spacing={7} sx={{ justifyContent: 'space-evenly', mx: 5 }}>
+      {/* <Grid container spacing={7} sx={{ justifyContent: 'space-evenly', mx: 5 }}>
             <RecipeReviewCard />
             <RecipeReviewCard />
             <RecipeReviewCard />
