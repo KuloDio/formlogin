@@ -10,20 +10,21 @@ const ButtonFilter = () => {
         <Box sx={{
             display: 'flex',
             justifyContent: 'center',
-            gap: 4,
+            gap: { xs: 2, md: 5 },
             flexWrap: 'wrap',
             height: 'auto',
         }}>
-            <Button sx={{
-                backgroundColor: '#A5BB86',
-                width: { xs: '20%', md: '10%' },
-                height: { xs: '5vh', md: '20vh' },
-                borderRadius: 5,
-                padding: 1,
-                justifyItems: 'center',
-                textAlign: 'center',
-            }}>
-                <Box >
+            <Button
+                sx={{
+                    backgroundColor: '#A5BB86',
+                    width: { xs: '20%', sm: '20%', md: '10%' },
+                    height: { xs: '13vh', md: '20vh' },
+                    borderRadius: 5,
+                    padding: 1,
+                    justifyItems: 'center',
+                    textAlign: 'center',
+                }}>
+                <Box>
                     <img
                         src={food}
                         alt="food"
@@ -44,7 +45,7 @@ const ButtonFilter = () => {
             <Button sx={{
                 backgroundColor: '#A5BB86',
                 width: { xs: '20%', md: '10%' },
-                height: { xs: '5vh', md: '20vh' },
+                height: { xs: '13vh', md: '20vh' },
                 borderRadius: 5,
                 padding: 1,
                 justifyItems: 'center',
@@ -71,7 +72,7 @@ const ButtonFilter = () => {
             <Button sx={{
                 backgroundColor: '#A5BB86',
                 width: { xs: '20%', md: '10%' },
-                height: { xs: '5vh', md: '20vh' },
+                height: { xs: '13vh', md: '20vh' },
                 borderRadius: 5,
                 padding: 1,
                 justifyItems: 'center',
@@ -98,7 +99,7 @@ const ButtonFilter = () => {
             <Button sx={{
                 backgroundColor: '#A5BB86',
                 width: { xs: '20%', md: '10%' },
-                height: { xs: '5vh', md: '20vh' },
+                height: { xs: '13vh', md: '20vh' },
                 borderRadius: 5,
                 padding: 1,
                 justifyItems: 'center',

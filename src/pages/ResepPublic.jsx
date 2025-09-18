@@ -12,13 +12,12 @@ const ResepPublic = () => {
       <Box sx={{
         height: '100vh',
         overflow: 'auto',
-
-        paddingTop: { xs: '20%', md: '5%' },
+        paddingTop: { xs: '20%', md: '7%' },
       }}>
         <Typography align="center"
           sx={{
             fontWeight: '900',
-            fontSize: { xs: 3, md: 75 },
+            fontSize: { xs: 40, md: 75 },
             color: "white",
           }}>
           Choose Your Own Recipe
@@ -33,8 +32,8 @@ const ResepPublic = () => {
           }}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod, voluptate a perspiciatis, excepturi error repudiandae fuga tempore porro similique fugiat.
         </Typography>
-        <ButtonFilter />
-        <Grid container spacing={1}
+        <ButtonFilter/>
+        <Grid container spacing={3}
           sx={{
             justifyContent: 'space-evenly',
             mt: 5,

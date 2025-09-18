@@ -154,7 +154,7 @@ const FormResep = () => {
         sx={{
           width: { xs: "100%", md: "32%" },
           height: "40vh",
-          marginTop: { xs: "2%", md: "2" },
+          marginTop: { xs: "40%", md: "2%" },
           padding: "1%",
         }}
       >
