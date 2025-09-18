@@ -30,6 +30,15 @@ const Favorite = () => {
            <Box>
             <FavoriteCard />
            </Box>
+           <Box>
+            <FavoriteCard />
+           </Box>
+           <Box>
+            <FavoriteCard />
+           </Box>
+           <Box>
+            <FavoriteCard />
+           </Box>
          </Grid>
     </>
   )
