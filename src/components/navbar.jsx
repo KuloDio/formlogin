@@ -15,13 +15,13 @@ export const Navbar = () => {
                 justifyContent: "space-between"
             }}>
                 <img
-  src={logocook}
-  alt="logo"
-  style={{
-    width: "40px",   // logo biar kecil di mobile
-    display: "flex", // selalu tampil
-  }}
-/>
+                    src={logocook}
+                    alt="logo"
+                    style={{
+                        width: "10%",
+                        display: "flex", 
+                    }}
+                />
 
                 <Box sx={{
                     display: "flex",
@@ -54,17 +54,19 @@ export const Navbar = () => {
                         }} ></Input >
                     </Box>
                     <Button
-  onClick={() => navigate("/login")}
-  sx={{
-    color: "white",
-    backgroundColor: "#1E5128",
-    paddingX: { xs: 1, md: 3 }, // responsive padding
-    fontWeight: "800",
-    alignItems: "center"
-  }}
->
-  Loginnn
-</Button>
+
+                        onClick={() => navigate("/login")}
+                        sx={{
+                            color: "white",
+                            backgroundColor: "#1E5128",
+                            paddingX: { xs: 1, md: 3 }, // responsive padding
+                            fontWeight: "800",
+                            alignItems: "center"
+                        }}
+                    >
+                        Login
+                    </Button>
+
                 </Box>
             </Toolbar>
         </AppBar>

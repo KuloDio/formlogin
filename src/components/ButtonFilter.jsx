@@ -6,24 +6,37 @@ import snack from '../assets/image/snack.png'
 import sambal from '../assets/image/sambal.png'
 
 const ButtonFilter = () => {
+    const filterFood = () => {
+        alert('Fitur ini belum tersedia')
+    }
+    const filterDrink = () => {
+        alert('Fitur ini belum tersedia')
+    }
+    const filterSnack = () => {
+        alert('Fitur ini belum tersedia')
+    }
+    const filterSambal = () => {
+        alert('Fitur ini belum tersedia')
+    }
     return (
         <Box sx={{
             display: 'flex',
             justifyContent: 'center',
-            gap: 4,
+            gap: { xs: 2, md: 5 },
             flexWrap: 'wrap',
             height: 'auto',
         }}>
-            <Button sx={{
-                backgroundColor: '#A5BB86',
-                width: { xs: '20%', md: '10%' },
-                height: { xs: '5vh', md: '20vh' },
-                borderRadius: 5,
-                padding: 1,
-                justifyItems: 'center',
-                textAlign: 'center',
-            }}>
-                <Box >
+            <Button onClick={filterFood}
+                sx={{
+                    backgroundColor: '#A5BB86',
+                    width: { xs: '20%', sm: '20%', md: '10%' },
+                    height: { xs: '13vh', md: '20vh' },
+                    borderRadius: 5,
+                    padding: 1,
+                    justifyItems: 'center',
+                    textAlign: 'center',
+                }}>
+                <Box>
                     <img
                         src={food}
                         alt="food"
@@ -41,10 +54,10 @@ const ButtonFilter = () => {
                     </Typography>
                 </Box>
             </Button>
-            <Button sx={{
+            <Button onClick={filterDrink} sx={{
                 backgroundColor: '#A5BB86',
                 width: { xs: '20%', md: '10%' },
-                height: { xs: '5vh', md: '20vh' },
+                height: { xs: '13vh', md: '20vh' },
                 borderRadius: 5,
                 padding: 1,
                 justifyItems: 'center',
@@ -68,10 +81,10 @@ const ButtonFilter = () => {
                     </Typography>
                 </Box>
             </Button>
-            <Button sx={{
+            <Button onClick={filterSnack} sx={{
                 backgroundColor: '#A5BB86',
                 width: { xs: '20%', md: '10%' },
-                height: { xs: '5vh', md: '20vh' },
+                height: { xs: '13vh', md: '20vh' },
                 borderRadius: 5,
                 padding: 1,
                 justifyItems: 'center',
@@ -95,10 +108,10 @@ const ButtonFilter = () => {
                     </Typography>
                 </Box>
             </Button>
-            <Button sx={{
+            <Button onClick={filterSambal} sx={{
                 backgroundColor: '#A5BB86',
                 width: { xs: '20%', md: '10%' },
-                height: { xs: '5vh', md: '20vh' },
+                height: { xs: '13vh', md: '20vh' },
                 borderRadius: 5,
                 padding: 1,
                 justifyItems: 'center',

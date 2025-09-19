@@ -1,16 +1,12 @@
 import React from 'react';
 import {
   Box,
-  TextField,
-  InputAdornment,
-  IconButton,
-  Button,
   Typography,
   Grid,
 } from "@mui/material";
 
 import RecipeReviewCard from '../components/RecipeCard';
-import { Navbar } from '../components/navbar';
+import ButtonFilter from '../components/ButtonFilter';
 
 const ResepUser = () => {
   return (
@@ -22,6 +18,24 @@ const ResepUser = () => {
           marginX: { md: '15%' },
         }}
       >
+        <Typography align="center"
+          sx={{
+            fontWeight: '900',
+            fontSize: { xs: 40, md: 55 },
+            color: "white",
+            fontFamily: 'Poppins',
+          }}>
+          Choose Your Own Recipe
+        </Typography>
+        <Typography variant="inherit"
+          sx={{
+            fontWeight: 'light',
+            color: "white",
+            mb: 3,
+            mx: { xs: '2%', md: '15%' },
+            textAlign: "center",
+          }}>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod.</Typography>
         <Typography variant="h3" color="initial" sx={{
           color: 'white',
           fontWeight: 'bold',
@@ -32,8 +46,12 @@ const ResepUser = () => {
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum ea ipsum culpa, officia placeat
         </Typography>
       </Box>
-
-      <Grid container spacing={1} sx={{ justifyContent: 'space-evenly', mb: 8 }}>
+      <Box sx={{
+        marginBottom: 4,
+      }}>
+        <ButtonFilter />
+      </Box>
+      <Grid container spacing={3} sx={{ justifyContent: 'space-evenly', mb: 1 }}>
         <Box>
           <RecipeReviewCard />
         </Box>
@@ -71,14 +89,6 @@ const ResepUser = () => {
           <RecipeReviewCard />
         </Box>
       </Grid>
-
-
-      {/* <Grid container spacing={7} sx={{ justifyContent: 'space-evenly', mx: 5 }}>
-            <RecipeReviewCard />
-            <RecipeReviewCard />
-            <RecipeReviewCard />
-            <RecipeReviewCard />
-        </Grid> */}
     </>
   )
 }
