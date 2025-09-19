@@ -12,6 +12,7 @@ import ButtonFilter from '../components/ButtonFilter';
 const ResepUser = () => {
   return (
     <>
+    <Navbar />
       <Box
         sx={{
           marginTop: 4,
@@ -36,6 +37,14 @@ const ResepUser = () => {
             textAlign: "center",
           }}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod.
+        <Typography variant="h3" color="initial" sx={{
+          color: 'white',
+          fontWeight: 'bold',
+          textAlign: 'center',
+
+        }}>ALL RECIPES</Typography>
+        <Typography sx={{ textAlign: 'center', py: 3 }}>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum ea ipsum culpa, officia placeat
         </Typography>
       </Box>
       <Box sx={{

@@ -22,7 +22,6 @@ const ResepPublic = () => {
             fontWeight: '900',
             fontSize: { xs: 40, md: 55 },
             color: "white",
-            fontFamily: 'Poppins',
           }}>
           Choose Your Own Recipe
         </Typography>
