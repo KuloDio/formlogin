@@ -5,6 +5,9 @@ import RecipeReviewCard from '../components/RecipeCard'
 import ButtonFilter from '../components/ButtonFilter'
 
 const ResepPublic = () => {
+  const handleLengkap = () => {
+    alert('Fitur ini belum tersedia')
+  }
   return (
     <>
       <Navbar sx={{
@@ -17,7 +20,7 @@ const ResepPublic = () => {
         <Typography align="center"
           sx={{
             fontWeight: '900',
-            fontSize: { xs: 40, md: 75 },
+            fontSize: { xs: 40, md: 55 },
             color: "white",
           }}>
           Choose Your Own Recipe
@@ -32,7 +35,7 @@ const ResepPublic = () => {
           }}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod, voluptate a perspiciatis, excepturi error repudiandae fuga tempore porro similique fugiat.
         </Typography>
-        <ButtonFilter/>
+        <ButtonFilter />
         <Grid container spacing={3}
           sx={{
             justifyContent: 'space-evenly',
@@ -112,6 +115,14 @@ const ResepPublic = () => {
             <RecipeReviewCard />
           </Box>
         </Grid>
+        <Button onClick={handleLengkap} sx={{
+          justifyContent: 'center',
+          display: 'flex',
+          margin: 'auto',
+          mb: 5,
+          color: '#D8E9A8',
+          fontWeight: 'bold',
+        }}>lihat selengkapnya</Button>
       </Box>
     </>
   )
