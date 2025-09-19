@@ -20,10 +20,11 @@ const ResepPublic = () => {
         <Typography align="center"
           sx={{
             fontWeight: '900',
-            fontSize: { xs: 40, md: 55 },
+            fontSize: { xs: 40, md: 65 },
             color: "white",
+            fontFamily: 'Poppins',
           }}>
-          Choose Your Own Recipe
+          Choose Your Own Recipesss
         </Typography>
         <Typography variant="inherit"
           sx={{
