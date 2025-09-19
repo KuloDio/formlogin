@@ -7,15 +7,17 @@ const MyResep = () => {
 
   return (
     <>
-      <Typography variant='h4'
+      <Typography
         sx={{
           color: "white",
+          fontFamily: 'Poppins',
+          fontSize: { xs: 30, md: 50 },
           fontWeight: "800",
           textAlign: "center",
           marginTop: 4,
           marginX: { md: "15%" },
         }}
-      >SELAMAT DATANG DI HALAMAN RESEP ANDA SILAHKAN KREASIKAN DAN KEMBANGKAN RESEPMU SENDIRI</Typography>
+      >CREATE YOUR OWN RECIPE HERE</Typography>
       <Box sx={{
         display: "flex",
         justifyContent: "flex-end",

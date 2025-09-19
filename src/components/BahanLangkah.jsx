@@ -95,7 +95,7 @@ const BahanLangkah = () => {
                     <Box
                         sx={{
                             width: "100%",
-                            minHeight: "50vh",
+                            minHeight: "35vh",
                             borderRadius: "15px",
                             backgroundColor: "#D8E9A8",
                             boxShadow: "0 10px 10px 0 #00000050",
@@ -282,7 +282,7 @@ const BahanLangkah = () => {
                     <Box
                         sx={{
                             width: "100%",
-                            minHeight: "50vh",
+                            minHeight: "35vh",
                             borderRadius: "15px",
                             backgroundColor: "#D8E9A8",
                             boxShadow: "0 10px 10px 0 #00000050",
