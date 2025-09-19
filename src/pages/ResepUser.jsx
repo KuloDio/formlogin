@@ -7,6 +7,7 @@ import {
 
 import RecipeReviewCard from '../components/RecipeCard';
 import ButtonFilter from '../components/ButtonFilter';
+import { Navbar } from '../components/navbar';
 
 const ResepUser = () => {
   return (
@@ -21,7 +22,7 @@ const ResepUser = () => {
         <Typography align="center"
           sx={{
             fontWeight: '900',
-            fontSize: { xs: 40, md: 55 },
+            fontSize: { xs: 40, md: 65 },
             color: "white",
             fontFamily: 'Poppins',
           }}>
@@ -36,15 +37,6 @@ const ResepUser = () => {
             textAlign: "center",
           }}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod.</Typography>
-        <Typography variant="h3" color="initial" sx={{
-          color: 'white',
-          fontWeight: 'bold',
-          textAlign: 'center',
-
-        }}>ALL RECIPES</Typography>
-        <Typography sx={{ textAlign: 'center', py: 3 }}>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia nostrum ea ipsum culpa, officia placeat
-        </Typography>
       </Box>
       <Box sx={{
         marginBottom: 4,
