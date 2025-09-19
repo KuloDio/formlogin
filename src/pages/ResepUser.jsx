@@ -3,6 +3,7 @@ import {
   Box,
   Typography,
   Grid,
+  Button,
 } from "@mui/material";
 
 import RecipeReviewCard from '../components/RecipeCard';
@@ -42,7 +43,7 @@ const ResepUser = () => {
       }}>
         <ButtonFilter />
       </Box>
-      <Grid container spacing={3} sx={{ justifyContent: 'space-evenly', mb: 8 }}>
+      <Grid container spacing={3} sx={{ justifyContent: 'space-evenly', mb: 1 }}>
         <Box>
           <RecipeReviewCard />
         </Box>
@@ -80,14 +81,6 @@ const ResepUser = () => {
           <RecipeReviewCard />
         </Box>
       </Grid>
-
-
-      {/* <Grid container spacing={7} sx={{ justifyContent: 'space-evenly', mx: 5 }}>
-            <RecipeReviewCard />
-            <RecipeReviewCard />
-            <RecipeReviewCard />
-            <RecipeReviewCard />
-        </Grid> */}
     </>
   )
 }
