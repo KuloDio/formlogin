@@ -36,7 +36,7 @@ const ResepUser = () => {
             mx: { xs: '2%', md: '15%' },
             textAlign: "center",
           }}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod.
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quodaa.</Typography>
         <Typography variant="h3" color="initial" sx={{
           color: 'white',
           fontWeight: 'bold',

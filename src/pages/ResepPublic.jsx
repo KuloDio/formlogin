@@ -23,7 +23,7 @@ const ResepPublic = () => {
             fontSize: { xs: 40, md: 55 },
             color: "white",
           }}>
-          Choose Your Own Recipe
+          Choose Your Own Recipesss
         </Typography>
         <Typography variant="inherit"
           sx={{
