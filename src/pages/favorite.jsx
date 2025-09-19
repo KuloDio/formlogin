@@ -11,7 +11,7 @@ const Favorite = () => {
           pb: 5
          }}>Favorite Recipes</Typography>
          
-         <Grid container spacing={1} sx={{ mb: 8 }}>
+         <Grid container spacing={1} sx={{ mb: 8, justifyContent: 'center' }}>
            <Box>
             <FavoriteCard />
            </Box>
