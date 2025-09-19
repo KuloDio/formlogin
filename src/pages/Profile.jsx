@@ -77,45 +77,68 @@ function Profile() {
 
   return (
     <Box
-      sx={{
-        backgroundColor: '#12372A',
-        mx: { xs: 2, sm: 5, md: 10, lg: 30 }, // responsive margin
-        my: 3,
-        p: { xs: 2, sm: 3 },
-        minHeight: "90vh",
-        textAlign: 'center',
-        border: '3px solid #D8E9A8',
-        borderRadius: 5,
-        boxShadow: 3
-      }}
-    >
+  sx={{
+    backgroundColor: '#12372A',
+    mx: { xs: 1, sm: 3, md: 10, lg: 30 },
+    my: 2,
+    p: { xs: 2, sm: 3 },
+    minHeight: isMobile ? "auto" : "90vh", // ⬅️ mobile lebih pendek
+    textAlign: 'center',
+    border: '3px solid #D8E9A8',
+    borderRadius: 5,
+    boxShadow: 3,
+    
+  }}
+>
+
 
       {/* Avatar & Nama */}
-      <Grid container spacing={0} sx={{ py: 3, justifyContent: 'center', alignItems: 'center' }}>
-        <Grid item>
-          <Stack spacing={1} alignItems="center">
-            <Avatar
-              src={photoPreview || undefined}
-              sx={{ bgcolor: red[500], width: isMobile ? 70 : 90, height: isMobile ? 70 : 90, fontSize: 30 }}
-            >
-              {!photoPreview && "R"}
-            </Avatar>
-            <Typography variant={isMobile ? "body1" : "h6"} color="#fff" sx={{ fontWeight: 'bold' }}>
-              {name || "Nama Kamu"}
-            </Typography>
-          </Stack>
-        </Grid>
+      <Grid container sx={{ py: 3, justifyContent: 'center' }}>
+        <Stack spacing={1} alignItems="center">
+          <Avatar
+            src={photoPreview || undefined}
+            sx={{
+              bgcolor: red[500],
+              width: isMobile ? 70 : 90,
+              height: isMobile ? 70 : 90,
+              fontSize: isMobile ? 24 : 30
+            }}
+          >
+            {!photoPreview && "R"}
+          </Avatar>
+          <Typography
+            variant={isMobile ? "subtitle1" : "h6"}
+            color="#fff"
+            sx={{ fontWeight: 'bold' }}
+          >
+            {name || "Nama Kamu"}
+          </Typography>
+        </Stack>
       </Grid>
 
       {/* Bio */}
-      <Typography variant="body2" color="#fff" sx={{ textAlign: 'center', px: { xs: 2, sm: 5, md: 10 } }}>
+      <Typography
+        variant="body2"
+        color="#fff"
+        sx={{
+          textAlign: 'center',
+          px: { xs: 2, sm: 5, md: 10 },
+          fontSize: isMobile ? "0.85rem" : "1rem"
+        }}
+      >
         {bio || "Tambahkan bio kamu disini..."}
       </Typography>
 
       {/* Edit Profile Button */}
       <Button
         variant="outlined"
-        sx={{ fontWeight: 'bold', my: 2, color: '#fff', borderColor: '#fff' }}
+        size={isMobile ? "small" : "medium"}
+        sx={{
+          fontWeight: 'bold',
+          my: 2,
+          color: '#fff',
+          borderColor: '#fff'
+        }}
         onClick={handleClickOpen}
       >
         Edit Profile
@@ -123,12 +146,11 @@ function Profile() {
 
       {/* Dialog */}
       <Dialog
-        fullScreen={isMobile} // kalau mobile → fullscreen
+        fullScreen={isMobile}
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
         PaperProps={{
           sx: {
             borderRadius: isMobile ? 0 : "16px",
@@ -137,20 +159,20 @@ function Profile() {
           },
         }}
       >
-        <DialogTitle sx={{
-          backgroundColor: '#12372A',
-          color: '#fff',
-          textAlign: 'center',
-          justifyContent: 'center',
-          fontWeight: 'bold',
-          fontSize: 25,
-        }}>
+        <DialogTitle
+          sx={{
+            backgroundColor: '#12372A',
+            color: '#fff',
+            textAlign: 'center',
+            fontWeight: 'bold',
+            fontSize: isMobile ? 20 : 25,
+          }}
+        >
           Edit Profile
         </DialogTitle>
 
         <DialogContent sx={{ backgroundColor: '#12372A' }}>
-
-          {/* ====== Edit Foto Profile ====== */}
+          {/* Foto */}
           <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
             <Box sx={{ position: 'relative' }}>
               <Avatar
@@ -159,8 +181,6 @@ function Profile() {
               >
                 {!tempPhoto && "R"}
               </Avatar>
-
-              {/* input file tersembunyi */}
               <input
                 id="profile-photo-input"
                 type="file"
@@ -186,7 +206,7 @@ function Profile() {
             </Box>
           </Box>
 
-          {/* ====== Form Nama & Bio ====== */}
+          {/* Form */}
           <Box>
             <TextField
               value={tempName}
@@ -201,12 +221,9 @@ function Profile() {
                   borderColor: "#D8E9A8",
                   borderRadius: "20px",
                   "& fieldset": { borderColor: "transparent" },
-                  "&:hover fieldset": { borderColor: "transparent" },
-                  "&.Mui-focused fieldset": { borderColor: "transparent" },
                 },
               }}
             />
-
             <TextField
               value={tempBio}
               placeholder='Bio'
@@ -222,8 +239,6 @@ function Profile() {
                   borderColor: "#D8E9A8",
                   borderRadius: "20px",
                   "& fieldset": { borderColor: "transparent" },
-                  "&:hover fieldset": { borderColor: "transparent" },
-                  "&.Mui-focused fieldset": { borderColor: "transparent" },
                 },
                 "& .MuiInputBase-input": { color: "white" },
               }}
@@ -231,11 +246,26 @@ function Profile() {
           </Box>
         </DialogContent>
 
-        <DialogActions sx={{ backgroundColor: '#12372A' }}>
-          <Button onClick={handleClose} sx={{ backgroundColor: '#D8E9A8', color: '#12372A', fontWeight: "bold" }}>Cancel</Button>
+        <DialogActions sx={{ backgroundColor: '#12372A', p: 2 }}>
+          <Button
+            onClick={handleClose}
+            sx={{
+              backgroundColor: '#D8E9A8',
+              color: '#12372A',
+              fontWeight: "bold",
+              width: isMobile ? "50%" : "auto"
+            }}
+          >
+            Cancel
+          </Button>
           <Button
             onClick={handleSave}
-            sx={{ backgroundColor: '#D8E9A8', color: '#12372A', fontWeight: "bold" }}
+            sx={{
+              backgroundColor: '#D8E9A8',
+              color: '#12372A',
+              fontWeight: "bold",
+              width: isMobile ? "50%" : "auto"
+            }}
           >
             Save
           </Button>
@@ -243,16 +273,36 @@ function Profile() {
       </Dialog>
 
       {/* Stats */}
-      <Box border="2px solid #fff" sx={{ my: 3, mx: { xs: 1, sm: 3, md: 5 }, borderRadius: 2 }}>
-        <Typography variant="body1" color="#fff" sx={{ py: 1, borderBottom: '2px solid #fff', fontWeight: 'bold' }}>STATS</Typography>
-        <Grid container spacing={2} sx={{ justifyContent: 'space-around', py: 3 }}>
-          <Grid item xs={6} sm={6} md={6} lg={6}>
-            <RestaurantIcon />
+      <Box
+        border="2px solid #fff"
+        sx={{
+          my: 3,
+          mx: { xs: 1, sm: 3, md: 5 },
+          borderRadius: 2,
+          p: { xs: 2, sm: 3 }
+        }}
+      >
+        <Typography
+          variant="body1"
+          color="#fff"
+          sx={{
+            pb: 1,
+            borderBottom: '2px solid #fff',
+            fontWeight: 'bold',
+            fontSize: isMobile ? "0.9rem" : "1rem"
+          }}
+        >
+          STATS
+        </Typography>
+
+        <Grid container spacing={2} sx={{ py: 2, px:5, justifyContent: 'space-between' }}>
+          <Grid item xs={6} textAlign="center">
+            <RestaurantIcon fontSize={isMobile ? "small" : "medium"} />
             <Typography variant="body2" color="#fff">My Recipes</Typography>
             <Typography variant="body2" color="#fff">0</Typography>
           </Grid>
-          <Grid item xs={6} sm={6} md={6} lg={6}>
-            <FavoriteIcon />
+          <Grid item xs={6} textAlign="center">
+            <FavoriteIcon fontSize={isMobile ? "small" : "medium"} />
             <Typography variant="body2" color="#fff">Favorites</Typography>
             <Typography variant="body2" color="#fff">0</Typography>
           </Grid>

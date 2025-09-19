@@ -83,7 +83,7 @@ const Dashboard = () => {
               <ListItemIcon sx={{ minWidth: 40, color: "#D8E9A8" }}>
                 {item.icon}
               </ListItemIcon>
-              {!isMobile && <ListItemText primary={item.text} />}
+              <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
         ))}
