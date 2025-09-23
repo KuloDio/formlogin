@@ -158,9 +158,9 @@ const Dashboard = () => {
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
-          marginTop: isMobile ? "56px" : "64px", // tinggi Navbar
-          height: `calc(100vh - ${isMobile ? "56px" : "64px"})`, // sisakan area navbar
-          overflowY: "auto", // biar dashboard bisa scroll
+          marginTop: isMobile ? "56px" : "64px", 
+          height: `calc(100vh - ${isMobile ? "56px" : "64px"})`,
+          overflowY: "auto", 
           backgroundColor: "#1a1a1a",
           color: "white",
         }}

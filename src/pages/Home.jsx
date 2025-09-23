@@ -30,9 +30,11 @@ const Home = () => {
           width: { xs: "100%", sm: "100%", md: "40%" },
           py: 12
         }}>
-          <Typography variant='h3' sx={{
+          <Typography sx={{
             marginTop: "15%",
             fontWeight: 900,
+            fontFamily: "montserrat",
+            fontSize: { xs: 30, md: 50 },
           }}>Indonesian traditional recipes</Typography>
           <Typography sx={{
             marginTop: "2%",
