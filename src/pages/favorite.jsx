@@ -29,7 +29,7 @@ const Favorite = () => {
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod.
         </Typography>
 
-        <Grid container spacing={4}
+        <Grid container spacing={1}
           sx={{
             justifyContent: 'space-evenly',
             paddingBottom: 5,

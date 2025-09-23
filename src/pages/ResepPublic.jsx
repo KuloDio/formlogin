@@ -3,6 +3,7 @@ import { Navbar } from '../components/navbar'
 import { Typography, Box, Grid, Button } from '@mui/material'
 import RecipeReviewCard from '../components/RecipeCard'
 import ButtonFilter from '../components/ButtonFilter'
+import { Link } from "react-router-dom";
 
 const ResepPublic = () => {
   const handleLengkap = () => {
@@ -116,14 +117,21 @@ const ResepPublic = () => {
             <RecipeReviewCard />
           </Box>
         </Grid>
-        <Button onClick={handleLengkap} sx={{
-          justifyContent: 'center',
-          display: 'flex',
-          margin: 'auto',
-          mb: 5,
-          color: '#D8E9A8',
-          fontWeight: 'bold',
-        }}>lihat selengkapnya</Button>
+        <Button
+          component={Link}
+          to="/dashboard/resepuser"
+          sx={{
+            justifyContent: "center",
+            display: "flex",
+            margin: "auto",
+            mb: 5,
+            color: "#D8E9A8",
+            fontWeight: "bold",
+            mx: 70
+          }}
+        >
+          lihat selengkapnya
+        </Button>
       </Box>
     </>
   )

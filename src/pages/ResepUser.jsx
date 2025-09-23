@@ -43,7 +43,7 @@ const ResepUser = () => {
       }}>
         <ButtonFilter />
       </Box>
-      <Grid container spacing={3} sx={{ justifyContent: 'space-evenly', mb: 1 }}>
+      <Grid container spacing={1} sx={{ justifyContent: 'space-evenly', mb: 1 }}>
         <Box>
           <RecipeReviewCard />
         </Box>
