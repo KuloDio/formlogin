@@ -15,7 +15,6 @@ const ResepPublic = () => {
       <Navbar />
       <Box sx={{
         overflow: 'auto',
-
       }}>
         <SlideBanner />
         <Box sx={{
