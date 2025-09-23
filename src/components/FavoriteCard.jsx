@@ -49,8 +49,8 @@ export default function RecipeReviewCard() {
           </Avatar>
         }
         action={
-          <IconButton 
-            aria-label="add to favorites"  
+          <IconButton
+            aria-label="add to favorites"
             sx={{ color: favorited ? "#bdbdbd" : "#ff0000ff" }} // 🔴 ganti warna sesuai state
             onClick={handleFavoriteClick}
           >
@@ -58,8 +58,20 @@ export default function RecipeReviewCard() {
           </IconButton>
         }
         title="Nasi Uduk"
+        titleTypographyProps={{
+          sx: {
+            fontWeight: '700',
+            fontSize: 18,
+            fontFamily: 'Poppins',
+          }
+        }}
         subheader="Sarapan"
-        subheaderTypographyProps={{ sx: { color: "#bdbdbd" } }}
+        subheaderTypographyProps={{
+          sx: {
+            color: "#bdbdbd"
+
+          }
+        }}
       />
       <CardMedia
         component="img"
@@ -75,12 +87,12 @@ export default function RecipeReviewCard() {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="time" sx={{ color: "#bdbdbd", alignItems: 'center' }}>
-          <AccessTimeIcon/>
+          <AccessTimeIcon />
           <Typography variant="body2" color="#bdbdbd" sx={{ pl: 0.5 }}>30 Menit</Typography>
         </IconButton>
         <Typography variant="h5" color="#bdbdbd">|</Typography>
         <IconButton aria-label="person" sx={{ color: "#bdbdbd", alignItems: 'center' }}>
-          <PersonIcon/>
+          <PersonIcon />
           <Typography variant="body2" color="#bdbdbd">1 porsi</Typography>
         </IconButton>
         <ExpandMore

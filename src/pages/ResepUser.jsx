@@ -8,23 +8,27 @@ import {
 import RecipeReviewCard from '../components/RecipeCard';
 import ButtonFilter from '../components/ButtonFilter';
 import { Navbar } from '../components/navbar';
+import banner1 from '../assets/image/banner1.png'
 
 const ResepUser = () => {
   return (
     <>
-    <Navbar />
+      <Navbar />
       <Box
         sx={{
-          marginTop: 4,
-          marginX: { md: '15%' },
+          backgroundImage: `url(${banner1})`,
+          backgroundRepeat: "no-repeat",
+          height: { xs: '50vh', md: '65vh' },
+          width: "100%",
+          marginBottom: 4,
         }}
       >
         <Typography align="center"
           sx={{
-            fontWeight: '900',
-            fontSize: { xs: 40, md: 65 },
+            fontSize: { xs: 35, md: 80, },
             color: "white",
-            fontFamily: 'Poppins',
+            fontFamily: 'Bellmont',
+            paddingTop: { xs: '10%', md: '4%' },
           }}>
           Choose Your Own Recipe
         </Typography>
@@ -37,11 +41,11 @@ const ResepUser = () => {
             textAlign: "center",
           }}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod.</Typography>
-      </Box>
       <Box sx={{
         marginBottom: 4,
       }}>
         <ButtonFilter />
+      </Box>
       </Box>
       <Grid container spacing={3} sx={{ justifyContent: 'space-evenly', mb: 1 }}>
         <Box>
