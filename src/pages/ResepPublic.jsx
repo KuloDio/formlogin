@@ -13,7 +13,10 @@ const ResepPublic = () => {
       <Navbar />
       <Box sx={{
         overflow: 'auto',
+<<<<<<< HEAD
         paddingTop: { xs: '20%', md: '7%' },
+=======
+>>>>>>> 0ff3c1a8b66e138c90d85aeb6462b4ddccbf76af
       }}>
         <Typography align="center"
           sx={{
