@@ -41,7 +41,12 @@ export default function RecipeReviewCard() {
   };
 
   return (
-    <Card sx={{ maxWidth: 345, backgroundColor: '#212121', color: '#bdbdbd' }}>
+    <Card sx={{
+      maxWidth: 345,
+      backgroundColor: '#212121',
+      color: '#bdbdbd',
+      height: 'auto',
+    }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -49,8 +54,8 @@ export default function RecipeReviewCard() {
           </Avatar>
         }
         action={
-          <IconButton 
-            aria-label="add to favorites"  
+          <IconButton
+            aria-label="add to favorites"
             sx={{ color: favorited ? "#ff0000ff" : "#bdbdbd" }} // 🔴 ganti warna sesuai state
             onClick={handleFavoriteClick}
           >
@@ -59,7 +64,18 @@ export default function RecipeReviewCard() {
         }
         title="Nasi Uduk"
         subheader="Sarapan"
-        subheaderTypographyProps={{ sx: { color: "#bdbdbd" } }}
+        titleTypographyProps={{
+          sx: {
+            fontWeight: '700',
+            fontSize: 18,
+            fontFamily: 'Poppins',
+          }
+        }}
+        subheaderTypographyProps={{
+          sx: {
+            color: "#bdbdbd",
+          }
+        }}
       />
       <CardMedia
         component="img"
@@ -75,12 +91,12 @@ export default function RecipeReviewCard() {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="time" sx={{ color: "#bdbdbd", alignItems: 'center' }}>
-          <AccessTimeIcon/>
+          <AccessTimeIcon />
           <Typography variant="body2" color="#bdbdbd" sx={{ pl: 0.5 }}>30 Menit</Typography>
         </IconButton>
         <Typography variant="h5" color="#bdbdbd" sx={{ justifyContent: 'center' }}>|</Typography>
         <IconButton aria-label="person" sx={{ color: "#bdbdbd", alignItems: 'center' }}>
-          <PersonIcon/>
+          <PersonIcon />
           <Typography variant="body2" color="#bdbdbd">1 porsi</Typography>
         </IconButton>
         <ExpandMore

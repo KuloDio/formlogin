@@ -1,5 +1,6 @@
 import React from 'react'
-import { Typography, CardMedia, Grid, Box } from '@mui/material'
+import { Typography,  Grid, Box } from '@mui/material'
+import bannerfav from '../assets/image/bannerfav.jpg'
 import FavoriteCard from '../components/FavoriteCard'
 
 const Favorite = () => {
@@ -7,8 +8,14 @@ const Favorite = () => {
     <>
       <Box sx={{
         height: '100vh',
-        paddingTop: { xs: '20%', md: '7%' },
       }}>
+        <Box sx={{
+          backgroundImage: `url(${bannerfav})`,
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          height: { xs: '50vh', md: '65vh' },
+          width: "100%",
+        }}>
         <Typography align="center"
           sx={{
             fontWeight: '900',
@@ -28,6 +35,7 @@ const Favorite = () => {
           }}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod.
         </Typography>
+        </Box>
 
         <Grid container spacing={4}
           sx={{
