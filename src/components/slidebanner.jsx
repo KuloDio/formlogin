@@ -19,9 +19,9 @@ const SlideBanner = () => {
 
     return (
         <Box sx={{
-             position: "absolute", 
-             width: "100%", 
-             minHeight: {xs: 320, md: 500},
+            position: "relative",
+             width: "100%",
+             minHeight: {xs: 10, md: 40},
              }}>
             {images.map((src, i) => (
                 <Fade in={i === index} timeout={5} key={i}>
@@ -31,7 +31,7 @@ const SlideBanner = () => {
                         sx={{
                             position: "absolute",
                             width: "100%",
-                            height: "100%",
+                            height: {xs: "50vh" ,md: "80vh"},
                             zIndex: 0,
                         }}
                     />
