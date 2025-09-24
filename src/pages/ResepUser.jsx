@@ -5,10 +5,10 @@ import {
   Grid,
 } from "@mui/material";
 
-import RecipeReviewCard from '../components/RecipeCard';
 import ButtonFilter from '../components/ButtonFilter';
 import { Navbar } from '../components/navbar';
 import SlideBanner from '../components/slidebanner';
+import RecipeCard from '../components/RecipeCard';
 
 const ResepUser = () => {
   return (
@@ -48,48 +48,14 @@ const ResepUser = () => {
           <ButtonFilter />
         </Box>
       </Box>
-      <Grid container spacing={3}
+      <Grid container spacing={3} alignItems="flex-start"
         sx={{
           justifyContent: 'space-evenly',
           mb: 1,
           position: "relative",
-        }}>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
+        }}
+      >
+        <RecipeCard />
       </Grid>
     </>
   )
