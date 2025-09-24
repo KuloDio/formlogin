@@ -50,7 +50,7 @@ const ResepPublic = () => {
             sx={{
               justifyContent: 'space-evenly',
               paddingBottom: 5,
-              paddingTop: 10,
+              paddingTop: 15,
             }}>
             <Box>
               <RecipeReviewCard />

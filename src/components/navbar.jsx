@@ -58,9 +58,10 @@ export const Navbar = () => {
                         sx={{
                             color: "white",
                             backgroundColor: "#1E5128",
-                            paddingX: { xs: 1, md: 3 }, // responsive padding
+                            paddingX: { xs: 1, md: 3 },
                             fontWeight: "800",
-                            alignItems: "center"
+                            alignItems: "center",
+                            display: { xs: 'none', md: 'block' },
                         }}
                     >
                         Login

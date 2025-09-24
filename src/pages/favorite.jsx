@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography,  Grid, Box } from '@mui/material'
-import bannerfav from '../assets/image/bannerfav.jpg'
 import FavoriteCard from '../components/FavoriteCard'
+import favbanner from '../assets/image/favbanner.png'
 
 const Favorite = () => {
   return (
@@ -10,10 +10,11 @@ const Favorite = () => {
         height: '100vh',
       }}>
         <Box sx={{
-          backgroundImage: `url(${bannerfav})`,
+          backgroundImage: `url(${favbanner})`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          height: { xs: '50vh', md: '65vh' },
+          backgroundSize: "cover",
+          height: { xs: '50vh', md: '45vh' },
           width: "100%",
         }}>
         <Typography align="center"
@@ -22,6 +23,7 @@ const Favorite = () => {
             fontSize: { xs: 40, md: 55 },
             color: "white",
             fontFamily: 'Poppins',
+            paddingTop: { xs: '20%', md: '8%' },
           }}>
           Your Favorite Cooking Recipe
         </Typography>
@@ -41,6 +43,7 @@ const Favorite = () => {
           sx={{
             justifyContent: 'space-evenly',
             paddingBottom: 5,
+            paddingTop: 5,
           }}>
           <Box>
             <FavoriteCard />
