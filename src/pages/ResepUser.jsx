@@ -8,19 +8,20 @@ import {
 import RecipeReviewCard from '../components/RecipeCard';
 import ButtonFilter from '../components/ButtonFilter';
 import { Navbar } from '../components/navbar';
-import banner1 from '../assets/image/banner1.png'
+import SlideBanner from '../components/slidebanner';
 
 const ResepUser = () => {
   return (
     <>
       <Navbar />
+      <SlideBanner />
       <Box
         sx={{
-          backgroundImage: `url(${banner1})`,
-          backgroundRepeat: "no-repeat",
-          height: { xs: '50vh', md: '65vh' },
+          height: { xs: '50vh', md: '80vh' },
           width: "100%",
           marginBottom: 4,
+          zIndex: 5,
+          position: "relative",
         }}
       >
         <Typography align="center"
@@ -41,13 +42,18 @@ const ResepUser = () => {
             textAlign: "center",
           }}>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod.</Typography>
-      <Box sx={{
-        marginBottom: 4,
-      }}>
-        <ButtonFilter />
+        <Box sx={{
+          marginBottom: 4,
+        }}>
+          <ButtonFilter />
+        </Box>
       </Box>
-      </Box>
-      <Grid container spacing={3} sx={{ justifyContent: 'space-evenly', mb: 1 }}>
+      <Grid container spacing={3}
+        sx={{
+          justifyContent: 'space-evenly',
+          mb: 1,
+          position: "relative",
+        }}>
         <Box>
           <RecipeReviewCard />
         </Box>
