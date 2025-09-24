@@ -1,10 +1,9 @@
 import React from 'react'
 import { Navbar } from '../components/navbar'
 import { Typography, Box, Grid, Button } from '@mui/material'
-import RecipeReviewCard from '../components/RecipeCard'
 import ButtonFilter from '../components/ButtonFilter'
-
 import SlideBanner from '../components/slidebanner'
+import RecipeCard from '../components/RecipeCard'
 
 const ResepPublic = () => {
   const handleLengkap = () => {
@@ -46,84 +45,15 @@ const ResepPublic = () => {
           </Typography>
 
           <ButtonFilter />
-          <Grid container spacing={3}
+          <Grid container spacing={2} alignItems="flex-start"
             sx={{
               justifyContent: 'space-evenly',
-              paddingBottom: 5,
-              paddingTop: 15,
-            }}>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
+              mb: 1,
+              position: "relative",
+              paddingTop: 18,
+            }}
+          >
+            <RecipeCard />
           </Grid>
           <Button onClick={handleLengkap} sx={{
             justifyContent: 'center',
@@ -132,6 +62,7 @@ const ResepPublic = () => {
             mb: 5,
             color: '#D8E9A8',
             fontWeight: 'bold',
+            position: 'relative',
           }}>lihat selengkapnya</Button>
         </Box>
 
