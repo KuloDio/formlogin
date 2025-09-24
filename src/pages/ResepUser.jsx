@@ -17,7 +17,7 @@ const ResepUser = () => {
       <SlideBanner />
       <Box
         sx={{
-          height: { xs: '50vh', md: '80vh' },
+          height: { xs: '50vh', md: '65vh' },
           width: "100%",
           marginBottom: 4,
           zIndex: 5,

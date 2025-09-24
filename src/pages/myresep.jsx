@@ -1,23 +1,37 @@
 import React from 'react'
 import { Box, Typography, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import cookbanner from '../assets/image/cookbanner.png'
 
 const MyResep = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <Typography
-        sx={{
-          color: "white",
-          fontFamily: 'Poppins',
-          fontSize: { xs: 30, md: 50 },
-          fontWeight: "800",
-          textAlign: "center",
-          marginTop: 4,
-          marginX: { md: "15%" },
-        }}
-      >CREATE YOUR OWN RECIPE HERE</Typography>
+      <Box sx={{
+        backgroundImage: `url(${cookbanner})`,
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        height: { xs: '50vh', md: '45vh' },
+        alignItems: "center",
+        textAlign: "center",
+      }}>
+        <Typography
+          sx={{
+            color: "white",
+            fontFamily: 'Poppins',
+            fontSize: { xs: 30, md: 50 },
+            fontWeight: "800",
+            textAlign: "center",
+            marginX: { md: "15%" },
+            paddingTop: { xs: '20%', md: '8%' },
+          }}
+        >CREATE YOUR OWN RECIPE HERE</Typography>
+        <Typography>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam vero facilis ea a nesciunt quo modi provident nihil doloremque quas?
+        </Typography>
+      </Box>
       <Box sx={{
         display: "flex",
         justifyContent: "flex-end",
@@ -44,7 +58,7 @@ const MyResep = () => {
         paddingY: "1%",
       }}>RESEP YANG TELAH ANDA BUAT</Typography>
 
-      
+
     </>
   )
 }
