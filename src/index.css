@@ -7,6 +7,11 @@
    height: 100%;
  }
 
+ @font-face {
+   font-family: 'BELLMONT';
+   src: url('/fonts/BELLMONT.TTF') format('TTF');
+ }
+
  * {
    box-sizing: border-box;
  }

@@ -4,6 +4,7 @@ import { Typography, Box, Grid, Button } from '@mui/material'
 import ButtonFilter from '../components/ButtonFilter'
 import SlideBanner from '../components/slidebanner'
 import RecipeCard from '../components/RecipeCard'
+import Bellmont from '../assets/fonts/BELLMONT.TTF'
 
 const ResepPublic = () => {
   const handleLengkap = () => {
