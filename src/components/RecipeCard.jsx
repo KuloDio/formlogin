@@ -49,8 +49,8 @@ const masakan = [
   },
   {
     id: 3,
-    title: "Nasi Uduk",
-    category: "Sarapan",
+    title: "Kue Cubit",
+    category: "Snack",
     image: banner4,
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde officia iusto facere! Aperiam alias, sit animi quidem sunt, totam dolor praesentium incidunt dolores dolore aut!",
     time: "30 Menit",
@@ -107,6 +107,21 @@ const masakan = [
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!"
     ]
   },
+  {
+    id: 7,
+    title: "Nasi Uduk",
+    category: "Sarapan",
+    image: imghome,
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde officia iusto facere! Aperiam alias, sit animi quidem sunt, totam dolor praesentium incidunt dolores dolore aut!",
+    time: "30 Menit",
+    portion: "3 porsi",
+    method: [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati.",
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!"
+    ]
+  },
 ]
 
 
@@ -125,7 +140,7 @@ const ExpandMore = styled((props) => {
 export default function RecipeReviewCard() {
   // state per item
   const [favorites, setFavorites] = React.useState([]);
-  const [expanded, setExpanded] = React.useState([]);     
+  const [expanded, setExpanded] = React.useState([]);
 
   const toggleFavorite = (id) => {
     setFavorites((prev) =>
@@ -152,10 +167,7 @@ export default function RecipeReviewCard() {
             mb: 2
           }}
         >
-          <CardHeader 
-          sx={{
-            color: "#FFFFFF",
-          }}
+          <CardHeader
             avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
             action={
               <IconButton
@@ -167,7 +179,19 @@ export default function RecipeReviewCard() {
               </IconButton>
             }
             title={item.title}
+            titleTypographyProps={{
+              sx: {
+                fontWeight: '700',
+                fontSize: 18,
+                fontFamily: 'Poppins',
+              }
+            }}
             subheader={item.category}
+            subheaderTypographyProps={{
+              sx: {
+                color: "#bdbdbd",
+              }
+            }}
           />
           <CardMedia component="img" height="194" image={item.image} />
           <CardContent>{item.description}</CardContent>
