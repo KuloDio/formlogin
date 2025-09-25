@@ -21,7 +21,7 @@ const SlideBanner = () => {
         <Box sx={{
             position: "relative",
              width: "100%",
-             minHeight: {xs: 10, md: 40},
+             minHeight: {xs: 0, md: 60},
              }}>
             {images.map((src, i) => (
                 <Fade in={i === index} timeout={5} key={i}>
