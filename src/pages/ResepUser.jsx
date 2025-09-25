@@ -5,10 +5,10 @@ import {
   Grid,
 } from "@mui/material";
 
-import RecipeReviewCard from '../components/RecipeCard';
 import ButtonFilter from '../components/ButtonFilter';
 import { Navbar } from '../components/navbar';
 import SlideBanner from '../components/slidebanner';
+import RecipeCard from '../components/RecipeCard';
 
 const ResepUser = () => {
   return (
@@ -17,7 +17,7 @@ const ResepUser = () => {
       <SlideBanner />
       <Box
         sx={{
-          height: { xs: '50vh', md: '80vh' },
+          height: { xs: '50vh', md: '65vh' },
           width: "100%",
           marginBottom: 4,
           zIndex: 5,
@@ -48,48 +48,14 @@ const ResepUser = () => {
           <ButtonFilter />
         </Box>
       </Box>
-      <Grid container spacing={3}
+      <Grid container spacing={3} alignItems="flex-start"
         sx={{
           justifyContent: 'space-evenly',
           mb: 1,
           position: "relative",
-        }}>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
-        <Box>
-          <RecipeReviewCard />
-        </Box>
+        }}
+      >
+        <RecipeCard />
       </Grid>
     </>
   )

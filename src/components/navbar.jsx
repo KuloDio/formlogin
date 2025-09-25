@@ -71,17 +71,14 @@ export const Navbar = () => {
 
                     {/* Login Button */}
                     <Button
-                    onClick={() => navigate("/login")}
-                    sx={{
-                        color: "white",
-                        backgroundColor: "#1E5128",
-                        px: { xs: 1.5, md: 3 },
-                        fontWeight: "800",
-                        borderRadius: "8px",
-                        "&:hover": {
-                        backgroundColor: "#276336",
-                        },
-                    }}
+                        onClick={() => navigate("/login")}
+                        sx={{
+                            color: "white",
+                            backgroundColor: "#1E5128",
+                            paddingX: { xs: 1, md: 3 }, // responsive padding
+                            fontWeight: "800",
+                            alignItems: "center"
+                        }}
                     >
                     Login
                     </Button>

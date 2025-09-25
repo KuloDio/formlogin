@@ -31,7 +31,7 @@ const SlideBanner = () => {
                         sx={{
                             position: "absolute",
                             width: "100%",
-                            height: {xs: "50vh" ,md: "80vh"},
+                            Height: "100%",
                             zIndex: 0,
                         }}
                     />
