@@ -3,6 +3,7 @@ import { Navbar } from '../components/navbar'
 import { Typography, Box, Grid, Button } from '@mui/material'
 import ButtonFilter from '../components/ButtonFilter'
 import RecipeCard from '../components/RecipeCard'
+import Bellmont from '../assets/fonts/BELLMONT.TTF'
 
 import SlideBanner from '../components/slidebanner'
 
