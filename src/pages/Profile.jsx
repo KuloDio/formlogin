@@ -90,7 +90,7 @@ function Profile() {
     
   }}
 >
-
+    <Typography sx={{ fontWeight: 'bold', fontSize: '' }} variant="body2" color="#fff">Profile Saya</Typography>
 
       {/* Avatar & Nama */}
       <Grid container sx={{ py: 3, justifyContent: 'center' }}>

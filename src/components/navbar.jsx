@@ -25,8 +25,7 @@ export const Navbar = () => {
                     height: { xs: 28, sm: 36, md: 40 },
                     width: "auto",
                     objectFit: "contain",
-                    mx: 5,
-                    ml: { xs: 1.5, sm: 0 }, // geser logo ke kanan hanya di mobile
+                    ml: { xs: 4, sm: 0 }, // geser logo ke kanan hanya di mobile
                 }}
                 />
 
@@ -43,9 +42,9 @@ export const Navbar = () => {
                     sx={{
                         display: "flex",
                         alignItems: "center",
-                        px: 1,
+                        px: 0.5,
                         py: 0.5,
-                        width: { xs: "130px", sm: "180px", md: "250px" },
+                        width: { xs: "200px", sm: "180px", md: "250px" },
                         borderRadius: "8px",
                         backgroundColor: "transparent",
                         border: "2px solid",
