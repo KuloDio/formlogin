@@ -30,7 +30,13 @@ const masakan = [
     method: [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati.",
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
-    ]
+    ],
+    Ingredients: [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati.",
+      "lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!",
+    ],
   },
   {
     id: 2,
@@ -45,7 +51,13 @@ const masakan = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!"
-    ]
+    ],
+    Ingredients: [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati.",
+      "lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!",
+    ],
   },
   {
     id: 3,
@@ -60,7 +72,13 @@ const masakan = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!"
-    ]
+    ],
+    Ingredients: [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati.",
+      "lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!",
+    ],
   },
   {
     id: 4,
@@ -75,7 +93,13 @@ const masakan = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!"
-    ]
+    ],
+    Ingredients: [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati.",
+      "lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!",
+    ],
   },
   {
     id: 5,
@@ -90,7 +114,13 @@ const masakan = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!"
-    ]
+    ],
+    Ingredients: [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati.",
+      "lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!",
+    ],
   },
   {
     id: 6,
@@ -105,7 +135,13 @@ const masakan = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!"
-    ]
+    ],
+    Ingredients: [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati.",
+      "lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!",
+    ],
   },
   {
     id: 7,
@@ -120,7 +156,13 @@ const masakan = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
       "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!"
-    ]
+    ],
+    Ingredients: [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, obcaecati.",
+      "lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum repudiandae aliquid iure iusto, ipsa perferendis repellat quo qui enim laborum iste laboriosam quia dolorum ut quam. Nulla vitae vero officia ad itaque, quidem, veritatis iste sunt autem rerum eos ipsum?",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est voluptatibus inventore fuga cumque eaque voluptatum, reiciendis repellat. Eum assumenda incidunt voluptatum facere ipsam, veritatis dolores obcaecati voluptas saepe repellat neque aliquid beatae libero dolor atque inventore repellendus iste minima officia minus nostrum commodi reiciendis eaque non. Dolorem, consequatur aliquam?",
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad eaque numquam facere nobis amet nam!",
+    ],
   },
 ]
 
@@ -222,10 +264,26 @@ export default function RecipeReviewCard() {
 
           <Collapse in={expanded.includes(item.id)} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography sx={{ mb: 2 }}>Method:</Typography>
+              <Typography sx={{
+                mb: 2,
+                fontWeight: '700',
+                fontSize: 16,
+                fontFamily: 'Poppins',
+              }}>Method:</Typography>
               {item.method.map((step, idx) => (
                 <Typography key={idx} paragraph>
                   {idx + 1}. {step}
+                </Typography>
+              ))}
+              <Typography sx={{
+                mb: 2,
+                fontWeight: '700',
+                fontSize: 16,
+                fontFamily: 'Poppins',
+              }}>Ingredients:</Typography>
+              {item.Ingredients.map((ing, idx) => (
+                <Typography key={idx} paragraph>
+                  - {ing}
                 </Typography>
               ))}
             </CardContent>

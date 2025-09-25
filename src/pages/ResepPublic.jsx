@@ -15,12 +15,12 @@ const ResepPublic = () => {
       <Box sx={{
         overflow: 'auto',
       }}>
-        <SlideBanner />
         <Box sx={{
           height: '100vh',
           paddingTop: { xs: '15%', md: '3%' },
           position: "relative",
         }}>
+          <SlideBanner />
 
           <Typography align="center"
             sx={{
@@ -28,6 +28,7 @@ const ResepPublic = () => {
               color: "white",
               fontFamily: 'Bellmont',
               paddingTop: { xs: '10%', md: '4%' },
+              position: 'relative',
             }}>
             Choose Your Own Recipe
           </Typography>
@@ -37,9 +38,10 @@ const ResepPublic = () => {
               fontFamily: 'montserrat',
               fontSize: { xs: 10, md: 15 },
               color: "white",
-              mb: 3,
+              mb: { xs: 5, md: 5 },
               mx: { xs: '2%', md: '20%' },
               textAlign: "center",
+              position: 'relative',
             }}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod, voluptate a perspiciatis, excepturi error repudiandae fuga tempore porro similique fugiat.
           </Typography>
@@ -48,81 +50,12 @@ const ResepPublic = () => {
           <Grid container spacing={3}
             sx={{
               justifyContent: 'space-evenly',
-              paddingBottom: 5,
-              paddingTop: 10,
-            }}>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
-            <Box>
-              <RecipeReviewCard />
-            </Box>
+              mb: 1,
+              position: "relative",
+              paddingTop: 18,
+            }}
+          >
+            <RecipeCard />
           </Grid>
           <Button onClick={handleLengkap} sx={{
             justifyContent: 'center',
