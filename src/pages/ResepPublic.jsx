@@ -3,7 +3,6 @@ import { Navbar } from '../components/navbar'
 import { Typography, Box, Grid, Button } from '@mui/material'
 import ButtonFilter from '../components/ButtonFilter'
 import RecipeCard from '../components/RecipeCard'
-import Bellmont from '../assets/fonts/BELLMONT.TTF'
 
 import SlideBanner from '../components/slidebanner'
 
@@ -28,7 +27,8 @@ const ResepPublic = () => {
             sx={{
               fontSize: { xs: 35, md: 90, },
               color: "white",
-              fontFamily: 'Bellmont',
+              fontFamily: 'poppins',
+              fontWeight: {xs: '900',md: '900'},
               paddingTop: { xs: '10%', md: '4%' },
               position: 'relative',
             }}>
