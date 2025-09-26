@@ -39,7 +39,7 @@ const Favorite = () => {
           </Typography>
         </Box>
 
-        <Grid container spacing={3} alignItems="flex-start"
+        <Grid container spacing={4}
           sx={{
             justifyContent: 'space-evenly',
             mb: 1,

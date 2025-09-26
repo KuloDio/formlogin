@@ -2,8 +2,9 @@ import React from 'react'
 import { Navbar } from '../components/navbar'
 import { Typography, Box, Grid, Button } from '@mui/material'
 import ButtonFilter from '../components/ButtonFilter'
-import SlideBanner from '../components/slidebanner'
 import RecipeCard from '../components/RecipeCard'
+
+import SlideBanner from '../components/slidebanner'
 
 const ResepPublic = () => {
   const handleLengkap = () => {
@@ -48,12 +49,12 @@ const ResepPublic = () => {
           </Typography>
 
           <ButtonFilter />
-          <Grid container spacing={2} alignItems="flex-start"
+          <Grid container spacing={3}
             sx={{
               justifyContent: 'space-evenly',
               mb: 1,
               position: "relative",
-              paddingTop: { xs: '5%', md: '10%' },
+              paddingTop: 18,
             }}
           >
             <RecipeCard />
@@ -65,7 +66,6 @@ const ResepPublic = () => {
             mb: 5,
             color: '#D8E9A8',
             fontWeight: 'bold',
-            position: 'relative',
           }}>lihat selengkapnya</Button>
         </Box>
 
