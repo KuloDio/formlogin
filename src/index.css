@@ -9,7 +9,7 @@
 
  @font-face {
    font-family: 'BELLMONT';
-   src: url('/fonts/BELLMONT.TTF') format('TTF');
+   src: url('/fonts/BELLMONT.ttf') format('ttf');
  }
 
  * {

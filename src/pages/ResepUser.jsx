@@ -22,9 +22,10 @@ const ResepUser = () => {
 
           <Typography align="center"
             sx={{
-              fontSize: { xs: 35, md: 90, },
+              fontSize: { xs: 35, md: 80, },
               color: "white",
-              fontFamily: 'Bellmont',
+              fontFamily: 'poppins',
+              fontWeight: {xs: '800',md: '900'},
               paddingTop: { xs: '5%', md: '0%' },
               position: 'relative',
             }}>
