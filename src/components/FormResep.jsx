@@ -1,8 +1,25 @@
 import React, { useContext } from "react";
-import { Box, Grid, Typography, TextField } from "@mui/material";
+import { Box, Grid, Typography, TextField, Autocomplete } from "@mui/material";
 import { FormContext } from "../context/FormContext";
 
+const kategori = [
+  { category: 'Food' },
+  { category: 'Drink', },
+  { category: 'Snack', },
+  { category: 'Sambal', },
+]
+
+
 const FormResep = () => {
+  const defaultProps = {
+    options: kategori,
+    getOptionLabel: (option) => option.category,
+  };
+  const flatProps = {
+    options: kategori.map((option) => option.category),
+  };
+  const [value, setValue] = React.useState(null);
+
   const { formResep, setFormResep } = useContext(FormContext);
 
   const safeForm = formResep || {
@@ -148,6 +165,8 @@ const FormResep = () => {
         />
       </Box>
 
+
+      {/* KATEGORI */}
       <Box
         xs={12}
         md={4}
@@ -172,11 +191,11 @@ const FormResep = () => {
         >
           KATEGORI RESEP
         </Typography>
-        <TextField
+        <Autocomplete
+          {...defaultProps}
           id="kategori"
-          value={safeForm.kategori}
-          onChange={(e) => setFormResep({ ...safeForm, kategori: e.target.value })}
-          placeholder="Masukkan Kategori Resep"
+          disablePortal
+          options={kategori}
           sx={{
             width: "100%",
             marginTop: "5%",
@@ -191,7 +210,9 @@ const FormResep = () => {
               "& .MuiInputBase-input": { color: "white" },
             },
           }}
+          renderInput={(params) => <TextField {...params} placeholder="Masukan Kategori Resep Masakan" />}
         />
+        {/* JUMLAH PORSI */}
         <Typography
           sx={{
             textAlign: "center",
@@ -232,6 +253,8 @@ const FormResep = () => {
         />
       </Box>
 
+
+      {/* WAKTU MEMASAK */}
       <Box
         xs={12}
         md={4}
@@ -256,6 +279,8 @@ const FormResep = () => {
         >
           WAKTU MEMASAK
         </Typography>
+
+        {/* WAKTU PERSIAPAN */}
         <TextField
           id="persiapan"
           value={safeForm.persiapan}
@@ -276,6 +301,8 @@ const FormResep = () => {
             },
           }}
         />
+
+        {/* WAKTU MEMASAK */}
         <TextField
           id="waktumasak"
           value={safeForm.waktumasak}
@@ -299,7 +326,7 @@ const FormResep = () => {
           }}
         />
       </Box>
-      
+
     </Grid>
   );
 };
