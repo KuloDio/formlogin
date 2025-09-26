@@ -11,63 +11,81 @@ export const Navbar = () => {
         <AppBar sx={{
             backgroundColor: "#191A19",
         }}>
-            <Toolbar sx={{
-                justifyContent: "space-between"
-            }}>
-                <img
-                    src={logocook}
-                    alt="logo"
-                    style={{
-                        width: "10%",
-                        display: "flex", 
-                    }}
+            <Toolbar
+                sx={{
+                    justifyContent: "space-between", // selalu space-between
+                }}
+                >
+                {/* Logo */}
+                <Box
+                component="img"
+                src={logocook}
+                alt="logo"
+                sx={{
+                    height: { xs: 28, sm: 36, md: 40 },
+                    width: "auto",
+                    objectFit: "contain",
+                    ml: { xs: 4, sm: 0 }, // geser logo ke kanan hanya di mobile
+                }}
                 />
 
-                <Box sx={{
+                {/* Search + Login */}
+                <Box
+                    sx={{
                     display: "flex",
                     alignItems: "center",
-                    gap: "8px"
-                }}>
-                    <Box sx={{
+                    gap: { xs: 1, sm: 2 },
+                    }}
+                >
+                    {/* Search box */}
+                    <Box
+                    sx={{
                         display: "flex",
-                        background: "blue",
-                        paddingY: "4px",
-                        paddingX: "6px",
-                        width: "250px",
                         alignItems: "center",
+                        px: 0.5,
+                        py: 0.5,
+                        width: { xs: "200px", sm: "180px", md: "250px" },
                         borderRadius: "8px",
                         backgroundColor: "transparent",
-                        border: "3px solid",
+                        border: "2px solid",
                         borderColor: "#1E5128",
-                        boxShadow: "5",
-                        gap: "4px",
-                    }}>
-                        <SearchIcon sx={{
-                            color: "#ADBC9F"
-                        }} />
-                        <Input placeholder='Search' sx={{
-                            "& .MuiInput-input::placeholder": {
-                                color: "#D8E9A8",
-                                opacity: 1,
-                            },
+                        boxShadow: 3,
+                        gap: 0.5,
+                    }}
+                    >
+                    <SearchIcon sx={{ color: "#ADBC9F", fontSize: { xs: 18, md: 22 } }} />
+                    <Input
+                        placeholder="Search"
+                        disableUnderline
+                        sx={{
+                        flex: 1,
+                        fontSize: { xs: "0.75rem", sm: "0.9rem", md: "1rem" },
+                        "& .MuiInput-input::placeholder": {
                             color: "#D8E9A8",
-                        }} ></Input >
+                            opacity: 1,
+                        },
+                        color: "#D8E9A8",
+                        }}
+                    />
                     </Box>
+
+                    {/* Login Button */}
                     <Button
                         onClick={() => navigate("/login")}
                         sx={{
                             color: "white",
                             backgroundColor: "#1E5128",
-                            paddingX: { xs: 1, md: 3 },
+                            paddingX: { xs: 1, md: 3 }, // responsive padding
                             fontWeight: "800",
-                            alignItems: "center",
-                            display: { xs: 'none', md: 'block' },
+                            alignItems: "center"
                         }}
                     >
-                        Login
+                    Login
                     </Button>
                 </Box>
-            </Toolbar>
+                </Toolbar>
+
+
         </AppBar>
     )
 }
