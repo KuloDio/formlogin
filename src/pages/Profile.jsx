@@ -261,7 +261,7 @@ function Profile() {
   minRows={3}
   InputProps={{
     sx: {
-      color: "#fff", // isi bio putih
+      color: "#fff",
       my: 1
     },
   }}
