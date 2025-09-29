@@ -240,42 +240,44 @@ function Profile() {
           </Box>
 
           {/* Form */}
-          <TextField
-            label="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            fullWidth
-            InputProps={{
-              sx: {
-                color: "#fff", // warna teks putih
-              },
-            }}
-            InputLabelProps={{
-              sx: {
-                color: "#aaa", // label jadi abu biar kelihatan
-              },
-            }}
-          />
+{/* Form */}  
+<TextField
+  label="Name"
+  value={tempName}   // ✅ pakai tempName
+  onChange={(e) => setTempName(e.target.value)}  // ✅ update tempName
+  fullWidth
+  InputProps={{
+    sx: {
+      color: "#fff", // warna teks putih
+    },
+  }}
+  InputLabelProps={{
+    sx: {
+      color: "#aaa",
+    },
+  }}
+/>
 
-          <TextField
-            label="Bio"
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            fullWidth
-            multiline
-            minRows={3}
-            InputProps={{
-              sx: {
-                color: "#fff",
-                my: 1
-              },
-            }}
-            InputLabelProps={{
-              sx: {
-                color: "#aaa",
-              },
-            }}
-          />
+<TextField
+  label="Bio"
+  value={tempBio}   // ✅ pakai tempBio
+  onChange={(e) => setTempBio(e.target.value)}   // ✅ update tempBio
+  fullWidth
+  multiline
+  minRows={3}
+  InputProps={{
+    sx: {
+      color: "#fff",
+      my: 1
+    },
+  }}
+  InputLabelProps={{
+    sx: {
+      color: "#aaa",
+    },
+  }}
+/>
+
 
         </DialogContent>
 
