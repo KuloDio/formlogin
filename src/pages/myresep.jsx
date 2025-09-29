@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Typography, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import cookbanner from '../assets/image/cookbanner.png'
+import CreateCard from '../components/CreateCard'
 
 const MyResep = () => {
   const navigate = useNavigate();
@@ -56,8 +57,10 @@ const MyResep = () => {
         borderColor: "#D8E9A8",
         fontWeight: "800",
         paddingY: "1%",
+        marginBottom: 5,
       }}>RESEP YANG TELAH ANDA BUAT</Typography>
 
+      <CreateCard />
 
     </>
   )

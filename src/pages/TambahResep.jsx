@@ -34,6 +34,7 @@ const TambahResep = () => {
         borderColor: "#D8E9A8",
         fontWeight: "800",
         paddingY: "1%",
+        marginTop: "1%",
       }}>BUAT RESEP ANDA DI SINI
       </Typography>
       <Box
