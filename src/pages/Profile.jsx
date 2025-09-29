@@ -48,7 +48,6 @@ function Profile() {
           sx={{
             width: 150,
             height: 150,
-            border: "4px solid #121212",
             position: "absolute",
             left: 50,
             bottom: -75,
@@ -102,6 +101,26 @@ function Profile() {
       <Typography variant="h6" color="#fff" sx={{ pl: 4, pt: 2 }}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, in.
       </Typography>
+
+      <Box sx={{
+        border: "3px solid",
+        borderRadius: "20px 20px 0px 0px",
+        borderColor: "#D8E9A8",
+        height: 350,
+        marginTop: 5,
+      }}>
+        <Typography sx={{
+          textAlign: "center",
+          borderBottom: "3px solid",
+          borderRadius: "20px 20px 0px 0px",
+          borderColor: "#D8E9A8",
+          fontWeight: "800",
+          paddingY: "1%",
+          backgroundColor: "#12372A",
+        }}>STATS
+        </Typography>
+
+      </Box>
     </>
   );
 }
