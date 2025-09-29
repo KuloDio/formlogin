@@ -16,20 +16,18 @@ export const Navbar = () => {
                     justifyContent: "space-between", // selalu space-between
                 }}
                 >
-                {/* Logo */}
                 <Box
                 component="img"
                 src={logocook}
                 alt="logo"
                 sx={{
-                    height: { xs: 28, sm: 36, md: 40 },
-                    width: "auto",
-                    objectFit: "contain",
-                    ml: { xs: 4, sm: 0 }, // geser logo ke kanan hanya di mobile
+                    
+                    width: "10%",
+                    
+                    ml: { xs: 4, sm: 0 },
                 }}
                 />
 
-                {/* Search + Login */}
                 <Box
                     sx={{
                     display: "flex",
@@ -37,7 +35,7 @@ export const Navbar = () => {
                     gap: { xs: 1, sm: 2 },
                     }}
                 >
-                    {/* Search box */}
+                    
                     <Box
                     sx={{
                         display: "flex",
@@ -69,15 +67,15 @@ export const Navbar = () => {
                     />
                     </Box>
 
-                    {/* Login Button */}
                     <Button
                         onClick={() => navigate("/login")}
-                        sx={{
+                         sx={{
                             color: "white",
                             backgroundColor: "#1E5128",
-                            paddingX: { xs: 1, md: 3 }, // responsive padding
+                            paddingX: { xs: 1, md: 3 },
                             fontWeight: "800",
-                            alignItems: "center"
+                            alignItems: "center",
+                            display: { xs: "none", sm: "flex" }, 
                         }}
                     >
                     Login
