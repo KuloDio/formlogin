@@ -350,7 +350,7 @@ function Profile() {
               textAlign: "center",
             }}>
               <FavoriteIcon sx={{
-                color: "#e22209ff",
+                color: "#D8E9A8",
                 fontSize: 80,
               }} />
               <Typography>
