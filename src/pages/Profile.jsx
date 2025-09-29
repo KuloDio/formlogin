@@ -360,7 +360,7 @@ function Profile() {
                 fontWeight: "800",
                 fontSize: 30,
                 fontFamily: 'Poppins',
-              }}>0</Typography>
+              }}>5</Typography>
             </Box>
 
           </Box>
