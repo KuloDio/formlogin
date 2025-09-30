@@ -96,7 +96,7 @@ function Profile() {
         <Box
           sx={{
             width: "100%",
-            height: 300,
+            height: { xs: 150, md: 300 },
             borderRadius: 2,
             overflow: "hidden",
           }}
@@ -118,12 +118,11 @@ function Profile() {
           src={photoPreview || undefined}
           alt="Profile"
           sx={{
-            width: 150,
-            height: 150,
-            border: "4px solid #121212",
+            width: { xs: 120, md: 150 },
+            height: { xs: 120, md: 150 },
             position: "absolute",
-            left: 50,
-            bottom: -75,
+            left: { xs: 25, md: 50 },
+            bottom: { xs: -50, md: -75 },
           }}
         >
           {!photoPreview && "?"}
@@ -240,23 +239,22 @@ function Profile() {
           </Box>
 
           {/* Form */}
-{/* Form */}  
-<TextField
-  label="Name"
-  value={tempName}   // ✅ pakai tempName
-  onChange={(e) => setTempName(e.target.value)}  // ✅ update tempName
-  fullWidth
-  InputProps={{
-    sx: {
-      color: "#fff", // warna teks putih
-    },
-  }}
-  InputLabelProps={{
-    sx: {
-      color: "#aaa",
-    },
-  }}
-/>
+          <TextField
+            label="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            fullWidth
+            InputProps={{
+              sx: {
+                color: "#fff", // warna teks putih
+              },
+            }}
+            InputLabelProps={{
+              sx: {
+                color: "#aaa", // label jadi abu biar kelihatan
+              },
+            }}
+          />
 
 <TextField
   label="Bio"
@@ -305,68 +303,68 @@ function Profile() {
         </DialogActions>
       </Dialog>
 
-        <Box sx={{
-          border: "3px solid",
+      <Box sx={{
+        border: "3px solid",
+        borderRadius: "20px 20px 0px 0px",
+        borderColor: "#D8E9A8",
+        minHeight: 350,
+        marginTop: 5,
+      }}>
+        <Typography sx={{
+          textAlign: "center",
+          borderBottom: "3px solid",
           borderRadius: "20px 20px 0px 0px",
           borderColor: "#D8E9A8",
-          minHeight: 350,
-          marginTop: 5,
+          fontWeight: "800",
+          paddingY: "1%",
+          backgroundColor: "#12372A",
+        }}>STATS
+        </Typography>
+        <Box sx={{
+          display: { xs: "row", md: "flex" },
+          placeContent: "center",
+          justifyContent: "between",
+          gap: 50,
+          paddingTop: { xs: 5, md: 10 },
+          paddingBottom: 3,
         }}>
-          <Typography sx={{
-            textAlign: "center",
-            borderBottom: "3px solid",
-            borderRadius: "20px 20px 0px 0px",
-            borderColor: "#D8E9A8",
-            fontWeight: "800",
-            paddingY: "1%",
-            backgroundColor: "#12372A",
-          }}>STATS
-          </Typography>
           <Box sx={{
-            display: { xs: "row", md: "flex" },
-            placeContent: "center",
-            justifyContent: "between",
-            gap: 50,
-            paddingTop: { xs: 5, md: 10 },
-            paddingBottom: 3,
+            alignItems: "center",
+            textAlign: "center",
           }}>
-            <Box sx={{
-              alignItems: "center",
-              textAlign: "center",
-            }}>
-              <RestaurantIcon sx={{
-                color: "#D8E9A8",
-                fontSize: 80,
-              }} />
-              <Typography>
-                My Own Recipe
-              </Typography>
-              <Typography sx={{
-                fontWeight: "800",
-                fontSize: 30,
-                fontFamily: 'Poppins',
-              }}>0</Typography>
-            </Box>
-            <Box sx={{
-              alignItems: "center",
-              textAlign: "center",
-            }}>
-              <FavoriteIcon sx={{
-                color: "#D8E9A8",
-                fontSize: 80,
-              }} />
-              <Typography>
-                My Favorites Recipe
-              </Typography>
-              <Typography sx={{
-                fontWeight: "800",
-                fontSize: 30,
-                fontFamily: 'Poppins',
-              }}>5</Typography>
-            </Box>
-
+            <RestaurantIcon sx={{
+              color: "#D8E9A8",
+              fontSize: 80,
+            }} />
+            <Typography>
+              My Own Recipe
+            </Typography>
+            <Typography sx={{
+              fontWeight: "800",
+              fontSize: 30,
+              fontFamily: 'Poppins',
+            }}>0</Typography>
           </Box>
+          <Box sx={{
+            alignItems: "center",
+            textAlign: "center",
+          }}>
+            <FavoriteIcon sx={{
+              color: "#D8E9A8",
+              fontSize: 80,
+            }} />
+            <Typography>
+              My Favorites Recipe
+            </Typography>
+            <Typography sx={{
+              fontWeight: "800",
+              fontSize: 30,
+              fontFamily: 'Poppins',
+            }}>5</Typography>
+          </Box>
+
         </Box>
+      </Box>
 
     </>
   );

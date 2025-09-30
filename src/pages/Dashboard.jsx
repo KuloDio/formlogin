@@ -25,6 +25,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const drawerWidth = 240;
 
 const menuItems = [
@@ -87,11 +89,12 @@ const Dashboard = () => {
             </ListItemButton>
           </ListItem>
         ))}
-        <Box sx={{ 
-          display: "flex", 
-          justifyContent: "flex-end", 
+        <Box sx={{
+          display: "flex",
+          justifyContent: "flex-end",
           gap: 1,
-          marginX: "10%", }}>
+          marginX: "10%",
+        }}>
           <Button
             variant="outlined"
             color="error"
@@ -158,9 +161,9 @@ const Dashboard = () => {
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
-          marginTop: isMobile ? "56px" : "64px", 
+          marginTop: isMobile ? "56px" : "64px",
           height: `calc(100vh - ${isMobile ? "56px" : "64px"})`,
-          overflowY: "auto", 
+          overflowY: "auto",
           backgroundColor: "#1a1a1a",
           color: "white",
         }}
