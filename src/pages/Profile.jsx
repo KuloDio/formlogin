@@ -256,26 +256,25 @@ function Profile() {
             }}
           />
 
-<TextField
-  label="Bio"
-  value={tempBio}   // ✅ pakai tempBio
-  onChange={(e) => setTempBio(e.target.value)}   // ✅ update tempBio
-  fullWidth
-  multiline
-  minRows={3}
-  InputProps={{
-    sx: {
-      color: "#fff",
-      my: 1
-    },
-  }}
-  InputLabelProps={{
-    sx: {
-      color: "#aaa",
-    },
-  }}
-/>
-
+          <TextField
+            label="Bio"
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            fullWidth
+            multiline
+            minRows={3}
+            InputProps={{
+              sx: {
+                color: "#fff",
+                my: 1
+              },
+            }}
+            InputLabelProps={{
+              sx: {
+                color: "#aaa",
+              },
+            }}
+          />
 
         </DialogContent>
 
