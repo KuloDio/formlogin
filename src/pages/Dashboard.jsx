@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/navbar";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
-
+import axios from "axios"
 import {
   Drawer,
   Toolbar,
@@ -46,15 +46,20 @@ const Dashboard = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleLogout = () => {
-    const confirmLogout = window.confirm("Yakin ingin log out?");
-    if (confirmLogout) {
+const handleLogout = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      await axios.post(
+        "/api/logout",
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+    } catch (err) {
+      console.error(err);
+    } finally {
       localStorage.removeItem("token");
-      setShowAlert(true);
-      setTimeout(() => {
-        setShowAlert(false);
-        navigate("/");
-      }, 1000);
+      // arahkan ke halaman login
+      window.location.href = "/login";
     }
   };
 
