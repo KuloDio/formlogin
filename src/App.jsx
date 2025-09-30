@@ -10,10 +10,37 @@ import MyResep from './pages/myresep.jsx';
 import Favorite from './pages/favorite.jsx';
 import Profile from './pages/Profile.jsx';
 import { FormProvider } from './context/FormContext.jsx';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Typography } from '@mui/material';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 function PrivateRoute({ children }) {
-  const token = localStorage.getItem("token");
-  return token ? children : <Navigate to="/login" />;
+   const [loading, setLoading] = useState(true);
+  const [valid, setValid] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
+    axios
+      .get(`${API_URL}/api/page/dashboard`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => setValid(true))
+      .catch(() => {
+        localStorage.removeItem('token');
+        setValid(false);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <Typography>Loading...</Typography>;
+  return valid ? children : <Navigate to="/dashboard" />;
 }
 
 function App() {
