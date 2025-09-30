@@ -241,8 +241,8 @@ function Profile() {
           {/* Form */}
           <TextField
             label="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={tempName}
+            onChange={(e) => setTempName(e.target.value)}
             fullWidth
             InputProps={{
               sx: {
@@ -258,8 +258,8 @@ function Profile() {
 
           <TextField
             label="Bio"
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
+            value={tempBio}
+            onChange={(e) => setTempBio(e.target.value)}
             fullWidth
             multiline
             minRows={3}
