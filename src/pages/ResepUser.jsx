@@ -6,6 +6,7 @@ import SlideBanner from '../components/slidebanner'
 import RecipeCard from '../components/RecipeCard'
 
 const ResepUser = () => {
+  
   const handleLengkap = () => {
     alert('Fitur ini belum tersedia')
   }
