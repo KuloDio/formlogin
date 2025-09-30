@@ -11,6 +11,7 @@ import Favorite from './pages/favorite.jsx';
 import Profile from './pages/Profile.jsx';
 import { FormProvider } from './context/FormContext.jsx';
 import { useEffect, useState } from 'react';
+
 import axios from 'axios';
 import { Typography } from '@mui/material';
 
@@ -22,6 +23,7 @@ function PrivateRoute({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+
     if (!token) {
       setLoading(false);
       return;
@@ -29,15 +31,19 @@ function PrivateRoute({ children }) {
 
     axios
       .get(`${API_URL}/api/page/dashboard`, {
+
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => setValid(true))
       .catch(() => {
+
         localStorage.removeItem('token');
+
         setValid(false);
       })
       .finally(() => setLoading(false));
   }, []);
+
 
   if (loading) return <Typography>Loading...</Typography>;
   return valid ? children : <Navigate to="/dashboard" />;

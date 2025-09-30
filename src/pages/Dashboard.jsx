@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/navbar";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
-import axios from 'axios';
 
 import {
   Drawer,
@@ -48,32 +47,18 @@ const Dashboard = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  
 
-    const handleLogout = async () => {
-      const confirmLogout = window.confirm('Yakin ingin log out?');
-      if (!confirmLogout) return;
-
-      const token = localStorage.getItem('token');
-      try {
-        // Panggil endpoint logout untuk blacklist token
-        await axios.post(
-          `${API_URL}/auth/logout`,
-          {},
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-      } catch (err) {
-        console.error('Gagal blacklist token:', err);
-        // tetap hapus token lokal agar user keluar
-      }
-
-      localStorage.removeItem('token');
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Yakin ingin log out?");
+    if (confirmLogout) {
+      localStorage.removeItem("token");
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
-        navigate('/login');
+        navigate("/");
       }, 1000);
-    };
+    }
+  };
 
   const drawerContent = (
     <Box sx={{ overflow: "auto" }}>
