@@ -12,7 +12,7 @@ const TambahResep = () => {
   const handleSubmit = async () => {
     const payload = { ...formResep, steps, bahanList };
     try {
-      const res = await fetch(`${API_URL}/api/recipes`, {
+      const res = await fetch(`${API_URL}api/recipes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
