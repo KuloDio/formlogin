@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/navbar";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import axios from 'axios';
 
 import {
   Drawer,
@@ -25,6 +26,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const drawerWidth = 240;
 
 const menuItems = [
@@ -45,18 +48,32 @@ const Dashboard = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  
 
-  const handleLogout = () => {
-    const confirmLogout = window.confirm("Yakin ingin log out?");
-    if (confirmLogout) {
-      localStorage.removeItem("token");
+    const handleLogout = async () => {
+      const confirmLogout = window.confirm('Yakin ingin log out?');
+      if (!confirmLogout) return;
+
+      const token = localStorage.getItem('token');
+      try {
+        // Panggil endpoint logout untuk blacklist token
+        await axios.post(
+          `${API_URL}/auth/logout`,
+          {},
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+      } catch (err) {
+        console.error('Gagal blacklist token:', err);
+        // tetap hapus token lokal agar user keluar
+      }
+
+      localStorage.removeItem('token');
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
-        navigate("/");
+        navigate('/login');
       }, 1000);
-    }
-  };
+    };
 
   const drawerContent = (
     <Box sx={{ overflow: "auto" }}>
@@ -87,11 +104,12 @@ const Dashboard = () => {
             </ListItemButton>
           </ListItem>
         ))}
-        <Box sx={{ 
-          display: "flex", 
-          justifyContent: "flex-end", 
+        <Box sx={{
+          display: "flex",
+          justifyContent: "flex-end",
           gap: 1,
-          marginX: "10%", }}>
+          marginX: "10%",
+        }}>
           <Button
             variant="outlined"
             color="error"
@@ -158,9 +176,9 @@ const Dashboard = () => {
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
-          marginTop: isMobile ? "56px" : "64px", 
+          marginTop: isMobile ? "56px" : "64px",
           height: `calc(100vh - ${isMobile ? "56px" : "64px"})`,
-          overflowY: "auto", 
+          overflowY: "auto",
           backgroundColor: "#1a1a1a",
           color: "white",
         }}
