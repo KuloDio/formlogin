@@ -11,35 +11,42 @@ import Favorite from './pages/favorite.jsx';
 import Profile from './pages/Profile.jsx';
 import { FormProvider } from './context/FormContext.jsx';
 import { useEffect, useState } from 'react';
-import axios from "axios";
 
+import axios from 'axios';
+import { Typography } from '@mui/material';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 function PrivateRoute({ children }) {
-  const [loading, setLoading] = useState(true);
+   const [loading, setLoading] = useState(true);
   const [valid, setValid] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
+
     if (!token) {
       setLoading(false);
       return;
     }
 
     axios
-      .get("http://localhost:5000/api/me", {
+      .get(`${API_URL}/api/page/dashboard`, {
+
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => setValid(true))
       .catch(() => {
-        // token tidak valid / sudah di-blacklist
-        localStorage.removeItem("token");
+
+        localStorage.removeItem('token');
+
         setValid(false);
       })
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return null;      // bisa ganti dengan spinner/loading state
-  return valid ? children : <Navigate to="/login" />;
+
+  if (loading) return <Typography>Loading...</Typography>;
+  return valid ? children : <Navigate to="/dashboard" />;
 }
 
 function App() {
