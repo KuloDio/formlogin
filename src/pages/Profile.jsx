@@ -241,8 +241,8 @@ function Profile() {
           {/* Form */}
           <TextField
             label="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={tempName}
+            onChange={(e) => setTempName(e.target.value)}
             fullWidth
             InputProps={{
               sx: {
