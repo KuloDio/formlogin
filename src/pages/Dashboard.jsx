@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navbar } from "../components/navbar";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
-import axios from "axios"
+
 import {
   Drawer,
   Toolbar,
@@ -25,6 +25,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const drawerWidth = 240;
 
 const menuItems = [
@@ -46,20 +48,15 @@ const Dashboard = () => {
     setMobileOpen(!mobileOpen);
   };
 
-const handleLogout = async () => {
-    const token = localStorage.getItem("token");
-    try {
-      await axios.post(
-        "/api/logout",
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-    } catch (err) {
-      console.error(err);
-    } finally {
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Yakin ingin log out?");
+    if (confirmLogout) {
       localStorage.removeItem("token");
-      // arahkan ke halaman login
-      window.location.href = "/login";
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+        navigate("/");
+      }, 1000);
     }
   };
 
@@ -92,11 +89,12 @@ const handleLogout = async () => {
             </ListItemButton>
           </ListItem>
         ))}
-        <Box sx={{ 
-          display: "flex", 
-          justifyContent: "flex-end", 
+        <Box sx={{
+          display: "flex",
+          justifyContent: "flex-end",
           gap: 1,
-          marginX: "10%", }}>
+          marginX: "10%",
+        }}>
           <Button
             variant="outlined"
             color="error"
@@ -163,9 +161,9 @@ const handleLogout = async () => {
           flexGrow: 1,
           p: 3,
           marginLeft: isMobile ? 0 : `${drawerWidth}px`,
-          marginTop: isMobile ? "56px" : "64px", 
+          marginTop: isMobile ? "56px" : "64px",
           height: `calc(100vh - ${isMobile ? "56px" : "64px"})`,
-          overflowY: "auto", 
+          overflowY: "auto",
           backgroundColor: "#1a1a1a",
           color: "white",
         }}
