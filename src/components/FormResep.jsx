@@ -285,7 +285,7 @@ const FormResep = () => {
           id="persiapan"
           value={safeForm.persiapan}
           onChange={(e) => setFormResep({ ...safeForm, persiapan: e.target.value })}
-          placeholder="Masukkan Waktu Persiapan Memasak"
+          placeholder="Waktu Persiapan Memasak (Menit)"
           sx={{
             width: "100%",
             marginTop: "5%",
@@ -309,7 +309,7 @@ const FormResep = () => {
           onChange={(e) =>
             setFormResep({ ...safeForm, waktumasak: e.target.value })
           }
-          placeholder="Masukkan Waktu Memasak"
+          placeholder="Waktu Memasak (Menit)"
           sx={{
             width: "100%",
             marginTop: "5%",

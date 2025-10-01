@@ -182,7 +182,7 @@ const BahanLangkah = () => {
                                     backgroundColor: "#D8E9A8",
                                     fontWeight: "600",
                                     padding: "1%",
-                                }}>Nama Bahan</DialogContentText>
+                                }}>Nomer Urut Memasak</DialogContentText>
                             <TextField
                                 label="Nomer"
                                 type="number"
@@ -214,7 +214,7 @@ const BahanLangkah = () => {
                                     backgroundColor: "#D8E9A8",
                                     fontWeight: "600",
                                     padding: "1%",
-                                }}>Nama Bahan</DialogContentText>
+                                }}>Deskripsi Langkah Memasak</DialogContentText>
                             <TextField
                                 label="Deskripsi"
                                 fullWidth
