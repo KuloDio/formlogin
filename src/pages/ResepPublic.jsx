@@ -49,12 +49,12 @@ const ResepPublic = () => {
           </Typography>
 
           <ButtonFilter />
-          <Grid container spacing={3}
+          <Grid container spacing={3} alignItems="flex-start"
             sx={{
               justifyContent: 'space-evenly',
               mb: 1,
               position: "relative",
-              paddingTop: 18,
+              paddingTop: { xs: '5%', md: '8%' },
             }}
           >
             <RecipeCard />

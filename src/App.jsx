@@ -40,7 +40,7 @@ function PrivateRoute({ children }) {
   }, []);
 
   if (loading) return <Typography>Loading...</Typography>;
-  return valid ? children : <Navigate to="/dashboard" />;
+  return valid ? children : <Navigate to="/login" />;
 }
 
 function App() {
