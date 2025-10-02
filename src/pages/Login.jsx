@@ -25,7 +25,7 @@ function Login() {
       console.log("Response dari backend:", res.data.token);
       // Simpan token di localStorage
       localStorage.setItem("token", res.data.token);
-      
+
 
       alert("Login success!");
       navigate("/dashboard");
@@ -83,7 +83,7 @@ function Login() {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <Email color="action" sx={{ mx: 1 }}/>
+                <Email color="action" sx={{ mx: 1 }} />
               </InputAdornment>
             ),
             sx: {
@@ -107,7 +107,7 @@ function Login() {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <Lock color="action" sx={{ mx: 1 }}/>
+                <Lock color="action" sx={{ mx: 1 }} />
               </InputAdornment>
             ),
             sx: {

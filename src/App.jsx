@@ -9,10 +9,12 @@ import TambahResep from './pages/TambahResep.jsx';
 import MyResep from './pages/myresep.jsx';
 import Favorite from './pages/favorite.jsx';
 import Profile from './pages/Profile.jsx';
+import EditResep from './pages/EditResep.jsx';
 import { FormProvider } from './context/FormContext.jsx';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Typography } from '@mui/material';
+
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -39,7 +41,11 @@ function PrivateRoute({ children }) {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <Typography>Loading...</Typography>;
+  if (loading) return <Typography sx={{
+    textAlign: "center",
+    fontFamily: "poppins",
+    color: "white",
+  }}>Loading...</Typography>;
   return valid ? children : <Navigate to="/login" />;
 }
 
@@ -73,6 +79,7 @@ function App() {
           }
         />
         <Route path="profile" element={<Profile />} />
+        <Route path="editresep/:id" element={<EditResep />} />
       </Route>
     </Routes>
   );

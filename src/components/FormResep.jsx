@@ -309,7 +309,7 @@ const FormResep = () => {
           onChange={(e) =>
             setFormResep({ ...safeForm, waktumasak: e.target.value })
           }
-          placeholder="Waktu Memasak (Menit)"
+          placeholder="Masukkan Waktu Memasak"
           sx={{
             width: "100%",
             marginTop: "5%",
