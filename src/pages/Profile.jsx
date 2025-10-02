@@ -12,6 +12,8 @@ import {
   DialogActions,
   TextField,
   Slide,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
@@ -19,14 +21,12 @@ import banner from "../assets/image/bannerProfile.png";
 import LinkIcon from "@mui/icons-material/Link";
 
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import RestaurantIcon from '@mui/icons-material/Restaurant';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-
+import RestaurantIcon from "@mui/icons-material/Restaurant";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
 
 function Profile() {
   const theme = useTheme();
@@ -42,6 +42,9 @@ function Profile() {
   const [tempName, setTempName] = useState("");
   const [tempBio, setTempBio] = useState("");
   const [tempPhoto, setTempPhoto] = useState(null);
+
+  // Snackbar untuk copy link
+  const [copySuccess, setCopySuccess] = useState(false);
 
   // Load dari localStorage
   useEffect(() => {
@@ -89,6 +92,12 @@ function Profile() {
     handleClose();
   };
 
+  // Copy link ke clipboard
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopySuccess(true);
+  };
+
   return (
     <>
       <Box sx={{ position: "relative", mb: 8 }}>
@@ -121,7 +130,7 @@ function Profile() {
             width: { xs: 120, md: 150 },
             height: { xs: 120, md: 150 },
             position: "absolute",
-            left: { xs: 25, md: 50 },
+            left: { xs: 25, md: 25 },
             bottom: { xs: -50, md: -75 },
           }}
         >
@@ -145,9 +154,7 @@ function Profile() {
               border: "1px solid #D8E9A8",
               "&:hover": { backgroundColor: "rgba(216,233,168,0.1)" },
             }}
-            onClick={() =>
-              navigator.clipboard.writeText(window.location.href)
-            }
+            onClick={handleCopyLink}
           >
             <LinkIcon />
           </IconButton>
@@ -171,10 +178,18 @@ function Profile() {
       </Box>
 
       {/* Info User */}
-      <Typography variant="h4" color="#fff" sx={{ fontWeight: "bold", pl: 4, pt: 3 }}>
+      <Typography
+        variant="h4"
+        color="#fff"
+        sx={{ fontWeight: "bold", pl: 6, pt: 3 }}
+      >
         {name || "Nama Kamu"}
       </Typography>
-      <Typography variant="h6" color="#fff" sx={{ pl: 4, pt: 2 }}>
+      <Typography
+        variant="h6"
+        color="#fff"
+        sx={{ fontWeight: "medium", pl: 6, pt: 2 }}
+      >
         {bio || "Tambahkan bio kamu disini..."}
       </Typography>
 
@@ -246,12 +261,12 @@ function Profile() {
             fullWidth
             InputProps={{
               sx: {
-                color: "#fff",
+                color: "#fff", // warna teks putih
               },
             }}
             InputLabelProps={{
               sx: {
-                color: "#aaa",
+                color: "#aaa", // label jadi abu biar kelihatan
               },
             }}
           />
@@ -266,7 +281,7 @@ function Profile() {
             InputProps={{
               sx: {
                 color: "#fff",
-                my: 1
+                my: 1,
               },
             }}
             InputLabelProps={{
@@ -275,7 +290,6 @@ function Profile() {
               },
             }}
           />
-
         </DialogContent>
 
         <DialogActions sx={{ backgroundColor: "#12372A", p: 2 }}>
@@ -302,69 +316,102 @@ function Profile() {
         </DialogActions>
       </Dialog>
 
-      <Box sx={{
-        border: "3px solid",
-        borderRadius: "20px 20px 0px 0px",
-        borderColor: "#D8E9A8",
-        minHeight: 350,
-        marginTop: 5,
-      }}>
-        <Typography sx={{
-          textAlign: "center",
-          borderBottom: "3px solid",
+      <Snackbar
+  open={copySuccess}
+  autoHideDuration={2000}
+  onClose={() => setCopySuccess(false)}
+  anchorOrigin={{ vertical: "top", horizontal: "center" }}
+>
+  <Alert
+    onClose={() => setCopySuccess(false)}
+    severity="success"   // ✅ sekarang berfungsi
+    sx={{ width: "100%" }}
+  >
+    Link berhasil disalin!
+  </Alert>
+</Snackbar>
+
+      {/* Stats */}
+      <Box
+        sx={{
+          border: "3px solid",
           borderRadius: "20px 20px 0px 0px",
           borderColor: "#D8E9A8",
-          fontWeight: "800",
-          paddingY: "1%",
-          backgroundColor: "#12372A",
-        }}>STATS
+          minHeight: 350,
+          marginTop: 5,
+        }}
+      >
+        <Typography
+          sx={{
+            textAlign: "center",
+            borderBottom: "3px solid",
+            borderRadius: "20px 20px 0px 0px",
+            borderColor: "#D8E9A8",
+            fontWeight: "800",
+            paddingY: "1%",
+            backgroundColor: "#12372A",
+          }}
+        >
+          STATS
         </Typography>
-        <Box sx={{
-          display: { xs: "row", md: "flex" },
-          placeContent: "center",
-          justifyContent: "between",
-          gap: 50,
-          paddingTop: { xs: 5, md: 10 },
-          paddingBottom: 3,
-        }}>
-          <Box sx={{
-            alignItems: "center",
-            textAlign: "center",
-          }}>
-            <RestaurantIcon sx={{
-              color: "#D8E9A8",
-              fontSize: 80,
-            }} />
-            <Typography>
-              My Own Recipe
+        <Box
+          sx={{
+            display: { xs: "row", md: "flex" },
+            placeContent: "center",
+            justifyContent: "between",
+            gap: 50,
+            paddingTop: { xs: 5, md: 10 },
+            paddingBottom: 3,
+          }}
+        >
+          <Box
+            sx={{
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <RestaurantIcon
+              sx={{
+                color: "#D8E9A8",
+                fontSize: 80,
+              }}
+            />
+            <Typography>My Own Recipe</Typography>
+            <Typography
+              sx={{
+                fontWeight: "800",
+                fontSize: 30,
+                fontFamily: "Poppins",
+              }}
+            >
+              0
             </Typography>
-            <Typography sx={{
-              fontWeight: "800",
-              fontSize: 30,
-              fontFamily: 'Poppins',
-            }}>0</Typography>
           </Box>
-          <Box sx={{
-            alignItems: "center",
-            textAlign: "center",
-          }}>
-            <FavoriteIcon sx={{
-              color: "#D8E9A8",
-              fontSize: 80,
-            }} />
-            <Typography>
-              My Favorites Recipe
+          <Box
+            sx={{
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <FavoriteIcon
+              sx={{
+                color: "#D8E9A8",
+                fontSize: 80,
+              }}
+            />
+            <Typography>My Favorites Recipe</Typography>
+            <Typography
+              sx={{
+                fontWeight: "800",
+                fontSize: 30,
+                fontFamily: "Poppins",
+              }}
+            >
+              5
             </Typography>
-            <Typography sx={{
-              fontWeight: "800",
-              fontSize: 30,
-              fontFamily: 'Poppins',
-            }}>5</Typography>
           </Box>
-
         </Box>
       </Box>
-
     </>
   );
 }

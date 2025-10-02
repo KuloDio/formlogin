@@ -19,11 +19,12 @@ import { Typography } from '@mui/material';
 const API_URL = import.meta.env.VITE_API_URL;
 
 function PrivateRoute({ children }) {
-   const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [valid, setValid] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+
     if (!token) {
       setLoading(false);
       return;
@@ -31,11 +32,14 @@ function PrivateRoute({ children }) {
 
     axios
       .get(`${API_URL}/api/page/dashboard`, {
+
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => setValid(true))
       .catch(() => {
+
         localStorage.removeItem('token');
+
         setValid(false);
       })
       .finally(() => setLoading(false));
