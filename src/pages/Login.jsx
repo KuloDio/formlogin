@@ -22,8 +22,6 @@ function Login() {
         email: form.email,
         password: form.password,
       });
-      console.log("Response dari backend:", res.data.token);
-      // Simpan token di localStorage
       localStorage.setItem("token", res.data.token);
 
 

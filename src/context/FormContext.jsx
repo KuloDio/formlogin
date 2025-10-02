@@ -2,16 +2,17 @@ import React, { createContext, useContext, useState } from "react";
 
 
 const initialForm = {
-  nama: "",
-  deskripsi: "",
-  image: "",
-  kategori: "",
-  porsi: "",
-  persiapan: "",
-  waktumasak: "",
-  langkah: [],
-  bahan: [],
+  title: "",
+  description: "",
+  thumbnail: "",
+  category: "",
+  servings: 0,
+  prep_time: 0,
+  cook_time: 0,
+  ingredients: [],  
+  steps: [],        
 };
+
 
 export const FormContext = createContext({
   formResep: initialForm,
@@ -30,6 +31,5 @@ export const FormProvider = ({ children }) => {
     </FormContext.Provider>
   );
 };
-
 
 export const useFormContext = () => useContext(FormContext);

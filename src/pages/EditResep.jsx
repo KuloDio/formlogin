@@ -45,7 +45,7 @@ const EditResep = () => {
             })) || [],
         });
       } catch (err) {
-        console.error("Gagal ambil resep:", err);
+        console.error("Gagal ambil data resep:", err);
         alert("Tidak bisa memuat data resep!");
       }
     };

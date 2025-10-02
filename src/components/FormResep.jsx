@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, Grid, Typography, TextField, Autocomplete } from "@mui/material";
+import { Box, Grid, Typography, TextField, Autocomplete, Input } from "@mui/material";
 import { FormContext } from "../context/FormContext";
 
 const kategori = [
@@ -8,7 +8,6 @@ const kategori = [
   { category: 'Snack', },
   { category: 'Sambal', },
 ]
-
 
 const FormResep = () => {
   const defaultProps = {
@@ -21,16 +20,6 @@ const FormResep = () => {
   const [value, setValue] = React.useState(null);
 
   const { formResep, setFormResep } = useContext(FormContext);
-
-  const safeForm = formResep || {
-    nama: "",
-    deskripsi: "",
-    image: "",
-    kategori: "",
-    porsi: "",
-    persiapan: "",
-    waktumasak: "",
-  };
 
   return (
     <Grid
@@ -68,8 +57,8 @@ const FormResep = () => {
         </Typography>
         <TextField
           id="nama"
-          value={safeForm.nama}
-          onChange={(e) => setFormResep({ ...safeForm, nama: e.target.value })}
+          value={formResep.nama || ""}
+          onChange={(e) => setFormResep({ ...formResep, nama: e.target.value })}
           placeholder="Masukkan Nama Resep"
           sx={{
             width: "100%",
@@ -105,9 +94,9 @@ const FormResep = () => {
         </Typography>
         <TextField
           id="deskripsi"
-          value={safeForm.deskripsi}
+          value={formResep.deskripsi || ""}
           onChange={(e) =>
-            setFormResep({ ...safeForm, deskripsi: e.target.value })
+            setFormResep({ ...formResep, deskripsi: e.target.value })
           }
           placeholder="Masukkan Deskripsi Resep"
           sx={{
@@ -142,12 +131,14 @@ const FormResep = () => {
         >
           FOTO MAKANAN
         </Typography>
-        <TextField
+        <Input
           id="image"
-          value={safeForm.image}
-          onChange={(e) => setFormResep({ ...safeForm, image: e.target.value })}
-          placeholder="Masukkan URL Foto Makanan"
-          type="url"
+          type="file"
+          accept="image/*"
+          onChange={(e) =>
+            setFormResep({ ...formResep, image: e.target.files[0] }) // simpan File, bukan string
+          }
+          placeholder="Masukkan Foto Makanan"
           sx={{
             width: "100%",
             marginTop: "5%",
@@ -163,6 +154,7 @@ const FormResep = () => {
             },
           }}
         />
+
       </Box>
 
 
@@ -192,10 +184,17 @@ const FormResep = () => {
           KATEGORI RESEP
         </Typography>
         <Autocomplete
-          {...defaultProps}
           id="kategori"
-          disablePortal
           options={kategori}
+          getOptionLabel={(option) => option.category || ""}
+          isOptionEqualToValue={(option, value) => option.category === value.category}
+          value={kategori.find((opt) => opt.category === formResep.kategori) || null}
+          onChange={(event, newValue) => {
+            setFormResep({
+              ...formResep,
+              kategori: newValue ? newValue.category : "",
+            });
+          }}
           sx={{
             width: "100%",
             marginTop: "5%",
@@ -210,7 +209,9 @@ const FormResep = () => {
               "& .MuiInputBase-input": { color: "white" },
             },
           }}
-          renderInput={(params) => <TextField {...params} placeholder="Masukan Kategori Resep Masakan" />}
+          renderInput={(params) => (
+            <TextField {...params} placeholder="Masukan Kategori Resep Masakan" />
+          )}
         />
         {/* JUMLAH PORSI */}
         <Typography
@@ -231,9 +232,9 @@ const FormResep = () => {
         <TextField
           id="porsi"
           type="number"
-          value={safeForm.porsi}
+          value={formResep.porsi || ""}
           onChange={(e) =>
-            setFormResep({ ...safeForm, porsi: e.target.value })
+            setFormResep({ ...formResep, porsi: e.target.value })
           }
           placeholder="Masukkan Jumlah Porsi"
           sx={{
@@ -283,8 +284,8 @@ const FormResep = () => {
         {/* WAKTU PERSIAPAN */}
         <TextField
           id="persiapan"
-          value={safeForm.persiapan}
-          onChange={(e) => setFormResep({ ...safeForm, persiapan: e.target.value })}
+          value={formResep.persiapan || ""}
+          onChange={(e) => setFormResep({ ...formResep, persiapan: e.target.value })}
           placeholder="Waktu Persiapan Memasak (Menit)"
           sx={{
             width: "100%",
@@ -305,11 +306,11 @@ const FormResep = () => {
         {/* WAKTU MEMASAK */}
         <TextField
           id="waktumasak"
-          value={safeForm.waktumasak}
+          value={formResep.waktumasak || ""}
           onChange={(e) =>
-            setFormResep({ ...safeForm, waktumasak: e.target.value })
+            setFormResep({ ...formResep, waktumasak: e.target.value })
           }
-          placeholder="Masukkan Waktu Memasak"
+          placeholder="Waktu Memasak ( Menit )"
           sx={{
             width: "100%",
             marginTop: "5%",
