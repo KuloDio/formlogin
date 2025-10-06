@@ -39,12 +39,12 @@ const Favorite = () => {
           </Typography>
         </Box>
 
-        <Grid container spacing={4}
+        <Grid container spacing={2} alignItems="flex-start"
           sx={{
             justifyContent: 'space-evenly',
             mb: 1,
             position: "relative",
-            marginTop: { xs: '5%', md: '2%' },
+            paddingTop: { xs: '5%', md: '5%' },
           }}
         >
           <FavoriteCard />

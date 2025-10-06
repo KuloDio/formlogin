@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Box, Grid, Typography, TextField, Autocomplete, Input } from "@mui/material";
+import { Box, Grid, Typography, TextField, Autocomplete, Input, Button } from "@mui/material";
 import { FormContext } from "../context/FormContext";
 
 const kategori = [
@@ -10,6 +10,7 @@ const kategori = [
 ]
 
 const FormResep = () => {
+
   const defaultProps = {
     options: kategori,
     getOptionLabel: (option) => option.category,
@@ -20,6 +21,7 @@ const FormResep = () => {
   const [value, setValue] = React.useState(null);
 
   const { formResep, setFormResep } = useContext(FormContext);
+
 
   return (
     <Grid
@@ -56,9 +58,9 @@ const FormResep = () => {
           NAMA RESEP
         </Typography>
         <TextField
-          id="nama"
-          value={formResep.nama || ""}
-          onChange={(e) => setFormResep({ ...formResep, nama: e.target.value })}
+          id="title"
+          value={formResep.title || ""}
+          onChange={(e) => setFormResep({ ...formResep, title: e.target.value })}
           placeholder="Masukkan Nama Resep"
           sx={{
             width: "100%",
@@ -93,10 +95,10 @@ const FormResep = () => {
           DESKRIPSI RESEP
         </Typography>
         <TextField
-          id="deskripsi"
-          value={formResep.deskripsi || ""}
+          id="description"
+          value={formResep.description || ""}
           onChange={(e) =>
-            setFormResep({ ...formResep, deskripsi: e.target.value })
+            setFormResep({ ...formResep, description: e.target.value })
           }
           placeholder="Masukkan Deskripsi Resep"
           sx={{
@@ -132,29 +134,15 @@ const FormResep = () => {
           FOTO MAKANAN
         </Typography>
         <Input
-          id="image"
           type="file"
-          accept="image/*"
-          onChange={(e) =>
-            setFormResep({ ...formResep, image: e.target.files[0] }) // simpan File, bukan string
-          }
-          placeholder="Masukkan Foto Makanan"
-          sx={{
-            width: "100%",
-            marginTop: "5%",
-            textAlign: "center",
-            "& .MuiOutlinedInput-root": {
-              border: "4px solid",
-              borderColor: "#D8E9A8",
-              borderRadius: "20px",
-              "& fieldset": { borderColor: "transparent" },
-              "&:hover fieldset": { borderColor: "transparent" },
-              "&.Mui-focused fieldset": { borderColor: "transparent" },
-              "& .MuiInputBase-input": { color: "white" },
-            },
+          inputProps={{ accept: "image/*" }}
+          onChange={(e) => {
+            const file = e.target.files[0];
+            if (file) {
+              setFormResep((prev) => ({ ...prev, thumbnail: file }));
+            }
           }}
         />
-
       </Box>
 
 
@@ -184,15 +172,15 @@ const FormResep = () => {
           KATEGORI RESEP
         </Typography>
         <Autocomplete
-          id="kategori"
+          id="category"
           options={kategori}
           getOptionLabel={(option) => option.category || ""}
           isOptionEqualToValue={(option, value) => option.category === value.category}
-          value={kategori.find((opt) => opt.category === formResep.kategori) || null}
+          value={kategori.find((opt) => opt.category === formResep.category) || null}
           onChange={(event, newValue) => {
             setFormResep({
               ...formResep,
-              kategori: newValue ? newValue.category : "",
+              category: newValue ? newValue.category : "",
             });
           }}
           sx={{
@@ -230,11 +218,11 @@ const FormResep = () => {
           JUMLAH PORSI
         </Typography>
         <TextField
-          id="porsi"
+          id="servings"
           type="number"
-          value={formResep.porsi || ""}
+          value={formResep.servings || ""}
           onChange={(e) =>
-            setFormResep({ ...formResep, porsi: e.target.value })
+            setFormResep({ ...formResep, servings: e.target.value })
           }
           placeholder="Masukkan Jumlah Porsi"
           sx={{
@@ -283,9 +271,9 @@ const FormResep = () => {
 
         {/* WAKTU PERSIAPAN */}
         <TextField
-          id="persiapan"
-          value={formResep.persiapan || ""}
-          onChange={(e) => setFormResep({ ...formResep, persiapan: e.target.value })}
+          id="prep_time"
+          value={formResep.prep_time || ""}
+          onChange={(e) => setFormResep({ ...formResep, prep_time: e.target.value })}
           placeholder="Waktu Persiapan Memasak (Menit)"
           sx={{
             width: "100%",
@@ -305,10 +293,10 @@ const FormResep = () => {
 
         {/* WAKTU MEMASAK */}
         <TextField
-          id="waktumasak"
-          value={formResep.waktumasak || ""}
+          id="cook_time"
+          value={formResep.cook_time || ""}
           onChange={(e) =>
-            setFormResep({ ...formResep, waktumasak: e.target.value })
+            setFormResep({ ...formResep, cook_time: e.target.value })
           }
           placeholder="Waktu Memasak ( Menit )"
           sx={{

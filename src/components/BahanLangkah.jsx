@@ -16,17 +16,21 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useFormContext } from "../context/FormContext";
 
 const BahanLangkah = () => {
-    const { formResep, setFormResep } = useFormContext();
+    const {
+        formResep,
+        addIngredient,
+        removeIngredient,
+        addStep,
+        removeStep,
+    } = useFormContext();
 
     // === STEPS (Langkah) ===
     const [openLangkah, setOpenLangkah] = useState(false);
-    const [nomer, setNomer] = useState("");
     const [deskripsi, setDeskripsi] = useState("");
 
     const handleClickOpenLangkah = () => setOpenLangkah(true);
     const handleCloseLangkah = () => {
         setOpenLangkah(false);
-        setNomer("");
         setDeskripsi("");
         setTimeout(() => {
             document.activeElement.blur();
@@ -34,27 +38,10 @@ const BahanLangkah = () => {
     };
 
     const handleAddStep = () => {
-        if (nomer && deskripsi) {
-            setFormResep({
-                ...formResep,
-                steps: [
-                    ...formResep.steps,
-                    {
-                        id: Date.now().toString(), // dummy id sementara
-                        number: parseInt(nomer, 10),
-                        detail: deskripsi,
-                    },
-                ],
-            });
+        if (deskripsi) {
+            addStep(deskripsi);
             handleCloseLangkah();
         }
-    };
-
-    const handleDeleteStep = (index) => {
-        setFormResep({
-            ...formResep,
-            steps: formResep.steps.filter((_, i) => i !== index),
-        });
     };
 
     // === INGREDIENTS (Bahan) ===
@@ -71,26 +58,9 @@ const BahanLangkah = () => {
 
     const handleAddBahan = () => {
         if (namaBahan && jumlahBahan) {
-            setFormResep({
-                ...formResep,
-                ingredients: [
-                    ...formResep.ingredients,
-                    {
-                        id: Date.now().toString(), // dummy id sementara
-                        name: namaBahan,
-                        amount: jumlahBahan,
-                    },
-                ],
-            });
+            addIngredient(namaBahan, jumlahBahan);
             handleCloseBahan();
         }
-    };
-
-    const handleDeleteBahan = (index) => {
-        setFormResep({
-            ...formResep,
-            ingredients: formResep.ingredients.filter((_, i) => i !== index),
-        });
     };
 
     return (
@@ -141,9 +111,9 @@ const BahanLangkah = () => {
                             Belum ada langkah memasak
                         </Typography>
                     ) : (
-                        formResep.steps.map((step, index) => (
+                        formResep.steps.map((step) => (
                             <Box
-                                key={step.id || index}
+                                key={step.id}
                                 sx={{
                                     display: "flex",
                                     justifyContent: "space-between",
@@ -158,7 +128,7 @@ const BahanLangkah = () => {
                                 <Typography>
                                     {step.number}. {step.detail}
                                 </Typography>
-                                <IconButton color="error" onClick={() => handleDeleteStep(index)}>
+                                <IconButton color="error" onClick={() => removeStep(step.id)}>
                                     <DeleteIcon />
                                 </IconButton>
                             </Box>
@@ -210,41 +180,6 @@ const BahanLangkah = () => {
                                 padding: "1%",
                             }}
                         >
-                            Nomor Urut Memasak
-                        </DialogContentText>
-                        <TextField
-                            label="Nomor"
-                            type="number"
-                            fullWidth
-                            margin="dense"
-                            value={nomer || ""}  // ✅ selalu controlled
-                            onChange={(e) => setNomer(e.target.value)}
-                            sx={{
-                                mb: 2,
-                                label: { color: "white" },
-                                "& .MuiOutlinedInput-root": {
-                                    border: "3px solid",
-                                    borderColor: "#D8E9A8",
-                                    borderRadius: "20px",
-                                    "& fieldset": { borderColor: "transparent", },
-                                    "&:hover fieldset": { borderColor: "transparent", },
-                                    "&.Mui-focused fieldset": { borderColor: "transparent", },
-                                    "& .MuiInputLabel-root": { color: "white", },
-                                    "& .MuiInputBase-input": { color: "white", },
-                                },
-                            }}
-                        />
-                        <DialogContentText
-                            sx={{
-                                color: "#1E5128",
-                                mb: 1,
-                                borderRadius: "10px",
-                                textAlign: "center",
-                                backgroundColor: "#D8E9A8",
-                                fontWeight: "600",
-                                padding: "1%",
-                            }}
-                        >
                             Deskripsi Langkah Memasak
                         </DialogContentText>
                         <TextField
@@ -252,8 +187,7 @@ const BahanLangkah = () => {
                             fullWidth
                             multiline
                             margin="dense"
-                            value={deskripsi || ""}  // ✅ selalu controlled
-                            onChange={(e) => setDeskripsi(e.target.value)}
+                            value={deskripsi}
                             sx={{
                                 mb: 2,
                                 label: { color: "white" },
@@ -268,9 +202,15 @@ const BahanLangkah = () => {
                                     "& .MuiInputBase-input": { color: "white", },
                                 },
                             }}
+                            onChange={(e) => setDeskripsi(e.target.value)}
+
                         />
                     </DialogContent>
-                    <DialogActions sx={{ backgroundColor: "#12372A" }}>
+                    <DialogActions
+                        sx={{
+                            backgroundColor: "#12372A",
+                        }}
+                    >
                         <Button onClick={handleCloseLangkah}
                             sx={{
                                 backgroundColor: "#D8E9A8",
@@ -337,9 +277,9 @@ const BahanLangkah = () => {
                             Belum ada bahan masakan
                         </Typography>
                     ) : (
-                        formResep.ingredients.map((bahan, index) => (
+                        formResep.ingredients.map((bahan) => (
                             <Box
-                                key={bahan.id || index}
+                                key={bahan.id}
                                 sx={{
                                     display: "flex",
                                     justifyContent: "space-between",
@@ -354,7 +294,7 @@ const BahanLangkah = () => {
                                 <Typography>
                                     {bahan.name} - {bahan.amount}
                                 </Typography>
-                                <IconButton color="error" onClick={() => handleDeleteBahan(index)}>
+                                <IconButton color="error" onClick={() => removeIngredient(bahan.id)}>
                                     <DeleteIcon />
                                 </IconButton>
                             </Box>
@@ -385,7 +325,9 @@ const BahanLangkah = () => {
                                 textAlign: "center",
                                 fontWeight: "800",
                             }}
-                        >Tambah Bahan</DialogTitle>
+                        >
+                            Tambah Bahan
+                        </DialogTitle>
                         <DialogContent
                             sx={{
                                 backgroundColor: "#12372A",
@@ -402,13 +344,14 @@ const BahanLangkah = () => {
                                     fontWeight: "600",
                                     padding: "1%",
                                 }}
-                            >Nama Bahan</DialogContentText>
+                            >
+                                Nama Bahan
+                            </DialogContentText>
                             <TextField
                                 label="Nama Bahan"
                                 fullWidth
                                 margin="dense"
                                 value={namaBahan || ""}
-                                onChange={(e) => setNamaBahan(e.target.value)}
                                 sx={{
                                     mb: 2,
                                     label: { color: "white" },
@@ -423,6 +366,7 @@ const BahanLangkah = () => {
                                         "& .MuiInputBase-input": { color: "white", },
                                     },
                                 }}
+                                onChange={(e) => setNamaBahan(e.target.value)}
                             />
                             <DialogContentText
                                 sx={{
@@ -434,13 +378,14 @@ const BahanLangkah = () => {
                                     fontWeight: "600",
                                     padding: "1%",
                                 }}
-                            >Jumlah Bahan</DialogContentText>
+                            >
+                                Jumlah Bahan
+                            </DialogContentText>
                             <TextField
                                 label="Jumlah"
                                 fullWidth
                                 margin="dense"
                                 value={jumlahBahan || ""}
-                                onChange={(e) => setJumlahBahan(e.target.value)}
                                 sx={{
                                     mb: 2,
                                     label: { color: "white" },
@@ -455,13 +400,10 @@ const BahanLangkah = () => {
                                         "& .MuiInputBase-input": { color: "white", },
                                     },
                                 }}
+                                onChange={(e) => setJumlahBahan(e.target.value)}
                             />
                         </DialogContent>
-                        <DialogActions
-                            sx={{
-                                backgroundColor: "#12372A",
-                            }}
-                        >
+                        <DialogActions sx={{ backgroundColor: "#12372A" }}>
                             <Button onClick={handleCloseBahan}
                                 sx={{
                                     backgroundColor: "#D8E9A8",
@@ -486,7 +428,6 @@ const BahanLangkah = () => {
                     </Dialog>
                 </Box>
             </Box>
-
         </Grid>
     );
 };

@@ -14,6 +14,7 @@ import { FormProvider } from './context/FormContext.jsx';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Typography } from '@mui/material';
+import { FavoriteProvider } from './context/FavoriteContext.jsx';
 
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -24,7 +25,6 @@ function PrivateRoute({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
     if (!token) {
       setLoading(false);
       return;
@@ -32,14 +32,11 @@ function PrivateRoute({ children }) {
 
     axios
       .get(`${API_URL}/api/page/dashboard`, {
-
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => setValid(true))
       .catch(() => {
-
         localStorage.removeItem('token');
-
         setValid(false);
       })
       .finally(() => setLoading(false));
@@ -65,23 +62,23 @@ function App() {
         path="/dashboard"
         element={
           <PrivateRoute>
-            <Dashboard />
+            <FormProvider>
+              <Dashboard />
+            </FormProvider>
           </PrivateRoute>
         }
       >
         <Route index element={<Navigate to="home" replace />} />
         <Route path="home" element={<Home />} />
         <Route path="resepuser" element={<ResepUser />} />
-        <Route path="favorite" element={<Favorite />} />
+        <Route path="favorite"
+        element={
+          <FavoriteProvider>
+            <Favorite />
+          </FavoriteProvider>
+        }/>
         <Route path="myresep" element={<MyResep />} />
-        <Route
-          path="tambahresep"
-          element={
-            <FormProvider>
-              <TambahResep />
-            </FormProvider>
-          }
-        />
+        <Route path="tambahresep" element={<TambahResep />} />
         <Route path="profile" element={<Profile />} />
         <Route path="editresep/:id" element={<EditResep />} />
       </Route>

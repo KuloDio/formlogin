@@ -18,6 +18,7 @@ export default function CreateCard() {
   const [expanded, setExpanded] = useState([]);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const fetchData = async () => {
@@ -47,11 +48,13 @@ export default function CreateCard() {
     <>
       {masakan.map((item) => (
         <Card key={item.id} sx={{ mb: 2, background: "#212121", color: "#fff" }}>
-          <CardMedia
-            component="img"
-            image={item.photos?.[0]?.url || ""}
-            sx={{ height: 200 }}
-          />
+          {item.thumbnail && (
+            <CardMedia
+              component="img"
+              height="200"
+              image={item.thumbnail}
+            />
+          )}
           <CardHeader
             avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
             action={
@@ -60,8 +63,20 @@ export default function CreateCard() {
               </IconButton>
             }
             title={item.title}
+            titleTypographyProps={{
+              sx: {
+                fontWeight: '700',
+                fontSize: 18,
+                fontFamily: 'Poppins',
+              }
+            }}
             subheader={item.category}
-            subheaderTypographyProps={{ sx: { color: "#bdbdbd" } }}
+            subheaderTypographyProps={{
+              sx: {
+                color: "#bdbdbd",
+                fontWeight: 600,
+              }
+            }}
           />
           <CardContent>{item.description}</CardContent>
           <CardActions disableSpacing>
@@ -82,14 +97,14 @@ export default function CreateCard() {
           </CardActions>
           <Collapse in={expanded.includes(item.id)} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography fontWeight="700">Ingredients:</Typography>
+              <Typography fontWeight="700">Bahan:</Typography>
               {item.ingredients?.map((ing, idx) => (
                 <Typography key={idx}>
                   - {ing.amount} {ing.name}
                 </Typography>
               ))}
 
-              <Typography fontWeight="700" sx={{ mt: 2 }}>Steps:</Typography>
+              <Typography fontWeight="700" sx={{ mt: 2 }}>Langkah:</Typography>
               {item.steps?.map((step) => (
                 <Typography key={step.number}>
                   {step.number}. {step.detail}

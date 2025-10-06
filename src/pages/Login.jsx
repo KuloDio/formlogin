@@ -24,7 +24,6 @@ function Login() {
       });
       localStorage.setItem("token", res.data.token);
 
-
       alert("Login success!");
       navigate("/dashboard");
     } catch (err) {

@@ -18,16 +18,15 @@ const TambahResep = () => {
       const formData = new FormData();
 
       // field utama
-      formData.append("title", formResep.nama?.trim() || "");
-      formData.append("description", formResep.deskripsi?.trim() || "");
-      formData.append("category", formResep.kategori?.trim() || "");
-      formData.append("servings", Number(formResep.porsi) || 0);
-      formData.append("prep_time", Number(formResep.persiapan) || 0);
-      formData.append("cook_time", Number(formResep.waktumasak) || 0);
+      formData.append("title", formResep.title?.trim() || "");
+      formData.append("description", formResep.description?.trim() || "");
+      formData.append("category", formResep.category?.trim() || "");
+      formData.append("servings", Number(formResep.servings) || 0);
+      formData.append("prep_time", Number(formResep.prep_time) || 0);
+      formData.append("cook_time", Number(formResep.cook_time) || 0);
 
-      // file gambar (optional)
-      if (formResep.image instanceof File) {
-        formData.append("thumbnail", formResep.image);
+      if (formResep.thumbnail instanceof File) {
+        formData.append("thumbnail", formResep.thumbnail);
       }
 
       // bahan
@@ -44,21 +43,12 @@ const TambahResep = () => {
       }));
       formData.append("steps", JSON.stringify(steps));
 
-
-      // debug payload
-      console.log("Payload Final:");
-      for (let [key, val] of formData.entries()) {
-        console.log(key, val);
-      }
-
-      // ambil token
       const token = localStorage.getItem("token");
 
-      // request ke backend
       await axios.post(`${API_URL}/api/recipes`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data"
         },
       });
 
@@ -66,8 +56,6 @@ const TambahResep = () => {
       resetForm();
       navigate("/dashboard/myresep");
     } catch (err) {
-      console.error("API Error Status:", err.response?.status);
-      console.error("API Error Data:", err.response?.data);
       alert("Gagal menyimpan resep!");
     }
   };

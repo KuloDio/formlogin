@@ -1,88 +1,98 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Box, Typography, Button } from "@mui/material";
-import BahanLangkah from "../components/BahanLangkah";
-import FormResep from "../components/FormResep";
 import { FormContext } from "../context/FormContext";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import FormResep from "../components/FormResep";
+import BahanLangkah from "../components/BahanLangkah";
 
 const EditResep = () => {
   const API_URL = import.meta.env.VITE_API_URL;
-  const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
   const { formResep, setFormResep, resetForm } = useContext(FormContext);
 
-  // Ambil data resep lama
+  const token = localStorage.getItem("token");
+
+  // ambil data resep by id
   useEffect(() => {
     const fetchResep = async () => {
       try {
-        const token = localStorage.getItem("token");
         const res = await axios.get(`${API_URL}/api/recipes/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
 
         const data = res.data;
 
-        // mapping ke formContext
         setFormResep({
-          nama: data.title || "",
-          deskripsi: data.description || "",
-          image: data.photos?.[0]?.url || "",
-          kategori: data.category || "",
-          porsi: data.servings?.toString() || "",
-          persiapan: data.prep_time?.toString() || "",
-          waktumasak: data.cook_time?.toString() || "",
-          langkah:
-            data.steps?.map((s) => ({
-              deskripsi: s.detail,
-            })) || [],
-          bahan:
-            data.ingredients?.map((i) => ({
-              namaBahan: i.name,
-              jumlahBahan: i.amount,
-            })) || [],
+          title: data.title || "",
+          description: data.description || "",
+          category: data.category || "",
+          servings: data.servings || 0,
+          prep_time: data.prep_time || 0,
+          cook_time: data.cook_time || 0,
+          thumbnail: data.thumbnail || "",
+          ingredients: (data.ingredients || []).map((b, idx) => ({
+            id: idx + "_" + Date.now(),
+            name: b.name,
+            amount: b.amount,
+          })),
+          steps: (data.steps || []).map((s, idx) => ({
+            id: idx + "_" + Date.now(),
+            number: s.number || idx + 1,
+            detail: s.detail,
+          })),
         });
+
       } catch (err) {
         console.error("Gagal ambil data resep:", err);
-        alert("Tidak bisa memuat data resep!");
       }
     };
 
     fetchResep();
-  }, [id, API_URL, setFormResep]);
+  }, [id]);
 
-  // Update resep
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
+
+  // submit update
+  const handleSubmit = async () => {
     try {
-      const payload = {
-        title: formResep.nama,
-        description: formResep.deskripsi,
-        category: formResep.kategori,
-        servings: parseInt(formResep.porsi, 10) || 0,
-        prep_time: parseInt(formResep.persiapan, 10) || 0,
-        cook_time: parseInt(formResep.waktumasak, 10) || 0,
-        photos: formResep.image ? [{ url: formResep.image }] : [],
-        steps:
-          formResep.langkah?.map((l, idx) => ({
+      const formData = new FormData();
+
+      formData.append("title", formResep.title);
+      formData.append("description", formResep.description);
+      formData.append("category", formResep.category);
+      formData.append("servings", formResep.servings);
+      formData.append("prep_time", formResep.prep_time);
+      formData.append("cook_time", formResep.cook_time);
+
+      if (formResep.thumbnail instanceof File) {
+        formData.append("thumbnail", formResep.thumbnail);
+      }
+
+      formData.append(
+        "ingredients",
+        JSON.stringify(
+          formResep.ingredients.map((b) => ({
+            name: b.name,
+            amount: b.amount,
+          }))
+        )
+      );
+
+      formData.append(
+        "steps",
+        JSON.stringify(
+          formResep.steps.map((s, idx) => ({
             number: idx + 1,
-            detail: l.deskripsi,
-          })) || [],
-        ingredients:
-          formResep.bahan?.map((b) => ({
-            name: b.namaBahan,
-            amount: b.jumlahBahan,
-          })) || [],
-      };
+            detail: s.detail,
+          }))
+        )
+      );
 
-      const token = localStorage.getItem("token");
-
-      await axios.put(`${API_URL}/api/recipes/${id}`, payload, {
+      await axios.put(`${API_URL}/api/recipes/${id}`, formData, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -91,10 +101,12 @@ const EditResep = () => {
       resetForm();
       navigate("/dashboard/myresep");
     } catch (err) {
-      console.error("Error API:", err);
-      alert("Gagal update resep!");
+      console.error("Gagal update:", err);
+      alert("Update resep gagal, cek console!");
     }
   };
+
+
 
   return (
     <>
@@ -109,7 +121,7 @@ const EditResep = () => {
           marginTop: "1%",
         }}
       >
-        EDIT RESEP ANDA
+        EDIT RESEP
       </Typography>
 
       <Box
@@ -124,18 +136,11 @@ const EditResep = () => {
           height: "fit-content",
         }}
       >
-        {/* Form Resep */}
         <FormResep />
-
-        {/* Bahan dan Langkah */}
         <BahanLangkah />
 
-        <Box
-          sx={{ display: "flex", justifyContent: "flex-end", marginTop: "2%" }}
-        >
-          <Button
-            variant="contained"
-            onClick={handleSubmit}
+        <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+          <Button variant="contained" onClick={handleSubmit}
             sx={{
               backgroundColor: "#D8E9A8",
               color: "#1E5128",
