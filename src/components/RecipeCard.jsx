@@ -28,26 +28,48 @@ export default function RecipeReviewCard() {
   const [masakan, setMasakan] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [expanded, setExpanded] = useState([]);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    axios.get(`${API_URL}/api/recipes`, {
-      // headers: {
-      //   Authorization: `Bearer ${token}`
-      // }
-    })
-      .then((res) => {
-        setMasakan(res.data);
-      })
-      .catch((err) => console.error(err));
+    axios.get(`${API_URL}/api/recipes`)
+      .then((res) => setMasakan(res.data))
+      .catch((err) => console.error("Gagal ambil resep:", err));
   }, []);
 
-  const toggleFavorite = (id) => {
+
+  useEffect(() => {
+    if (!token) return;
+    const fetchFavorites = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/api/recipes/favorites`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const favoriteIds = res.data.map((fav) => fav.recipe_id);
+        setFavorites(favoriteIds);
+      } catch (err) {
+        console.error("Gagal ambil data favorite:", err);
+      }
+    };
+
+    fetchFavorites();
+  }, [token]);
+
+  const toggleFavorite = async (id) => {
+  try {
+    await axios.post(`${API_URL}/api/recipes/${id}/favorites`, {}, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
     setFavorites((prev) =>
-      prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id]
+      prev.includes(id)
+        ? prev.filter((f) => f !== id)
+        : [...prev, id]
     );
-  };
+  } catch (err) {
+    console.error("Gagal update favorite:", err);
+  }
+};
+
 
   const toggleExpand = (id) => {
     setExpanded((prev) =>
@@ -58,13 +80,25 @@ export default function RecipeReviewCard() {
   return (
     <>
       {masakan.map((item) => (
-        <Card key={item.id} sx={{ maxWidth: 345, mb: 2, backgroundColor: '#212121', color: '#bdbdbd' }}>
+        <Card
+          key={item.id}
+          sx={{
+            maxWidth: 345,
+            mb: 2,
+            backgroundColor: '#212121',
+            color: '#bdbdbd',
+          }}
+        >
           <CardHeader
             avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
             action={
               <IconButton
                 aria-label="add to favorites"
-                sx={{ color: favorites.includes(item.id) ? "#ff0000ff" : "#bdbdbd" }}
+                sx={{
+                  color: favorites.includes(item.id)
+                    ? "#ff0000ff"
+                    : "#bdbdbd",
+                }}
                 onClick={() => toggleFavorite(item.id)}
               >
                 <FavoriteIcon />
@@ -72,31 +106,34 @@ export default function RecipeReviewCard() {
             }
             title={item.title}
             titleTypographyProps={{
-              sx: {
-                fontWeight: '700',
-                fontSize: 18,
-                fontFamily: 'Poppins',
-              }
+              sx: { fontWeight: '700', fontSize: 18, fontFamily: 'Poppins' },
             }}
             subheader={item.category}
             subheaderTypographyProps={{
-              sx: {
-                color: "#bdbdbd",
-              }
+              sx: { color: "#bdbdbd", fontWeight: 600 },
             }}
           />
-          <CardMedia component="img" height="194" image={item.image} />
+          {item.thumbnail && (
+            <CardMedia component="img" height="200" image={item.thumbnail} />
+          )}
+
           <CardContent>{item.description}</CardContent>
 
           <CardActions disableSpacing>
             <IconButton sx={{ color: "#bdbdbd" }}>
               <AccessTimeIcon />
-              <Typography variant="body2" sx={{ pl: 0.5 }}>{item.cook_time} Menit</Typography>
+              <Typography variant="body2" sx={{ pl: 0.5 }}>
+                {item.cook_time} Menit
+              </Typography>
             </IconButton>
-            <Typography variant="h5" color="#bdbdbd" sx={{ mx: 1 }}>|</Typography>
+            <Typography variant="h5" color="#bdbdbd" sx={{ mx: 1 }}>
+              |
+            </Typography>
             <IconButton sx={{ color: "#bdbdbd" }}>
               <PersonIcon />
-              <Typography variant="body2">{item.servings} Porsi</Typography>
+              <Typography variant="body2">
+                {item.servings} Porsi
+              </Typography>
             </IconButton>
             <ExpandMore
               expand={expanded.includes(item.id)}
@@ -110,17 +147,17 @@ export default function RecipeReviewCard() {
 
           <Collapse in={expanded.includes(item.id)} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography sx={{ mb: 2, fontWeight: '700' }}>Method:</Typography>
-              {item.steps?.map((step, idx) => (
-                <Typography key={idx} paragraph>
-                  {step.number}. {step.detail}
-                </Typography>
-              ))}
-
-              <Typography sx={{ mb: 2, fontWeight: '700' }}>Ingredients:</Typography>
+              <Typography sx={{ mb: 2, fontWeight: '700' }}>Bahan:</Typography>
               {item.ingredients?.map((ing, idx) => (
                 <Typography key={idx} paragraph>
                   - {ing.amount} {ing.name}
+                </Typography>
+              ))}
+
+              <Typography sx={{ mb: 2, fontWeight: '700' }}>Langkah:</Typography>
+              {item.steps?.map((step, idx) => (
+                <Typography key={idx} paragraph>
+                  {step.number}. {step.detail}
                 </Typography>
               ))}
             </CardContent>

@@ -3,7 +3,7 @@ import { Box, Typography, Button } from '@mui/material'
 import food from '../assets/image/food.png'
 import drink from '../assets/image/drink.png'
 import snack from '../assets/image/snack.png'
-import sambal from '../assets/image/sambal.png'
+import cake from '../assets/image/cake.png'
 
 const ButtonFilter = () => {
     const filterFood = () => {
@@ -15,7 +15,7 @@ const ButtonFilter = () => {
     const filterSnack = () => {
         alert('Fitur ini belum tersedia')
     }
-    const filterSambal = () => {
+    const filterCake = () => {
         alert('Fitur ini belum tersedia')
     }
     return (
@@ -108,7 +108,7 @@ const ButtonFilter = () => {
                     </Typography>
                 </Box>
             </Button>
-            <Button onClick={filterSambal} sx={{
+            <Button onClick={filterCake} sx={{
                 backgroundColor: '#A5BB86',
                 width: { xs: '20%', md: '10%' },
                 height: { xs: '13vh', md: '20vh' },
@@ -119,8 +119,8 @@ const ButtonFilter = () => {
             }}>
                 <Box>
                     <img
-                        src={sambal}
-                        alt="sambal"
+                        src={cake}
+                        alt="cake"
                         style={{
                             width: "70%",
                         }}
@@ -131,7 +131,7 @@ const ButtonFilter = () => {
                         color: '#12372A',
                         fontFamily: 'Poppins',
                     }}>
-                        SAMBAL
+                        CAKE
                     </Typography>
                 </Box>
             </Button>
