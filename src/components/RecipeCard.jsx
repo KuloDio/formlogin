@@ -59,14 +59,13 @@ export default function RecipeReviewCard() {
     await axios.post(`${API_URL}/api/recipes/${id}/favorites`, {}, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
     setFavorites((prev) =>
       prev.includes(id)
         ? prev.filter((f) => f !== id)
         : [...prev, id]
     );
   } catch (err) {
-    console.error("Gagal update favorite:", err);
+    alert("HARAP LOGIN TERLEBIH DAHULU")
   }
 };
 

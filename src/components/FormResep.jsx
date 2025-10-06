@@ -142,6 +142,19 @@ const FormResep = () => {
               setFormResep((prev) => ({ ...prev, thumbnail: file }));
             }
           }}
+          sx={{
+            width: "100%",
+            marginTop: "5%",
+            paddingY: "3%",
+            paddingX: "4%",
+            textAlign: "center",
+            color: "white",
+            border: "4px solid",
+            borderColor: "#D8E9A8",
+            borderRadius: "20px",
+            alignItems: "center",
+            textDecoration: "none",
+          }}
         />
       </Box>
 
