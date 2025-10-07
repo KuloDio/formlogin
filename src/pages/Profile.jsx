@@ -14,15 +14,14 @@ import {
   Slide,
   Snackbar,
   Alert,
+  CircularProgress,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import banner from "../assets/image/bannerProfile.png";
 import LinkIcon from "@mui/icons-material/Link";
-
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import RestaurantIcon from "@mui/icons-material/Restaurant";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import axios from "axios";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -32,76 +31,150 @@ function Profile() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  // State utama
+  // === State utama ===
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
+  const [email, setEmail] = useState("");
   const [photoPreview, setPhotoPreview] = useState(null);
 
-  // State dialog
+  // === State edit dialog ===
   const [open, setOpen] = useState(false);
   const [tempName, setTempName] = useState("");
   const [tempBio, setTempBio] = useState("");
-  const [tempPhoto, setTempPhoto] = useState(null);
+  const [tempEmail, setTempEmail] = useState("");
+  
+  // --- DIUBAH --- : Kita butuh dua state untuk foto
+  const [tempPhotoPreview, setTempPhotoPreview] = useState(null); // Untuk menampilkan preview di dialog
+  const [tempPhotoFile, setTempPhotoFile] = useState(null);       // Untuk menyimpan file asli yang akan di-upload
 
-  // Snackbar untuk copy link
-  const [copySuccess, setCopySuccess] = useState(false);
+  // === Snackbar dan loading ===
+  const [snackbar, setSnackbar] = useState({ open: false, message: "", severity: "success" });
+  const [loading, setLoading] = useState(true);
 
-  // Load dari localStorage
+  // === Load data dari backend ===
   useEffect(() => {
-    const savedProfile = localStorage.getItem("profileData");
-    if (savedProfile) {
-      const parsed = JSON.parse(savedProfile);
-      setName(parsed.name || "");
-      setBio(parsed.bio || "");
-      setPhotoPreview(parsed.photo || null);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("Token tidak ditemukan. Pastikan sudah login.");
+      setLoading(false);
+      return;
     }
+
+    axios
+      .put(
+        "http://192.168.100.247:8080/auth/profile", // URL yang sudah benar
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => {
+        const data = res.data.data; // Sesuaikan jika data ada di dalam properti 'data'
+        setName(data.name || "");
+        setBio(data.bio || "");
+        setEmail(data.email || "");
+        setPhotoPreview(data.avatar || null);
+      })
+      .catch((err) => {
+        console.error("Gagal mengambil profile:", err);
+        setSnackbar({ open: true, message: "Gagal memuat profile", severity: "error" });
+      })
+      .finally(() => setLoading(false));
   }, []);
 
-  // Buka dialog → isi state sementara
+  // === Fungsi buka/tutup dialog ===
   const handleClickOpen = () => {
     setTempName(name);
     setTempBio(bio);
-    setTempPhoto(photoPreview);
+    setTempEmail(email);
+    // --- DIUBAH --- : Atur state preview dan file saat dialog dibuka
+    setTempPhotoPreview(photoPreview); 
+    setTempPhotoFile(null); // Reset file setiap kali dialog dibuka
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
 
-  // Ganti foto di dialog
+  // --- DIUBAH --- : Fungsi ini sekarang menyimpan file DAN preview-nya
   const handlePhotoChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // Simpan file asli ke state
+    setTempPhotoFile(file);
+
+    // Buat URL preview untuk ditampilkan di avatar
     const reader = new FileReader();
     reader.onloadend = () => {
-      setTempPhoto(reader.result);
+      setTempPhotoPreview(reader.result);
     };
     reader.readAsDataURL(file);
   };
 
-  // Save ke localStorage
-  const handleSave = () => {
-    setName(tempName);
-    setBio(tempBio);
-    setPhotoPreview(tempPhoto);
+  // --- DIUBAH --- : Ini adalah fungsi handleSave yang sudah benar dan lengkap
+  const handleSave = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setSnackbar({ open: true, message: "Sesi habis, silakan login kembali", severity: "error" });
+      return;
+    }
 
-    const profileData = {
-      name: tempName,
-      bio: tempBio,
-      photo: tempPhoto,
-    };
-    localStorage.setItem("profileData", JSON.stringify(profileData));
-    handleClose();
+    // 1. Buat objek FormData
+    const formData = new FormData();
+    formData.append("name", tempName);
+    formData.append("email", tempEmail);
+    formData.append("bio", tempBio);
+    if (tempPhotoFile) {
+      // Jika ada file baru yang dipilih, tambahkan ke form data
+      formData.append("avatar", tempPhotoFile);
+    }
+
+    try {
+      // 2. Kirim request dengan formData
+      const response = await axios.put(
+        "http://192.168.100.247:8080/auth/profile", // <-- Pastikan URL SAMA dengan yang di useEffect
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            // "Content-Type" akan diatur otomatis oleh Axios menjadi "multipart/form-data"
+          },
+        }
+      );
+
+      // 3. Update state utama dengan data baru dari server
+      const updatedData = response.data.data; // Sesuaikan jika data ada di dalam properti 'data'
+      setName(updatedData.name);
+      setBio(updatedData.bio);
+      setEmail(updatedData.email);
+      setPhotoPreview(updatedData.avatar);
+
+      handleClose();
+      setSnackbar({ open: true, message: "Profile berhasil diperbarui!", severity: "success" });
+
+    } catch (error) {
+      console.error("Gagal update profil:", error.response?.data || error.message);
+      setSnackbar({ open: true, message: "Gagal memperbarui profile.", severity: "error" });
+    }
   };
 
-  // Copy link ke clipboard
+  // === Copy link profil ===
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
-    setCopySuccess(true);
+    setSnackbar({ open: true, message: "Link berhasil disalin!", severity: "success" });
   };
+
+  if (loading) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
+        <CircularProgress color="success" />
+      </Box>
+    );
+  }
 
   return (
     <>
       <Box sx={{ position: "relative", mb: 8 }}>
-        {/* Cover */}
+        {/* Banner */}
         <Box
           sx={{
             width: "100%",
@@ -114,11 +187,7 @@ function Profile() {
             component="img"
             src={banner}
             alt="cover"
-            sx={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
+            sx={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
         </Box>
 
@@ -132,21 +201,19 @@ function Profile() {
             position: "absolute",
             left: { xs: 25, md: 25 },
             bottom: { xs: -50, md: -75 },
+            border: "3px solid #D8E9A8",
+            cursor: "pointer",
           }}
         >
           {!photoPreview && "?"}
         </Avatar>
 
-        {/* Link + Edit Profile */}
+        {/* Tombol Edit */}
         <Stack
           direction="row"
           spacing={2}
           alignItems="center"
-          sx={{
-            position: "absolute",
-            bottom: -50,
-            right: 20,
-          }}
+          sx={{ position: "absolute", bottom: -50, right: 20 }}
         >
           <IconButton
             sx={{
@@ -158,7 +225,6 @@ function Profile() {
           >
             <LinkIcon />
           </IconButton>
-
           <Button
             variant="outlined"
             sx={{
@@ -177,19 +243,14 @@ function Profile() {
         </Stack>
       </Box>
 
-      {/* Info User */}
-      <Typography
-        variant="h4"
-        color="#fff"
-        sx={{ fontWeight: "bold", pl: 6, pt: 3 }}
-      >
+      {/* Info */}
+      <Typography variant="h4" color="#fff" sx={{ fontWeight: "bold", pl: 6, pt: 3 }}>
         {name || "Nama Kamu"}
       </Typography>
-      <Typography
-        variant="h6"
-        color="#fff"
-        sx={{ fontWeight: "medium", pl: 6, pt: 2 }}
-      >
+      <Typography variant="h6" color="#fff" sx={{ pl: 6, pt: 1 }}>
+        {email || "Email belum diatur"}
+      </Typography>
+      <Typography variant="body1" color="#fff" sx={{ pl: 6, pt: 1 }}>
         {bio || "Tambahkan bio kamu disini..."}
       </Typography>
 
@@ -217,16 +278,13 @@ function Profile() {
         >
           Edit Profile
         </DialogTitle>
-
         <DialogContent sx={{ backgroundColor: "#12372A" }}>
           {/* Foto */}
-          <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
+          <Box sx={{ display: "flex", justifyContent: "center", my: 3 }}>
             <Box sx={{ position: "relative" }}>
-              <Avatar
-                src={tempPhoto || undefined}
-                sx={{ width: 96, height: 96 }}
-              >
-                {!tempPhoto && "?"}
+              {/* --- DIUBAH --- : Gunakan tempPhotoPreview untuk sumber gambar */}
+              <Avatar src={tempPhotoPreview || undefined} sx={{ width: 96, height: 96 }}>
+                {!tempPhotoPreview && "?"}
               </Avatar>
               <input
                 id="profile-photo-input"
@@ -252,25 +310,25 @@ function Profile() {
               </label>
             </Box>
           </Box>
-
           {/* Form */}
           <TextField
             label="Name"
             value={tempName}
             onChange={(e) => setTempName(e.target.value)}
             fullWidth
-            InputProps={{
-              sx: {
-                color: "#fff", // warna teks putih
-              },
-            }}
-            InputLabelProps={{
-              sx: {
-                color: "#aaa", // label jadi abu biar kelihatan
-              },
-            }}
+            sx={{ mb: 2 }}
+            InputProps={{ sx: { color: "#fff" } }}
+            InputLabelProps={{ sx: { color: "#aaa" } }}
           />
-
+          <TextField
+            label="Email"
+            value={tempEmail}
+            onChange={(e) => setTempEmail(e.target.value)}
+            fullWidth
+            sx={{ mb: 2 }}
+            InputProps={{ sx: { color: "#fff" } }}
+            InputLabelProps={{ sx: { color: "#aaa" } }}
+          />
           <TextField
             label="Bio"
             value={tempBio}
@@ -278,140 +336,35 @@ function Profile() {
             fullWidth
             multiline
             minRows={3}
-            InputProps={{
-              sx: {
-                color: "#fff",
-                my: 1,
-              },
-            }}
-            InputLabelProps={{
-              sx: {
-                color: "#aaa",
-              },
-            }}
+            InputProps={{ sx: { color: "#fff" } }}
+            InputLabelProps={{ sx: { color: "#aaa" } }}
           />
         </DialogContent>
-
         <DialogActions sx={{ backgroundColor: "#12372A", p: 2 }}>
-          <Button
-            onClick={handleClose}
-            sx={{
-              backgroundColor: "#D8E9A8",
-              color: "#12372A",
-              fontWeight: "bold",
-            }}
-          >
+          <Button onClick={handleClose} sx={{ backgroundColor: "#D8E9A8", color: "#12372A", fontWeight: "bold" }}>
             Cancel
           </Button>
-          <Button
-            onClick={handleSave}
-            sx={{
-              backgroundColor: "#D8E9A8",
-              color: "#12372A",
-              fontWeight: "bold",
-            }}
-          >
+          <Button onClick={handleSave} sx={{ backgroundColor: "#D8E9A8", color: "#12372A", fontWeight: "bold" }}>
             Save
           </Button>
         </DialogActions>
       </Dialog>
 
+      {/* Snackbar */}
       <Snackbar
-  open={copySuccess}
-  autoHideDuration={2000}
-  onClose={() => setCopySuccess(false)}
-  anchorOrigin={{ vertical: "top", horizontal: "center" }}
->
-  <Alert
-    onClose={() => setCopySuccess(false)}
-    severity="success"   // ✅ sekarang berfungsi
-    sx={{ width: "100%" }}
-  >
-    Link berhasil disalin!
-  </Alert>
-</Snackbar>
-
-      {/* Stats */}
-      <Box
-        sx={{
-          border: "3px solid",
-          borderRadius: "20px 20px 0px 0px",
-          borderColor: "#D8E9A8",
-          minHeight: 350,
-          marginTop: 5,
-        }}
+        open={snackbar.open}
+        autoHideDuration={2500}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Typography
-          sx={{
-            textAlign: "center",
-            borderBottom: "3px solid",
-            borderRadius: "20px 20px 0px 0px",
-            borderColor: "#D8E9A8",
-            fontWeight: "800",
-            paddingY: "1%",
-            backgroundColor: "#12372A",
-          }}
+        <Alert
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
         >
-          STATS
-        </Typography>
-        <Box
-          sx={{
-            display: { xs: "row", md: "flex" },
-            placeContent: "center",
-            justifyContent: "between",
-            gap: 50,
-            paddingTop: { xs: 5, md: 10 },
-            paddingBottom: 3,
-          }}
-        >
-          <Box
-            sx={{
-              alignItems: "center",
-              textAlign: "center",
-            }}
-          >
-            <RestaurantIcon
-              sx={{
-                color: "#D8E9A8",
-                fontSize: 80,
-              }}
-            />
-            <Typography>My Own Recipe</Typography>
-            <Typography
-              sx={{
-                fontWeight: "800",
-                fontSize: 30,
-                fontFamily: "Poppins",
-              }}
-            >
-              0
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              alignItems: "center",
-              textAlign: "center",
-            }}
-          >
-            <FavoriteIcon
-              sx={{
-                color: "#D8E9A8",
-                fontSize: 80,
-              }}
-            />
-            <Typography>My Favorites Recipe</Typography>
-            <Typography
-              sx={{
-                fontWeight: "800",
-                fontSize: 30,
-                fontFamily: "Poppins",
-              }}
-            >
-              5
-            </Typography>
-          </Box>
-        </Box>
-      </Box>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
