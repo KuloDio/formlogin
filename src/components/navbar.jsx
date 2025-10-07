@@ -3,9 +3,11 @@ import { AppBar, Box, Typography, Button, Toolbar, Link, Input, } from '@mui/mat
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom'
 import logocook from '../assets/image/logocook.png'
+import { useSearch } from "../context/SearchContext";
 
 export const Navbar = () => {
     const navigate = useNavigate();
+    const { search, setSearch } = useSearch();
 
     return (
         <AppBar sx={{
@@ -13,75 +15,77 @@ export const Navbar = () => {
         }}>
             <Toolbar
                 sx={{
-                    justifyContent: "space-between", // selalu space-between
+                    justifyContent: "space-between",
                 }}
-                >
+            >
                 <Box
-                component="img"
-                src={logocook}
-                alt="logo"
-                sx={{
-                    
-                    width: "10%",
-                    
-                    ml: { xs: 4, sm: 0 },
-                }}
+                    component="img"
+                    src={logocook}
+                    alt="logo"
+                    sx={{
+
+                        width: "10%",
+
+                        ml: { xs: 4, sm: 0 },
+                    }}
                 />
 
                 <Box
                     sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: { xs: 1, sm: 2 },
-                    }}
-                >
-                    
-                    <Box
-                    sx={{
                         display: "flex",
                         alignItems: "center",
-                        px: 0.5,
-                        py: 0.5,
-                        width: { xs: "200px", sm: "180px", md: "250px" },
-                        borderRadius: "8px",
-                        backgroundColor: "transparent",
-                        border: "2px solid",
-                        borderColor: "#1E5128",
-                        boxShadow: 3,
-                        gap: 0.5,
+                        gap: { xs: 1, sm: 2 },
                     }}
-                    >
-                    <SearchIcon sx={{ color: "#ADBC9F", fontSize: { xs: 18, md: 22 } }} />
-                    <Input
-                        placeholder="Search"
-                        disableUnderline
+                >
+
+                    <Box
                         sx={{
-                        flex: 1,
-                        fontSize: { xs: "0.75rem", sm: "0.9rem", md: "1rem" },
-                        "& .MuiInput-input::placeholder": {
-                            color: "#D8E9A8",
-                            opacity: 1,
-                        },
-                        color: "#D8E9A8",
+                            display: "flex",
+                            alignItems: "center",
+                            px: 0.5,
+                            py: 0.5,
+                            width: { xs: "200px", sm: "180px", md: "250px" },
+                            borderRadius: "8px",
+                            backgroundColor: "transparent",
+                            border: "2px solid",
+                            borderColor: "#1E5128",
+                            boxShadow: 3,
+                            gap: 0.5,
                         }}
-                    />
+                    >
+                        <SearchIcon sx={{ color: "#ADBC9F", fontSize: { xs: 18, md: 22 } }} />
+                        <Input
+                            placeholder="Search"
+                            disableUnderline
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            sx={{
+                                flex: 1,
+                                fontSize: { xs: "0.75rem", sm: "0.9rem", md: "1rem" },
+                                "& .MuiInput-input::placeholder": {
+                                    color: "#D8E9A8",
+                                    opacity: 1,
+                                },
+                                color: "#D8E9A8",
+                            }}
+                        />
                     </Box>
 
                     <Button
                         onClick={() => navigate("/login")}
-                         sx={{
+                        sx={{
                             color: "white",
                             backgroundColor: "#1E5128",
                             paddingX: { xs: 1, md: 3 },
                             fontWeight: "800",
                             alignItems: "center",
-                            display: { xs: "none", sm: "flex" }, 
+                            display: { xs: "none", sm: "flex" },
                         }}
                     >
-                    Login
+                        Login
                     </Button>
                 </Box>
-                </Toolbar>
+            </Toolbar>
 
 
         </AppBar>

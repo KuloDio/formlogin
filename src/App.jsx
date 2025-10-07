@@ -10,11 +10,13 @@ import MyResep from './pages/myresep.jsx';
 import Favorite from './pages/favorite.jsx';
 import Profile from './pages/Profile.jsx';
 import EditResep from './pages/EditResep.jsx';
+import { Navbar } from './components/navbar.jsx';
 import { FormProvider } from './context/FormContext.jsx';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Typography } from '@mui/material';
 import { FavoriteProvider } from './context/FavoriteContext.jsx';
+import { SearchProvider } from './context/SearchContext.jsx';
 
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -46,43 +48,50 @@ function PrivateRoute({ children }) {
     textAlign: "center",
     fontFamily: "poppins",
     color: "white",
+    justifyContent: "center",
+    fontWeight: 800,
+    fontSize: {xs: "50px",md: "100px"},
+    marginTop: "25%"
   }}>Loading...</Typography>;
   return valid ? children : <Navigate to="/login" />;
 }
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/reseppublic" element={<ResepPublic />} />
+    <SearchProvider>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/reseppublic" element={<ResepPublic />} />
 
-      <Route
-        path="/dashboard"
-        element={
-          <PrivateRoute>
-            <FormProvider>
-              <Dashboard />
-            </FormProvider>
-          </PrivateRoute>
-        }
-      >
-        <Route index element={<Navigate to="home" replace />} />
-        <Route path="home" element={<Home />} />
-        <Route path="resepuser" element={<ResepUser />} />
-        <Route path="favorite"
-        element={
-          <FavoriteProvider>
-            <Favorite />
-          </FavoriteProvider>
-        }/>
-        <Route path="myresep" element={<MyResep />} />
-        <Route path="tambahresep" element={<TambahResep />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="editresep/:id" element={<EditResep />} />
-      </Route>
-    </Routes>
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <FormProvider>
+                <Dashboard />
+              </FormProvider>
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<Navigate to="home" replace />} />
+          <Route path="home" element={<Home />} />
+          <Route path="resepuser" element={<ResepUser />} />
+          <Route path="favorite"
+            element={
+              <FavoriteProvider>
+                <Favorite />
+              </FavoriteProvider>
+            } />
+          <Route path="myresep" element={<MyResep />} />
+          <Route path="tambahresep" element={<TambahResep />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="editresep/:id" element={<EditResep />} />
+        </Route>
+      </Routes>
+    </SearchProvider>
   );
 }
 
