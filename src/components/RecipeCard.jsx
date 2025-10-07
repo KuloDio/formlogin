@@ -71,7 +71,6 @@ export default function RecipeReviewCard() {
     }
   };
 
-
   const toggleExpand = (id) => {
     setExpanded((prev) =>
       prev.includes(id) ? prev.filter(e => e !== id) : [...prev, id]

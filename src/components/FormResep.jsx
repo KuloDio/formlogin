@@ -6,7 +6,7 @@ const kategori = [
   { category: 'Food' },
   { category: 'Drink', },
   { category: 'Snack', },
-  { category: 'Sambal', },
+  { category: 'Cake', },
 ]
 
 const FormResep = () => {
@@ -135,6 +135,7 @@ const FormResep = () => {
         </Typography>
         <Input
           type="file"
+          placeholder="Foto Max 2mb"
           inputProps={{ accept: "image/*" }}
           onChange={(e) => {
             const file = e.target.files[0];
