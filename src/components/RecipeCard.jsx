@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PersonIcon from '@mui/icons-material/Person';
 import axios from 'axios';
+import { useSearch } from '../context/SearchContext';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -29,6 +30,7 @@ export default function RecipeReviewCard() {
   const [favorites, setFavorites] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const token = localStorage.getItem("token");
+  const { search } = useSearch();
 
   useEffect(() => {
     axios.get(`${API_URL}/api/recipes`)
@@ -55,20 +57,19 @@ export default function RecipeReviewCard() {
   }, [token]);
 
   const toggleFavorite = async (id) => {
-  try {
-    await axios.post(`${API_URL}/api/recipes/${id}/favorites`, {}, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    setFavorites((prev) =>
-      prev.includes(id)
-        ? prev.filter((f) => f !== id)
-        : [...prev, id]
-    );
-  } catch (err) {
-    console.error("Gagal update favorite:", err);
-  }
-};
+    try {
+      await axios.post(`${API_URL}/api/recipes/${id}/favorites`, {}, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setFavorites((prev) =>
+        prev.includes(id)
+          ? prev.filter((f) => f !== id)
+          : [...prev, id]
+      );
+    } catch (err) {
+      alert("HARAP LOGIN TERLEBIH DAHULU")
+    }
+  };
 
 
   const toggleExpand = (id) => {
@@ -77,9 +78,14 @@ export default function RecipeReviewCard() {
     );
   };
 
+  const filteredMasakan = masakan.filter((item) =>
+    item.title?.toLowerCase().includes(search.toLowerCase())
+  );
+
+
   return (
     <>
-      {masakan.map((item) => (
+      {filteredMasakan.map((item) => (
         <Card
           key={item.id}
           sx={{
