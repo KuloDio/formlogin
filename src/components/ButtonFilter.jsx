@@ -156,7 +156,7 @@ const ButtonFilter = ({ setFilter }) => {
                             fontFamily: 'Poppins',
                         }}
                     >
-                        RESET FILTER
+                        CLEAR FILTER
                     </Typography>
                 </Box>
             </Button>
