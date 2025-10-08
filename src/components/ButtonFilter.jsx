@@ -4,134 +4,159 @@ import food from '../assets/image/food.png'
 import drink from '../assets/image/drink.png'
 import snack from '../assets/image/snack.png'
 import cake from '../assets/image/cake.png'
+import ClearAllIcon from '@mui/icons-material/ClearAll';
 
-const ButtonFilter = () => {
-    const filterFood = () => {
-        alert('Fitur ini belum tersedia')
-    }
-    const filterDrink = () => {
-        alert('Fitur ini belum tersedia')
-    }
-    const filterSnack = () => {
-        alert('Fitur ini belum tersedia')
-    }
-    const filterCake = () => {
-        alert('Fitur ini belum tersedia')
-    }
+const ButtonFilter = ({ setFilter }) => {
     return (
-        <Box sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: { xs: 2, md: 5 },
-            flexWrap: 'wrap',
-            height: 'auto',
-        }}>
-            <Button onClick={filterFood}
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: { xs: 2, md: 5 },
+                flexWrap: 'wrap',
+                height: 'auto',
+            }}
+        >
+            {/* FOOD */}
+            <Button
+                onClick={() => setFilter('food')}
                 sx={{
                     backgroundColor: '#A5BB86',
-                    width: { xs: '20%', sm: '20%', md: '10%' },
+                    width: { xs: '20%', md: '10%' },
                     height: { xs: '13vh', md: '20vh' },
                     borderRadius: 5,
                     padding: 1,
-                    justifyItems: 'center',
                     textAlign: 'center',
-                }}>
+                    '&:hover': { backgroundColor: '#8EA974' },
+                }}
+            >
                 <Box>
-                    <img
-                        src={food}
-                        alt="food"
-                        style={{
-                            width: "70%",
+                    <img src={food} alt="food" style={{ width: '70%' }} />
+                    <Typography
+                        sx={{
+                            fontWeight: 800,
+                            fontSize: { xs: 12, md: 18 },
+                            color: '#12372A',
+                            fontFamily: 'Poppins',
                         }}
-                    />
-                    <Typography sx={{
-                        fontWeight: '800',
-                        fontSize: { xs: 12, md: 18 },
-                        color: '#12372A',
-                        fontFamily: 'Poppins',
-                    }}>
+                    >
                         FOOD
                     </Typography>
                 </Box>
             </Button>
-            <Button onClick={filterDrink} sx={{
-                backgroundColor: '#A5BB86',
-                width: { xs: '20%', md: '10%' },
-                height: { xs: '13vh', md: '20vh' },
-                borderRadius: 5,
-                padding: 1,
-                justifyItems: 'center',
-                textAlign: 'center',
-            }}>
+
+            {/* DRINK */}
+            <Button
+                onClick={() => setFilter('drink')}
+                sx={{
+                    backgroundColor: '#A5BB86',
+                    width: { xs: '20%', md: '10%' },
+                    height: { xs: '13vh', md: '20vh' },
+                    borderRadius: 5,
+                    padding: 1,
+                    textAlign: 'center',
+                    '&:hover': { backgroundColor: '#8EA974' },
+                }}
+            >
                 <Box>
-                    <img
-                        src={drink}
-                        alt="drink"
-                        style={{
-                            width: "45%",
+                    <img src={drink} alt="drink" style={{ width: '45%' }} />
+                    <Typography
+                        sx={{
+                            fontWeight: 800,
+                            fontSize: { xs: 12, md: 18 },
+                            color: '#12372A',
+                            fontFamily: 'Poppins',
                         }}
-                    />
-                    <Typography sx={{
-                        fontWeight: '800',
-                        fontSize: { xs: 12, md: 18 },
-                        color: '#12372A',
-                        fontFamily: 'Poppins',
-                    }}>
+                    >
                         DRINK
                     </Typography>
                 </Box>
             </Button>
-            <Button onClick={filterSnack} sx={{
-                backgroundColor: '#A5BB86',
-                width: { xs: '20%', md: '10%' },
-                height: { xs: '13vh', md: '20vh' },
-                borderRadius: 5,
-                padding: 1,
-                justifyItems: 'center',
-                textAlign: 'center',
-            }}>
+
+            {/* SNACK */}
+            <Button
+                onClick={() => setFilter('snack')}
+                sx={{
+                    backgroundColor: '#A5BB86',
+                    width: { xs: '20%', md: '10%' },
+                    height: { xs: '13vh', md: '20vh' },
+                    borderRadius: 5,
+                    padding: 1,
+                    textAlign: 'center',
+                    '&:hover': { backgroundColor: '#8EA974' },
+                }}
+            >
                 <Box>
-                    <img
-                        src={snack}
-                        alt="snack"
-                        style={{
-                            width: "70%",
+                    <img src={snack} alt="snack" style={{ width: '70%' }} />
+                    <Typography
+                        sx={{
+                            fontWeight: 800,
+                            fontSize: { xs: 12, md: 18 },
+                            color: '#12372A',
+                            fontFamily: 'Poppins',
                         }}
-                    />
-                    <Typography sx={{
-                        fontWeight: '800',
-                        fontSize: { xs: 12, md: 18 },
-                        color: '#12372A',
-                        fontFamily: 'Poppins',
-                    }}>
+                    >
                         SNACK
                     </Typography>
                 </Box>
             </Button>
-            <Button onClick={filterCake} sx={{
-                backgroundColor: '#A5BB86',
-                width: { xs: '20%', md: '10%' },
-                height: { xs: '13vh', md: '20vh' },
-                borderRadius: 5,
-                padding: 1,
-                justifyItems: 'center',
-                textAlign: 'center',
-            }}>
+
+            {/* CAKE */}
+            <Button
+                onClick={() => setFilter('cake')}
+                sx={{
+                    backgroundColor: '#A5BB86',
+                    width: { xs: '20%', md: '10%' },
+                    height: { xs: '13vh', md: '20vh' },
+                    borderRadius: 5,
+                    padding: 1,
+                    textAlign: 'center',
+                    '&:hover': { backgroundColor: '#8EA974' },
+                }}
+            >
                 <Box>
-                    <img
-                        src={cake}
-                        alt="cake"
-                        style={{
-                            width: "70%",
+                    <img src={cake} alt="cake" style={{ width: '95%' }} />
+                    <Typography
+                        sx={{
+                            fontWeight: 800,
+                            fontSize: { xs: 12, md: 18 },
+                            color: '#12372A',
+                            fontFamily: 'Poppins',
                         }}
-                    />
-                    <Typography sx={{
-                        fontWeight: '800',
-                        fontSize: { xs: 12, md: 18 },
-                        color: '#12372A',
-                        fontFamily: 'Poppins',
-                    }}>
+                    >
                         CAKE
+                    </Typography>
+                </Box>
+            </Button>
+
+            {/* SEMUA */}
+            <Button
+                onClick={() => setFilter('')}
+                sx={{
+                    backgroundColor: '#A5BB86',
+                    width: { xs: '50%', md: '10%' },
+                    height: { xs: 'vh', md: '20vh' },
+                    borderRadius: 5,
+                    padding: 1,
+                    textAlign: 'center',
+                    '&:hover': { backgroundColor: '#8EA974' },
+                }}
+            >
+                <Box>
+                    <ClearAllIcon sx={{
+                        display: {xs: "none", md: "block"},
+                        fontSize: 80,
+                        color: "white",
+                    }}/>
+                    <Typography
+                        sx={{
+                            fontWeight: 800,
+                            fontSize: { xs: 12, md: 15 },
+                            color: '#12372A',
+                            fontFamily: 'Poppins',
+                        }}
+                    >
+                        RESET FILTER
                     </Typography>
                 </Box>
             </Button>

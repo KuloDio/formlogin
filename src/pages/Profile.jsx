@@ -23,6 +23,8 @@ import LinkIcon from "@mui/icons-material/Link";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -42,7 +44,7 @@ function Profile() {
   const [tempName, setTempName] = useState("");
   const [tempBio, setTempBio] = useState("");
   const [tempEmail, setTempEmail] = useState("");
-  
+
   // --- DIUBAH --- : Kita butuh dua state untuk foto
   const [tempPhotoPreview, setTempPhotoPreview] = useState(null); // Untuk menampilkan preview di dialog
   const [tempPhotoFile, setTempPhotoFile] = useState(null);       // Untuk menyimpan file asli yang akan di-upload
@@ -62,14 +64,14 @@ function Profile() {
 
     axios
       .put(
-        "http://192.168.100.247:8080/auth/profile", // URL yang sudah benar
+        `${API_URL}/auth/profile`, // URL yang sudah benar
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
       .then((res) => {
-        const data = res.data.data; // Sesuaikan jika data ada di dalam properti 'data'
+        const data = res.data.data;
         setName(data.name || "");
         setBio(data.bio || "");
         setEmail(data.email || "");
@@ -88,7 +90,7 @@ function Profile() {
     setTempBio(bio);
     setTempEmail(email);
     // --- DIUBAH --- : Atur state preview dan file saat dialog dibuka
-    setTempPhotoPreview(photoPreview); 
+    setTempPhotoPreview(photoPreview);
     setTempPhotoFile(null); // Reset file setiap kali dialog dibuka
     setOpen(true);
   };
@@ -131,7 +133,7 @@ function Profile() {
     try {
       // 2. Kirim request dengan formData
       const response = await axios.put(
-        "http://192.168.100.247:8080/auth/profile", // <-- Pastikan URL SAMA dengan yang di useEffect
+        `${API_URL}/auth/profile`, // <-- Pastikan URL SAMA dengan yang di useEffect
         formData,
         {
           headers: {

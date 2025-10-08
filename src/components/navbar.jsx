@@ -23,13 +23,10 @@ export const Navbar = () => {
                     src={logocook}
                     alt="logo"
                     sx={{
-
-                        width: "10%",
-
+                        width: {xs: "30%", md: "10%"},
                         ml: { xs: 4, sm: 0 },
                     }}
                 />
-
                 <Box
                     sx={{
                         display: "flex",
@@ -37,7 +34,6 @@ export const Navbar = () => {
                         gap: { xs: 1, sm: 2 },
                     }}
                 >
-
                     <Box
                         sx={{
                             display: "flex",

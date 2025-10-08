@@ -25,7 +25,7 @@ const ExpandMore = styled((props) => {
   transform: expand ? 'rotate(180deg)' : 'rotate(0deg)',
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard({ category }) {
   const [masakan, setMasakan] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [expanded, setExpanded] = useState([]);
@@ -33,10 +33,34 @@ export default function RecipeReviewCard() {
   const { search } = useSearch();
 
   useEffect(() => {
-    axios.get(`${API_URL}/api/recipes`)
-      .then((res) => setMasakan(res.data))
-      .catch((err) => console.error("Gagal ambil resep:", err));
-  }, []);
+    let url = `${API_URL}/api/recipes`;
+    if (category) {
+      url = `${API_URL}/api/recipesByCategory?category=${encodeURIComponent(category)}`;
+    }
+
+    console.log("[RecipeCard] Fetching data dari URL:", url);
+
+    axios
+      .get(url)
+      .then((res) => {
+        console.log("[RecipeCard] Full response:", res);
+        console.log("[RecipeCard] res.data isi:", res.data);
+
+        if (Array.isArray(res.data.recipes)) {
+          setMasakan(res.data.recipes);
+        } else if (Array.isArray(res.data)) {
+          setMasakan(res.data);
+        } else {
+          console.warn("[RecipeCard] Format data tidak sesuai, masakan di-set kosong");
+          setMasakan([]);
+        }
+      })
+      .catch((err) => {
+        console.error("[RecipeCard] Gagal ambil data:", err);
+        setMasakan([]);
+      });
+  }, [category]);
+
 
 
   useEffect(() => {
@@ -71,7 +95,6 @@ export default function RecipeReviewCard() {
     }
   };
 
-
   const toggleExpand = (id) => {
     setExpanded((prev) =>
       prev.includes(id) ? prev.filter(e => e !== id) : [...prev, id]
@@ -81,7 +104,6 @@ export default function RecipeReviewCard() {
   const filteredMasakan = masakan.filter((item) =>
     item.title?.toLowerCase().includes(search.toLowerCase())
   );
-
 
   return (
     <>
