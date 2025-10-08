@@ -48,10 +48,11 @@ function PrivateRoute({ children }) {
     textAlign: "center",
     fontFamily: "poppins",
     color: "white",
-    justifyContent: "center",
+    justifyItems: "centerc",
     fontWeight: 800,
     fontSize: {xs: "50px",md: "100px"},
-    marginTop: "25%"
+    marginTop: "25%",
+
   }}>Loading...</Typography>;
   return valid ? children : <Navigate to="/login" />;
 }

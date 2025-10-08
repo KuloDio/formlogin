@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Navbar } from '../components/navbar'
 import { Typography, Box, Grid, Button } from '@mui/material'
 import ButtonFilter from '../components/ButtonFilter'
@@ -6,7 +6,11 @@ import SlideBanner from '../components/slidebanner'
 import RecipeCard from '../components/RecipeCard'
 
 const ResepUser = () => {
-  
+  const [filter, setFilter] = useState('');
+  const handleFilter = (category) => {
+    setFilter(category);
+  };
+
   const handleLengkap = () => {
     alert('Fitur ini belum tersedia')
   }
@@ -26,7 +30,7 @@ const ResepUser = () => {
               fontSize: { xs: 35, md: 80, },
               color: "white",
               fontFamily: 'poppins',
-              fontWeight: {xs: '800',md: '900'},
+              fontWeight: { xs: '800', md: '900' },
               paddingTop: { xs: '5%', md: '0%' },
               position: 'relative',
             }}>
@@ -46,7 +50,7 @@ const ResepUser = () => {
             }}>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ducimus cumque iste quibusdam quod, voluptate a perspiciatis, excepturi error repudiandae fuga tempore porro similique fugiat.
           </Typography>
-          <ButtonFilter />
+          <ButtonFilter setFilter={handleFilter}/>
           <Grid container spacing={2} alignItems="flex-start"
             sx={{
               justifyContent: 'space-evenly',
@@ -55,7 +59,7 @@ const ResepUser = () => {
               paddingTop: { xs: '5%', md: '8%' },
             }}
           >
-            <RecipeCard />
+            <RecipeCard category={filter}/>
           </Grid>
         </Box>
       </Box>
