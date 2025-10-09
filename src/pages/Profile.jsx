@@ -23,6 +23,8 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import ImageIcon from "@mui/icons-material/Image";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -66,7 +68,7 @@ function Profile() {
 
     axios
       .put(
-        "http://192.168.100.247:8080/auth/profile",
+        `${API_URL}/auth/profile`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -134,7 +136,7 @@ function Profile() {
 
     try {
       const response = await axios.put(
-        "http://192.168.100.247:8080/auth/profile",
+        `${API_URL}/auth/profile`,
         formData,
         {
           headers: {
