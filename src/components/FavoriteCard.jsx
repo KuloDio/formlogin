@@ -110,16 +110,17 @@ export default function FavoriteCard() {
             title={item.title}
             titleTypographyProps={{
               sx: {
-                fontWeight: "700",
+                fontWeight: '700',
                 fontSize: 18,
-                fontFamily: "Poppins",
-              },
+                fontFamily: 'Poppins',
+              }
             }}
             subheader={item.category}
             subheaderTypographyProps={{
               sx: {
                 color: "#bdbdbd",
-              },
+                fontWeight: 600,
+              }
             }}
           />
 
