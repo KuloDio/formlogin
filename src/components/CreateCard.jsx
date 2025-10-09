@@ -4,7 +4,6 @@ import {
   Card, CardHeader, CardMedia, CardContent, CardActions,
   Collapse, Avatar, IconButton, Typography
 } from "@mui/material";
-import { red } from "@mui/material/colors";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PersonIcon from "@mui/icons-material/Person";
@@ -15,13 +14,6 @@ import { useSearch } from '../context/SearchContext';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function CreateCard() {
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
-  const [email, setEmail] = useState("");
-  const [photoPreview, setPhotoPreview] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-
   const [masakan, setMasakan] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const navigate = useNavigate();
@@ -49,25 +41,6 @@ export default function CreateCard() {
     );
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios.put(`${API_URL}/auth/profile`, {}, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => {
-        const data = res.data.data;
-        setName(data.name || "");
-        setBio(data.bio || "");
-        setEmail(data.email || "");
-        setPhotoPreview(data.avatar || null);
-      })
-      .catch((err) => {
-        console.error("Gagal mengambil profile:", err);
-      })
-      .finally(() => setLoading(false));
-
-  }, []);
-
   const filteredMasakan = masakan.filter((item) =>
     item.title?.toLowerCase().includes(search.toLowerCase())
   );
@@ -89,11 +62,13 @@ export default function CreateCard() {
           )}
           <CardHeader
             avatar={<Avatar
-              src={item.user?.avatar || photoPreview || undefined}
-              alt={item.user?.name || name}
+              key={item.user?.avatar}
+              src={item.user?.avatar}
+              alt={item.user?.name}
             >
-              {!item.user?.avatar && (item.user?.name?.[0] || name?.[0])?.toUpperCase()}
-            </Avatar>}
+              {!item.user?.avatar && item.user?.name?.[0]?.toUpperCase()}
+            </Avatar>
+            }
             action={
               <IconButton sx={{ color: "#fff" }} onClick={() => handleEdit(item.id)}>
                 <EditIcon />

@@ -4,7 +4,6 @@ import {
   Card, CardHeader, CardMedia, CardContent,
   CardActions, Collapse, Avatar, IconButton, Typography
 } from '@mui/material';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -26,13 +25,6 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeReviewCard({ category }) {
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
-  const [email, setEmail] = useState("");
-  const [photoPreview, setPhotoPreview] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-
   const [masakan, setMasakan] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [expanded, setExpanded] = useState([]);
@@ -63,8 +55,6 @@ export default function RecipeReviewCard({ category }) {
       });
   }, [category]);
 
-
-
   useEffect(() => {
     if (!token) return;
     const fetchFavorites = async () => {
@@ -75,7 +65,6 @@ export default function RecipeReviewCard({ category }) {
         const favoriteIds = res.data.map((fav) => fav.recipe_id);
         setFavorites(favoriteIds);
       } catch (err) {
-        console.error("Gagal ambil data favorite:", err);
       }
     };
 
@@ -97,25 +86,6 @@ export default function RecipeReviewCard({ category }) {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    axios.put(`${API_URL}/auth/profile`, {}, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => {
-        const data = res.data.data;
-        setName(data.name || "");
-        setBio(data.bio || "");
-        setEmail(data.email || "");
-        setPhotoPreview(data.avatar || null);
-      })
-      .catch((err) => {
-        console.error("Gagal mengambil profile:", err);
-      })
-      .finally(() => setLoading(false));
-
-  }, []);
-
   const toggleExpand = (id) => {
     setExpanded((prev) =>
       prev.includes(id) ? prev.filter(e => e !== id) : [...prev, id]
@@ -125,6 +95,7 @@ export default function RecipeReviewCard({ category }) {
   const filteredMasakan = masakan.filter((item) =>
     item.title?.toLowerCase().includes(search.toLowerCase())
   );
+
 
   return (
     <>
@@ -140,11 +111,13 @@ export default function RecipeReviewCard({ category }) {
         >
           <CardHeader
             avatar={<Avatar
-              src={item.user?.avatar || photoPreview || undefined}
-              alt={item.user?.name || name}
+              key={item.user?.avatar}
+              src={item.user?.avatar}
+              alt={item.user?.name}
             >
-              {!item.user?.avatar && (item.user?.name?.[0] || name?.[0])?.toUpperCase()}
-            </Avatar>}
+              {!item.user?.avatar && item.user?.name?.[0]?.toUpperCase()}
+            </Avatar>
+            }
             action={
               <IconButton
                 aria-label="add to favorites"
