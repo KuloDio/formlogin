@@ -59,7 +59,7 @@ function ForgotPassword() {
           sx={{
             textAlign: "center",
             fontWeight: "bold",
-            color: "#43a047",
+            color: "#00673B",
             pb: 1,
           }}
         >
@@ -127,7 +127,7 @@ function ForgotPassword() {
           <Link
             to="/login"
             style={{
-              color: "#00c3ffff",
+              color: "#00673B",
               cursor: "pointer",
               textDecoration: "none",
               fontWeight: "bold",

@@ -15,6 +15,7 @@ import { useSearch } from '../context/SearchContext';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function CreateCard() {
+  const [user, setUser] = useState(null);
   const [masakan, setMasakan] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const navigate = useNavigate();
@@ -42,6 +43,15 @@ export default function CreateCard() {
     );
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios.put(`${API_URL}/auth/profile`, {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(res => {
+      setUser(res.data.data);
+    });
+  }, []);
+
   const filteredMasakan = masakan.filter((item) =>
     item.title?.toLowerCase().includes(search.toLowerCase())
   );
@@ -62,7 +72,9 @@ export default function CreateCard() {
             />
           )}
           <CardHeader
-            avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
+            avatar={<Avatar src={`${API_URL}${masakan.user?.avatar}`} alt={masakan.user?.name}>
+              {!masakan.user?.avatar && masakan.user?.name?.[0]?.toUpperCase()}
+            </Avatar>}
             action={
               <IconButton sx={{ color: "#fff" }} onClick={() => handleEdit(item.id)}>
                 <EditIcon />

@@ -133,7 +133,7 @@ function Login() {
 
         <Typography variant="body2" sx={{ textAlign: "center", mt: 2, color: "white" }}>
           Don't have account?{" "}
-          <Link to="/register" style={{ color: "#00c3ffff", cursor: "pointer", textDecoration: "none" }}>
+          <Link to="/register" style={{ color: "#00673B", cursor: "pointer", textDecoration: "none" }}>
             Sign Up
           </Link>
         </Typography>
@@ -142,7 +142,7 @@ function Login() {
             component={Link}
             to="/forgot-password"
             sx={{
-              color: "#00c3ffff",
+              color: "#00673B",
               textDecoration: "none",
               fontWeight: "bold",
               display: "inline-block",

@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
-import banner from "../assets/image/bannerProfile.png";
+import banner from "../assets/image/bannerprofile.png"
 import LinkIcon from "@mui/icons-material/Link";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import axios from "axios";
@@ -62,7 +62,6 @@ function Profile() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      console.error("Token tidak ditemukan. Pastikan sudah login.");
       setLoading(false);
       return;
     }

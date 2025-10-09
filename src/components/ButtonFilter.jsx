@@ -4,7 +4,7 @@ import food from '../assets/image/food.png'
 import drink from '../assets/image/drink.png'
 import snack from '../assets/image/snack.png'
 import cake from '../assets/image/cake.png'
-import CancelPresentationSharpIcon from '@mui/icons-material/CancelPresentationSharp';
+import LayersClearSharpIcon from '@mui/icons-material/LayersClearSharp';
 
 const ButtonFilter = ({ setFilter }) => {
     return (
@@ -139,14 +139,15 @@ const ButtonFilter = ({ setFilter }) => {
                     borderRadius: 5,
                     padding: 1,
                     textAlign: 'center',
-                    placeItems: "center",
                     '&:hover': { backgroundColor: '#8EA974' },
                 }}
             >
                 <Box>
-                    <CancelPresentationSharpIcon sx={{
+                    <LayersClearSharpIcon sx={{
                         display: {xs: "none", md: "block"},
-
+                        fontSize: 80,
+                        color: "#BF6E2F",
+                        textAlign: "center",
                     }}/>
                     <Typography
                         sx={{
