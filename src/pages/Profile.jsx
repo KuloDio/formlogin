@@ -61,7 +61,6 @@ function Profile() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      console.error("Token tidak ditemukan. Pastikan sudah login.");
       setLoading(false);
       return;
     }

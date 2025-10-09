@@ -10,13 +10,22 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PersonIcon from "@mui/icons-material/Person";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
+import { useSearch } from '../context/SearchContext';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function CreateCard() {
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
+  const [email, setEmail] = useState("");
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
   const [masakan, setMasakan] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const navigate = useNavigate();
+  const { search } = useSearch();
 
 
   useEffect(() => {
@@ -40,13 +49,36 @@ export default function CreateCard() {
     );
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios.put(`${API_URL}/auth/profile`, {}, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => {
+        const data = res.data.data;
+        setName(data.name || "");
+        setBio(data.bio || "");
+        setEmail(data.email || "");
+        setPhotoPreview(data.avatar || null);
+      })
+      .catch((err) => {
+        console.error("Gagal mengambil profile:", err);
+      })
+      .finally(() => setLoading(false));
+
+  }, []);
+
+  const filteredMasakan = masakan.filter((item) =>
+    item.title?.toLowerCase().includes(search.toLowerCase())
+  );
+
   const handleEdit = (id) => {
     navigate(`/dashboard/editresep/${id}`);
   };
 
   return (
     <>
-      {masakan.map((item) => (
+      {filteredMasakan.map((item) => (
         <Card key={item.id} sx={{ mb: 2, background: "#212121", color: "#fff" }}>
           {item.thumbnail && (
             <CardMedia
@@ -56,7 +88,12 @@ export default function CreateCard() {
             />
           )}
           <CardHeader
-            avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
+            avatar={<Avatar
+              src={item.user?.avatar || photoPreview || undefined}
+              alt={item.user?.name || name}
+            >
+              {!item.user?.avatar && (item.user?.name?.[0] || name?.[0])?.toUpperCase()}
+            </Avatar>}
             action={
               <IconButton sx={{ color: "#fff" }} onClick={() => handleEdit(item.id)}>
                 <EditIcon />

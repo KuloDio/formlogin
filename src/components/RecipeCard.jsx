@@ -26,6 +26,13 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeReviewCard({ category }) {
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
+  const [email, setEmail] = useState("");
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
   const [masakan, setMasakan] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [expanded, setExpanded] = useState([]);
@@ -38,20 +45,15 @@ export default function RecipeReviewCard({ category }) {
       url = `${API_URL}/api/recipesByCategory?category=${encodeURIComponent(category)}`;
     }
 
-    console.log("[RecipeCard] Fetching data dari URL:", url);
-
     axios
       .get(url)
       .then((res) => {
-        console.log("[RecipeCard] Full response:", res);
-        console.log("[RecipeCard] res.data isi:", res.data);
 
         if (Array.isArray(res.data.recipes)) {
           setMasakan(res.data.recipes);
         } else if (Array.isArray(res.data)) {
           setMasakan(res.data);
         } else {
-          console.warn("[RecipeCard] Format data tidak sesuai, masakan di-set kosong");
           setMasakan([]);
         }
       })
@@ -95,6 +97,25 @@ export default function RecipeReviewCard({ category }) {
     }
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios.put(`${API_URL}/auth/profile`, {}, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => {
+        const data = res.data.data;
+        setName(data.name || "");
+        setBio(data.bio || "");
+        setEmail(data.email || "");
+        setPhotoPreview(data.avatar || null);
+      })
+      .catch((err) => {
+        console.error("Gagal mengambil profile:", err);
+      })
+      .finally(() => setLoading(false));
+
+  }, []);
+
   const toggleExpand = (id) => {
     setExpanded((prev) =>
       prev.includes(id) ? prev.filter(e => e !== id) : [...prev, id]
@@ -118,7 +139,12 @@ export default function RecipeReviewCard({ category }) {
           }}
         >
           <CardHeader
-            avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
+            avatar={<Avatar
+              src={item.user?.avatar || photoPreview || undefined}
+              alt={item.user?.name || name}
+            >
+              {!item.user?.avatar && (item.user?.name?.[0] || name?.[0])?.toUpperCase()}
+            </Avatar>}
             action={
               <IconButton
                 aria-label="add to favorites"

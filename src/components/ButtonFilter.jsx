@@ -4,7 +4,7 @@ import food from '../assets/image/food.png'
 import drink from '../assets/image/drink.png'
 import snack from '../assets/image/snack.png'
 import cake from '../assets/image/cake.png'
-import ClearAllIcon from '@mui/icons-material/ClearAll';
+import LayersClearSharpIcon from '@mui/icons-material/LayersClearSharp';
 
 const ButtonFilter = ({ setFilter }) => {
     return (
@@ -143,10 +143,11 @@ const ButtonFilter = ({ setFilter }) => {
                 }}
             >
                 <Box>
-                    <ClearAllIcon sx={{
+                    <LayersClearSharpIcon sx={{
                         display: {xs: "none", md: "block"},
                         fontSize: 80,
-                        color: "white",
+                        color: "#BF6E2F",
+                        textAlign: "center",
                     }}/>
                     <Typography
                         sx={{
