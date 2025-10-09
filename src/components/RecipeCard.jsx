@@ -104,9 +104,6 @@ export default function RecipeReviewCard({ category }) {
     })
       .then((res) => {
         const data = res.data.data;
-        console.log("[Profile] Data profil dari API:", data); // 👈 log utama
-        console.log("[Profile] Avatar URL:", data.avatar);
-
         setName(data.name || "");
         setBio(data.bio || "");
         setEmail(data.email || "");
@@ -143,11 +140,10 @@ export default function RecipeReviewCard({ category }) {
         >
           <CardHeader
             avatar={<Avatar
-              key={item.user?.avatar}
-              src={item.user?.avatar ? item.user.avatar : undefined}
-              alt={item.user?.name}
+              src={item.user?.avatar || photoPreview || undefined}
+              alt={item.user?.name || name}
             >
-              {!item.user?.avatar && item.user?.name?.[0]?.toUpperCase()}
+              {!item.user?.avatar && (item.user?.name?.[0] || name?.[0])?.toUpperCase()}
             </Avatar>}
             action={
               <IconButton

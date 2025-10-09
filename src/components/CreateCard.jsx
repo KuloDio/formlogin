@@ -15,7 +15,13 @@ import { useSearch } from '../context/SearchContext';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function CreateCard() {
-  const [user, setUser] = useState(null);
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
+  const [email, setEmail] = useState("");
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+
   const [masakan, setMasakan] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const navigate = useNavigate();
@@ -46,10 +52,20 @@ export default function CreateCard() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios.put(`${API_URL}/auth/profile`, {}, {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(res => {
-      setUser(res.data.data);
-    });
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => {
+        const data = res.data.data;
+        setName(data.name || "");
+        setBio(data.bio || "");
+        setEmail(data.email || "");
+        setPhotoPreview(data.avatar || null);
+      })
+      .catch((err) => {
+        console.error("Gagal mengambil profile:", err);
+      })
+      .finally(() => setLoading(false));
+
   }, []);
 
   const filteredMasakan = masakan.filter((item) =>
@@ -72,8 +88,11 @@ export default function CreateCard() {
             />
           )}
           <CardHeader
-            avatar={<Avatar src={`${API_URL}${masakan.user?.avatar}`} alt={masakan.user?.name}>
-              {!masakan.user?.avatar && masakan.user?.name?.[0]?.toUpperCase()}
+            avatar={<Avatar
+              src={item.user?.avatar || photoPreview || undefined}
+              alt={item.user?.name || name}
+            >
+              {!item.user?.avatar && (item.user?.name?.[0] || name?.[0])?.toUpperCase()}
             </Avatar>}
             action={
               <IconButton sx={{ color: "#fff" }} onClick={() => handleEdit(item.id)}>

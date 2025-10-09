@@ -34,6 +34,12 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function FavoriteCard() {
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
+  const [email, setEmail] = useState("");
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const [favorites, setFavorites] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const { search } = useSearch();
@@ -66,6 +72,25 @@ export default function FavoriteCard() {
     }
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios.put(`${API_URL}/auth/profile`, {}, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => {
+        const data = res.data.data;
+        setName(data.name || "");
+        setBio(data.bio || "");
+        setEmail(data.email || "");
+        setPhotoPreview(data.avatar || null);
+      })
+      .catch((err) => {
+        console.error("Gagal mengambil profile:", err);
+      })
+      .finally(() => setLoading(false));
+
+  }, []);
+
   const toggleExpand = (id) => {
     setExpanded((prev) =>
       prev.includes(id) ? prev.filter((e) => e !== id) : [...prev, id]
@@ -91,7 +116,12 @@ export default function FavoriteCard() {
           }}
         >
           <CardHeader
-            avatar={<Avatar sx={{ bgcolor: red[500] }}>R</Avatar>}
+            avatar={<Avatar
+              src={item.user?.avatar || photoPreview || undefined}
+              alt={item.user?.name || name}
+            >
+              {!item.user?.avatar && (item.user?.name?.[0] || name?.[0])?.toUpperCase()}
+            </Avatar>}
             action={
               <IconButton
                 aria-label="remove from favorites"
