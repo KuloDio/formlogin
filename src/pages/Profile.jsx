@@ -51,6 +51,11 @@ function Profile() {
   const [snackbar, setSnackbar] = useState({ open: false, message: "", severity: "success" });
   const [loading, setLoading] = useState(true);
 
+  // open avatar
+  const [openPhoto, setOpenPhoto] = useState(false);
+  const [photoToView, setPhotoToView] = useState(null);
+
+
   // === Load data dari backend ===
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -171,6 +176,17 @@ function Profile() {
     );
   }
 
+  // buka/tutup avatar
+  const handleOpenPhoto = () => {
+  if (photoPreview) {
+    setPhotoToView(photoPreview);
+    setOpenPhoto(true);
+  }
+};
+
+const handleClosePhoto = () => setOpenPhoto(false);
+
+
   return (
     <>
       <Box sx={{ position: "relative", mb: 8 }}>
@@ -195,6 +211,7 @@ function Profile() {
         <Avatar
           src={photoPreview || undefined}
           alt="Profile"
+          onClick={handleOpenPhoto} // 👈 tambahkan ini
           sx={{
             width: { xs: 120, md: 150 },
             height: { xs: 120, md: 150 },
@@ -202,11 +219,14 @@ function Profile() {
             left: { xs: 25, md: 25 },
             bottom: { xs: -50, md: -75 },
             border: "3px solid #D8E9A8",
-            cursor: "pointer",
+            cursor: photoPreview ? "pointer" : "default", // hanya pointer jika ada foto
+            transition: "transform 0.2s",
+            "&:hover": { transform: photoPreview ? "scale(1.05)" : "none" },
           }}
         >
           {!photoPreview && "?"}
         </Avatar>
+
 
         {/* Tombol Edit */}
         <Stack
@@ -349,6 +369,36 @@ function Profile() {
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Dialog Foto Penuh */}
+<Dialog
+  open={openPhoto}
+  onClose={handleClosePhoto}
+  maxWidth="md"
+  fullWidth
+  PaperProps={{
+    sx: {
+      backgroundColor: "transparent",
+      boxShadow: "none",
+    },
+  }}
+>
+  <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", position: "relative" }}>
+    <Box
+      component="img"
+      src={photoToView}
+      alt="Profile Full"
+      sx={{
+        width: "80%",
+        height: "auto",
+        maxHeight: "90vh",
+        borderRadius: 2,
+        objectFit: "contain",
+      }}
+    />
+  </Box>
+</Dialog>
+
 
       {/* Snackbar */}
       <Snackbar
