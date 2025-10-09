@@ -17,6 +17,8 @@ import axios from 'axios';
 import { Typography } from '@mui/material';
 import { FavoriteProvider } from './context/FavoriteContext.jsx';
 import { SearchProvider } from './context/SearchContext.jsx';
+import ForgotPassword from './pages/ForgotPassword.jsx';
+import ResetPassword from './pages/ResetPassword.jsx';
 
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -58,12 +60,17 @@ function PrivateRoute({ children }) {
 }
 
 function App() {
+  const hideNavbarRoutes = ["/login", "/register", "/forgot-password"];
+  const currentPath = window.location.pathname;
+
   return (
     <SearchProvider>
-      <Navbar/>
+      {!hideNavbarRoutes.includes(currentPath) && <Navbar />}  {/* <-- tampil hanya kalau bukan halaman auth */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reseppublic" element={<ResepPublic />} />
 
@@ -80,12 +87,14 @@ function App() {
           <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<Home />} />
           <Route path="resepuser" element={<ResepUser />} />
-          <Route path="favorite"
+          <Route
+            path="favorite"
             element={
               <FavoriteProvider>
                 <Favorite />
               </FavoriteProvider>
-            } />
+            }
+          />
           <Route path="myresep" element={<MyResep />} />
           <Route path="tambahresep" element={<TambahResep />} />
           <Route path="profile" element={<Profile />} />
@@ -95,5 +104,6 @@ function App() {
     </SearchProvider>
   );
 }
+
 
 export default App;
