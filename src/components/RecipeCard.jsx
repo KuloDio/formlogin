@@ -38,20 +38,15 @@ export default function RecipeReviewCard({ category }) {
       url = `${API_URL}/api/recipesByCategory?category=${encodeURIComponent(category)}`;
     }
 
-    console.log("[RecipeCard] Fetching data dari URL:", url);
-
     axios
       .get(url)
       .then((res) => {
-        console.log("[RecipeCard] Full response:", res);
-        console.log("[RecipeCard] res.data isi:", res.data);
 
         if (Array.isArray(res.data.recipes)) {
           setMasakan(res.data.recipes);
         } else if (Array.isArray(res.data)) {
           setMasakan(res.data);
         } else {
-          console.warn("[RecipeCard] Format data tidak sesuai, masakan di-set kosong");
           setMasakan([]);
         }
       })

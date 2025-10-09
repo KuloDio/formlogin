@@ -10,6 +10,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PersonIcon from "@mui/icons-material/Person";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
+import { useSearch } from '../context/SearchContext';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -17,6 +18,7 @@ export default function CreateCard() {
   const [masakan, setMasakan] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const navigate = useNavigate();
+  const { search } = useSearch();
 
 
   useEffect(() => {
@@ -40,13 +42,17 @@ export default function CreateCard() {
     );
   };
 
+  const filteredMasakan = masakan.filter((item) =>
+    item.title?.toLowerCase().includes(search.toLowerCase())
+  );
+
   const handleEdit = (id) => {
     navigate(`/dashboard/editresep/${id}`);
   };
 
   return (
     <>
-      {masakan.map((item) => (
+      {filteredMasakan.map((item) => (
         <Card key={item.id} sx={{ mb: 2, background: "#212121", color: "#fff" }}>
           {item.thumbnail && (
             <CardMedia

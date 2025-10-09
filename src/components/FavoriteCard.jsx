@@ -17,6 +17,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PersonIcon from "@mui/icons-material/Person";
 import axios from "axios";
+import { useSearch } from '../context/SearchContext';
 
 const API_URL = import.meta.env.VITE_API_URL;
 const token = localStorage.getItem("token");
@@ -35,6 +36,7 @@ const ExpandMore = styled((props) => {
 export default function FavoriteCard() {
   const [favorites, setFavorites] = useState([]);
   const [expanded, setExpanded] = useState([]);
+  const { search } = useSearch();
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -70,11 +72,14 @@ export default function FavoriteCard() {
     );
   };
 
+  const filteredFavorites = favorites.filter((item) =>
+    item.title?.toLowerCase().includes(search.toLowerCase())
+  );
 
 
   return (
     <>
-      {favorites.map((item) => (
+      {filteredFavorites.map((item) => (
         <Card
           key={item.id}
           sx={{
