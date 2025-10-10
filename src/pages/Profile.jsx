@@ -328,6 +328,7 @@ function Profile() {
               </IconButton>
             </label>
           </Box>
+          <Typography sx={{ textAlign: 'center' }} variant="body2" color="#fff">*file max 2 mb</Typography>
 
           {/* Foto Profil */}
           <Box sx={{ display: "flex", justifyContent: "center", my: 3 }}>

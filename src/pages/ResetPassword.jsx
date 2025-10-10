@@ -30,7 +30,10 @@ function ResetPassword() {
     severity: "success",
   });
 
+  
+
   const handleResetPassword = async () => {
+
     if (!token) {
       setSnackbar({ open: true, message: "Token tidak ditemukan.", severity: "error" });
       return;
@@ -45,6 +48,10 @@ function ResetPassword() {
         message: "Password dan konfirmasi tidak sama!",
         severity: "warning",
       });
+      return;
+    }
+      if (password.length < 6) {
+      alert("Password minimal 6 karakter");
       return;
     }
 

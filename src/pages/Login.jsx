@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import {
-  Box, Paper, Typography, TextField, Button, InputAdornment
+  Box,
+  Paper,
+  Typography,
+  TextField,
+  Button,
+  InputAdornment,
 } from "@mui/material";
 import { Email, Lock } from "@mui/icons-material";
 import Background from "../assets/image/background.jpeg";
@@ -44,30 +49,46 @@ function Login() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        p: 2,
+        p: { xs: 2, md: 4 },
       }}
     >
       <Paper
         elevation={6}
         sx={{
-          padding: 3,
+          padding: { xs: 3, sm: 4 },
           width: "100%",
-          maxWidth: 700,
+          maxWidth: { xs: 380, sm: 450, md: 600 },
           backgroundColor: "rgba(255, 255, 255, 0.2)",
           backdropFilter: "blur(6px)",
           borderRadius: 3,
-          px: 15
+          px: { xs: 3, sm: 6, md: 10 },
         }}
       >
         <Typography
           variant="h4"
           component="h1"
-          sx={{ textAlign: "center", fontWeight: "bold", color: "#43a047", pb: 1 }}
+          sx={{
+            textAlign: "center",
+            fontWeight: "bold",
+            color: "#43a047",
+            pb: 1,
+            fontSize: { xs: "1.8rem", sm: "2rem" },
+          }}
         >
           WELCOME
         </Typography>
-        <Typography variant="body2" sx={{ textAlign: "center", color: "white", mb: 3, opacity: 0.9 }}>
-          Please Sign In To Continue !
+
+        <Typography
+          variant="body2"
+          sx={{
+            textAlign: "center",
+            color: "white",
+            mb: 3,
+            opacity: 0.9,
+            fontSize: { xs: "0.9rem", sm: "1rem" },
+          }}
+        >
+          Please Sign In To Continue!
         </Typography>
 
         <TextField
@@ -88,7 +109,7 @@ function Login() {
               borderRadius: 2,
               boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
               border: "1px solid rgba(255,255,255,0.2)",
-              py: 1
+              py: 1,
             },
           }}
         />
@@ -112,18 +133,24 @@ function Login() {
               borderRadius: 2,
               boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
               border: "1px solid rgba(255,255,255,0.2)",
-              py: 1
+              py: 1,
             },
           }}
         />
 
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
           <Button
             variant="contained"
+            fullWidth
             sx={{
-              py: 1, px: 6,
+              py: 1.3,
               backgroundColor: "#00673B",
-              "&:hover": { backgroundColor: "#388e3c", transform: "scale(1.05)" },
+              fontWeight: "bold",
+              "&:hover": {
+                backgroundColor: "#388e3c",
+                transform: "scale(1.03)",
+              },
+              transition: "all 0.2s ease",
             }}
             onClick={handleLogin}
           >
@@ -131,32 +158,49 @@ function Login() {
           </Button>
         </Box>
 
-        <Typography variant="body2" sx={{ textAlign: "center", mt: 2, color: "white" }}>
-          Don't have account?{" "}
-          <Link to="/register" style={{ color: "#00673B", cursor: "pointer", textDecoration: "none" }}>
+        <Typography
+          variant="body2"
+          sx={{
+            textAlign: "center",
+            mt: 3,
+            color: "white",
+            fontSize: { xs: "0.85rem", sm: "0.95rem" },
+          }}
+        >
+          Don't have an account?{" "}
+          <Link
+            to="/register"
+            style={{
+              color: "#A5BB86",
+              cursor: "pointer",
+              textDecoration: "none",
+              fontWeight: "bold",
+            }}
+          >
             Sign Up
           </Link>
         </Typography>
+
         <Box sx={{ textAlign: "center", mt: 2 }}>
           <Typography
             component={Link}
             to="/forgot-password"
             sx={{
-              color: "#00673B",
+              color: "#A5BB86",
               textDecoration: "none",
               fontWeight: "bold",
               display: "inline-block",
               transition: "all 0.3s ease",
+              fontSize: { xs: "0.85rem", sm: "0.95rem" },
               "&:hover": {
-                transform: "scale(1.1)",
+                transform: "scale(1.05)",
                 color: "rgba(255, 255, 255, 1)",
               },
             }}
           >
-            Forgot Password
+            Forgot Password?
           </Typography>
         </Box>
-
       </Paper>
     </Box>
   );

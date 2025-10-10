@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Navbar } from '../components/navbar';
-import { Typography, Box, Grid, Button } from '@mui/material';
+import { Typography, Box, Grid, Button, } from '@mui/material';
 import ButtonFilter from '../components/ButtonFilter';
 import RecipeCard from '../components/RecipeCard';
 import SlideBanner from '../components/slidebanner';
+import { Link } from "react-router-dom";
+
 
 const ResepPublic = () => {
   const [filter, setFilter] = useState('');
@@ -77,19 +79,20 @@ const ResepPublic = () => {
             <RecipeCard category={filter} />
           </Grid>
 
-          <Button
-            onClick={handleLengkap}
+          <Typography
+          component={Link}
+            to="/login"
             sx={{
               justifyContent: 'center',
               display: 'flex',
               margin: 'auto',
-              mb: 5,
+              pb: 3,
               color: '#D8E9A8',
               fontWeight: 'bold',
             }}
           >
             lihat selengkapnya
-          </Button>
+          </Typography>
         </Box>
       </Box>
     </>

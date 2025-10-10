@@ -60,7 +60,7 @@ function PrivateRoute({ children }) {
 }
 
 function App() {
-  const hideNavbarRoutes = ["/login", "/register", "/forgot-password"];
+  const hideNavbarRoutes = ["/login", "/register", "/forgot-password", "/reset-password"];
   const currentPath = window.location.pathname;
 
   return (
